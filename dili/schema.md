@@ -20,15 +20,16 @@ This table will contain list of users of the app and their roles
 | role		 | String  | User's Role								    | {admin, entrant, analyst}				|
 
 #### Consideration
+
 - role
-	- Admin will have previleges to read from registry, write to registry, modify registry, and add users
-	- Delegate will have previlege to add entrants
-	- Entrant will have previlege to write to registry via app only
-	- Analyst will have previleges to read from registry via dedicated online portal
-	- Users can have multiple roles
-		- e.g. a physician can be given entrant role to add suspected cases of DILI as well as delegate role to invite other physicians to the program
-	- Users will be added only after review by Dr. Shahab Abid 
-		- Optionally requirement for electronic countersignature can be enforced
+    - Admin will have privileges to read from registry, write to registry, modify registry, and add users
+    - Delegate will have privilege to add entrants
+    - Entrant will have privilege to write to registry via app only
+    - Analyst will have privileges to read from registry via dedicated online portal
+    - Users can have multiple roles
+        - e.g. a physician can be given entrant role to add suspected cases of DILI as well as delegate role to invite other physicians to the program
+    - Users will be added only after review by Dr. Shahab Abid 
+        - Optionally requirement for electronic countersignature can be enforced
 
 ## Patient Characteristics
 
@@ -39,7 +40,7 @@ This table will contain list of users of the app and their roles
 | age            | Number  | Patient’s Age                                                                  | Greater than 2                                    |
 | gender         | String  | Patient’s Gender                                                               | {male, female}                                    |
 | consent        | Boolean | Has patient given consent                                                      | none	                                        |
-| entrant        | String  | ID of physican entering data                                                   | none	                                        |
+| entrant        | String  | ID of physical entering data                                                   | none	                                        |
 | entrydate      | Date    | Date of data entry                                                  	    | none	                                        |
 
 #### Considerations
@@ -57,13 +58,14 @@ This table will contain list of users of the app and their roles
 | dose           | Float   | Administered dose of the drug suspected                                        | none                                              |
 | doseunit       | String  | Unit of dose of the drug suspected                                        	    | {milligrams, micrograms}                          |
 | indication     | String  | Indication for which the suspected drug was administered                       | none                          			|
-| rechallenge    | Boolean | Was patient rechallenged with the suspected drug?                              | none                                              |
-| rechallengeres | String  | What was result of rechallenge?                                                | ???                                               |
+| rechallenge    | Boolean | Was patient re-challenged with the suspected drug?                              | none                                              |
+| rechallengeres | String  | What was result of re-challenge?                                                | ???                                               |
 
 #### Considerations
+
 - rechallengres
-	- Can this variable be further codified? Are there specific signs and symptoms we are looking for during rechallange?
-		- E.g. rash, fever, hepatomegaly, change in laboratory values?
+  - Can this variable be further codified? Are there specific signs and symptoms we are looking for during re-challenge?
+    - E.g. rash, fever, hepatomegaly, change in laboratory values?
 
 ### History
 
@@ -75,12 +77,13 @@ This table will contain list of users of the app and their roles
 | vomiting       | Boolean | Was the patient vomiting on initial presentation                               | none                                              |
 | anorexia       | Boolean | Was the patient anorexic on initial presentation                               | none                                              |
 | abdpain        | Boolean | Did the patient complain of abdominal pain on initial presentation             | none                                              |
-| darkurine      | Boolean | Did the patient complain of dark colored urine on inital presentaiton          | none                                              |
+| darkurine      | Boolean | Did the patient complain of dark colored urine on initial presentation          | none                                              |
 | pruritis       | Boolean | Did the patient complain of itching on initial presentation                    | none                                              |
-| rash           | Boolean | Did the patient complain of rash on initial presentaion                        | none                                              |
+| rash           | Boolean | Did the patient complain of rash on initial presentation                        | none                                              |
 | fever          | Boolean | Did the patient complain of fever on initial presentation                      | none                                              |
 
 #### Considerations
+
 - fever & rash
 	- Is there a need to include a separate variable for fever and rash in the history section?
 	- Is there a significance to fever and rash reported by the patient but is not present on examination at initial presentation?
@@ -96,6 +99,7 @@ This table will contain list of users of the app and their roles
 | stigmata       | Boolean | Did the patient have one or more stigmata of CLD on initial presentation       | none                                              |
 
 #### Considerations
+
 - Stigmata
 	- Do we need to further codify "stigmata" into yes/no responses?
 		- E.g. spider angiomas, hepatomegaly, pedal edema
@@ -106,18 +110,19 @@ This table will contain list of users of the app and their roles
 | Field          | Type    | Description                                                                    | Constraints                                       |
 | :------        | :-----  | :------------                                                                  | :------------                                     |
 | hf             | Boolean | Does the patient have heart failure                                            | none                                              |
-| hypotension    | Boolean | Is the patient hypotentive on presentation                                     | none                                              |
+| hypotension    | Boolean | Is the patient hypotensive on presentation                                     | none                                              |
 | septic         | Boolean | Is the patient septic on initial presentation                                  | none                                              |
 | tpn            | Boolean | Did the patient receive TPN immediately prior to presentation                  | none                                              |
 | hepB           | Boolean | Does the patient suffer from Hepatitis B                                       | none                                              |
 | hepC           | Boolean | Does the patient suffer from Hepatitis C                                       | none                                              |
 | alcohol        | Boolean | History of alcohol abuse                                                       | none                                              |
-| comorbid       | List    | Known hepatic co-morbidities                                                   | {Hep C, Hep B, HCC, hemochromomatosis, wilson’s } |
+| comorbid       | List    | Known hepatic co-morbidities                                                   | {Hep C, Hep B, HCC, hemochromomatosis, Wilson’s } |
 
 #### Considerations
+
 - tpn
 	- Will there be limit to how recently TPN was given to qualify as yes?
-	- According to some journals, tpn components have various half lives from 12 hours to 1 month; is 3 months a reasonable cut off?
+	- According to some journals, TPN components have various half lives from 12 hours to 1 month; is 3 months a reasonable cut off?
 - hepC
 	- Do we need to differentiate between Hep C undergoing treatment and Hep C completed treatment?
 
@@ -149,6 +154,7 @@ This table will contain list of users of the app and their roles
 | biopsy results | Image   | Upload picture of biopsy results report                                        | less than 100KB                                   |
 
 #### Considerations
+
 - Do each of these lab values need separate date fields
 	- Will doing that make it harder for physicians to fill out the mobile proforma?
 
@@ -166,6 +172,7 @@ This table will contain list of users of the app and their roles
 | inrpriordate     | Date    | Date of Patient’s most recent prior INR	                 		      | greater than 1/1/2018                             |
 
 ### Follow-up Laboratory Records
+
 | Field          | Type    | Description                                                                    | Constraints                                       |
 | :------        | :-----  | :------------                                                                  | :------------                                     |
 | bilirubinfup   | Float   | Follow up bilirubin                                                            | non-negative                                      |
