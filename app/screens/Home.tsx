@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { Container } from '../components/Container';
+import { Logo } from '../components/Logo';
 
 export default () => (
     <Container>
-        <View />
+        <Logo />
+        <Text style={styles.text}>Cross-institutional Drug-Induced Livery Injury Registry</Text>
     </Container>
 );
