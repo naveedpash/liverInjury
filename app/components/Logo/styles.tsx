@@ -13,11 +13,12 @@ const styles = StyleSheet.create({
         width: imageWidth / 2,
     },
     text: {
-        fontWeight: '600',
-        fontSize: 28,
+        fontWeight: '500',
+        fontSize: 20,
         letterSpacing: -0.5,
         marginTop: 15,
-        color: '#FFF',
+        color: '#785537',
+        textAlign: 'center',
     },
 })
 
