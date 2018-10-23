@@ -5,9 +5,13 @@ import { View, Text, TextInput } from 'react-native';
 //styles
 import styles from './styles';
 
-const TextInput = () => {
-
+const EntryForm = () => {
+    return (
+        <View>
+            
+        </View>
+    )
 }
 
 
-export default () => <TextInput />;
+export default () => <EntryForm />;
