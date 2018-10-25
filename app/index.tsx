@@ -1,4 +1,4 @@
 import * as React from 'react';
-import Entry from './screens/Entry';
+import FollowUp from './screens/FollowUp';
 
-export default () => <Entry />
+export default () => <FollowUp />
