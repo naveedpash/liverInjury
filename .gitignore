@@ -74,3 +74,8 @@ typings/
 
 # Jest
 .jest/
+
+# .js source files
+App.js
+app/**/*.js
+app/*.js

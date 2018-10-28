@@ -1,30 +1,52 @@
-import * as React from 'react';
-import { View, Text, TextInput, Picker } from 'react-native';
-//styles
-//import styles from './styles';
+import * as React from "react";
+import { Picker, Text, TextInput, View } from "react-native";
+import { TextEntry } from "../components/TextEntry";
+// styles
+import styles from "./styles";
+
+const today: Date = new Date();
 
 // TODO: Implement Accordion on each section; Green tick vs Red cross to indicate remaining fields
 const Entry = () => {
     return (
-        <View> 
+        <View style={styles.container}>
         {/* Patient Demographics */}
-            <View> 
-                <View>
-                    <Text>Unique ID</Text>
-                    <Text>Unique ID for Registering the Patient</Text>
-                    <TextInput />
+            <View>
+                <View style={styles.container}>
+                {/* TODO: Android and iOS have separate DatePickers; need to implement scripts to render accordingly */}
+                    <Text>string.concat(today.getDate(),today.getMonth(),today.getFullYear())</Text>
                 </View>
-                <View>
-                    <Text>Name</Text>
-                    <Text>Name Patient</Text>
-                    <TextInput />
+                <View style={styles.container}>
+                {/* TODO: Automatically pull entrant name from stored ID */}
+                    <Text>Entrant</Text>
+                    <TextInput style={styles.input} />
                 </View>
+                {TextEntry("National Identity Card Number",
+                           "Enter the patient's NIC number")}
+//              <View>
+//                  <View style={styles.container}>
+//                      <Text style={styles.label}>National Identity Card Number</Text>
+//                      <TextInput style={styles.input} />
+//                  </View>
+//                  <View>
+//                      <Text style={styles.helpText}>Enter the National ID Card number</Text>
+//                  </View>
+//              </View>
                 <View>
-                    <Text>Age</Text>
-                    <Text>Age of Patient at the time of Registration</Text>
-                    <TextInput />
+                    <View style={styles.container}>
+                        <Text style={styles.label}>Name</Text>
+                        <Text style={styles.helpText}>Name Patient</Text>
+                    </View>
+                    <View>
+                        <TextInput style={styles.input} />
+                    </View>
                 </View>
-                <View>
+                <View style={styles.container}>
+                    <Text style={styles.label}>Age</Text>
+                    <Text style={styles.helpText}>Age of Patient at the time of Registration</Text>
+                    <TextInput style={styles.input} />
+                </View>
+                <View style={styles.container}>
                     <Text>Gender</Text>
                     <Text>Gender of Patient</Text>
                     <Picker>
@@ -32,7 +54,7 @@ const Entry = () => {
                         <Picker.Item label="female" value={1} />
                     </Picker>
                 </View>
-                <View>
+                <View style={styles.container}>
                     <Text>Consent</Text>
                     <Text>Has the patient given consent to be registered?</Text>
                     <Picker>
@@ -40,19 +62,7 @@ const Entry = () => {
                         <Picker.Item label="Yes" value={1} />
                     </Picker>
                 </View>
-                <View>
-                {/* TODO: Automatically pull entrant name from stored ID */}
-                    <Text>Entrant</Text>
-                    <Text>Name of Physician Registering Patient</Text>
-                    <TextInput />
-                </View>
-                <View>
-                {/* TODO: Android and iOS have separate DatePickers; need to implement scripts to render accordingly */}
-                    <Text>Entry Date</Text>
-                    <Text>Date of Registering Patient</Text>
-                </View>
             </View>
-            {/* DILI Episode */}
             {/* DILI Episode */}
             <View>
                 <View>
@@ -246,7 +256,8 @@ const Entry = () => {
                 </View>
                 <View>
                     <Text>Total Parenteral Nutrition</Text>
-                    <Text>Is the patient known to have received total parenteral nutrition within the past 3 months?</Text>
+                    <Text>Is the patient known to have received total parenteral nutrition within the past 3 months?
+                    </Text>
                     <Picker>
                         <Picker.Item label="No" value={0} />
                         <Picker.Item label="Yes" value={1} />
@@ -281,7 +292,9 @@ const Entry = () => {
             <View>
                 <View>
                     <Text>Past Reaction to Suspected Drug</Text>
-                    <Text>Has the patient previously taken the drug suspected to have caused the current episode of liver injury?</Text>
+                    <Text>Has the patient previously taken the drug suspected to have caused the current episode of
+                    liver injury?
+                    </Text>
                     <Picker>
                         <Picker.Item label="No" value={0} />
                         <Picker.Item label="Yes" value={1} />
@@ -289,7 +302,9 @@ const Entry = () => {
                 </View>
                 <View>
                     <Text>What medications has the patient been taking over the past 3 months?</Text>
-                    <Text>Please type the drug, its dose and dosage unit and duration the patient has been taking the drug</Text>
+                    <Text>Please type the drug, its dose and dosage unit and duration the patient
+                     has been taking the drug
+                    </Text>
                     {/* Button to add more row */}
                     <TextInput multiline={true} />
                 </View>
@@ -352,31 +367,33 @@ const Entry = () => {
             {/* Prior Lab Tests */}
             <View>
                 <View>
-                    <Text>Please enter any of the following laboratory reports that are available from prior to the current episode of suspected drug induced liver injury</Text> 
+                    <Text>Please enter any of the following laboratory reports that are available from prior to the
+                    current episode of suspected drug induced liver injury
+                    </Text>
                 </View>
                 <View>
-                    <Text>AST</Text> 
+                    <Text>AST</Text>
                     <TextInput />
                     {/* Date Picker */}
                 </View>
                 <View>
-                    <Text>ALT</Text> 
+                    <Text>ALT</Text>
                     <TextInput />
                     {/* Date Picker */}
                 </View>
                 <View>
-                    <Text>Alkaline Phosphatase</Text> 
+                    <Text>Alkaline Phosphatase</Text>
                     <TextInput />
                     {/* Date Picker */}
                 </View>
                 <View>
-                    <Text>INR</Text> 
+                    <Text>INR</Text>
                     <TextInput />
                     {/* Date Picker */}
                 </View>
             </View>
         </View>
-    )
+    );
 };
 
 export default Entry;

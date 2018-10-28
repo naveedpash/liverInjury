@@ -1,16 +1,15 @@
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import { View } from 'react-native';
-//Styles
-import styles from './styles';
+import * as PropTypes from "prop-types";
+import * as React from "react";
+import { View } from "react-native";
+// styles
+import styles from "./styles";
 
-
-const Container = ({children}: {children:any}) => {
+const Container = ({children}: {children: any}) => {
     return (
-        <View style={styles.container}> 
-            {children} 
+        <View style={styles.container}>
+            {children}
         </View>
-    )
+    );
 };
 
 Container.propTypes = {

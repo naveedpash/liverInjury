@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 13440,
-  "expoServerNgrokUrl": "https://5i-jbc.naveedpash.liverinjury.exp.direct",
-  "packagerNgrokUrl": "https://packager.5i-jbc.naveedpash.liverinjury.exp.direct",
-  "ngrokPid": 5012
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
