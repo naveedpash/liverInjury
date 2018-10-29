@@ -6,31 +6,25 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(require("react"));
 var react_native_1 = require("react-native");
-//styles
-//import styles from './styles';
+var TextEntry_1 = require("../components/TextEntry");
+// styles
+var styles_1 = __importDefault(require("./styles"));
 var FollowUp = function () {
     return (React.createElement(react_native_1.View, null,
-        React.createElement(react_native_1.View, null,
-            React.createElement(react_native_1.Text, null, "Follow Up LFTs"),
-            React.createElement(react_native_1.Text, null, "Please enter the laboratory values of the registered patient suspected to have drug induced liver injury")),
-        React.createElement(react_native_1.View, null,
-            React.createElement(react_native_1.Text, null, "Unique ID"),
-            React.createElement(react_native_1.Text, null, "Please enter the unique ID the patient was given at the time of registration"),
-            React.createElement(react_native_1.TextInput, null)),
-        React.createElement(react_native_1.View, null,
-            React.createElement(react_native_1.Text, null, "Bilirubin (mg/dL)"),
-            React.createElement(react_native_1.TextInput, null)),
-        React.createElement(react_native_1.View, null,
-            React.createElement(react_native_1.Text, null, "AST (mg/dL)"),
-            React.createElement(react_native_1.TextInput, null)),
-        React.createElement(react_native_1.View, null,
-            React.createElement(react_native_1.Text, null, "ALT (mg/dL)"),
-            React.createElement(react_native_1.TextInput, null)),
-        React.createElement(react_native_1.View, null,
-            React.createElement(react_native_1.Text, null, "Alkaline Phosphatase (mg/dL)"),
-            React.createElement(react_native_1.TextInput, null))));
+        React.createElement(react_native_1.View, { style: styles_1.default.container },
+            React.createElement(react_native_1.Text, { style: styles_1.default.heading }, "Follow Up LFTs"),
+            React.createElement(react_native_1.Text, { style: styles_1.default.helpText }, "Please enter the laboratory values of the registered patient suspected to have drug induced liver injury")),
+        React.createElement(react_native_1.KeyboardAvoidingView, { behavior: "padding" },
+            React.createElement(TextEntry_1.TextEntry, { label: "NIC number", helptext: "Enter the National ID Card number of the patient", keyboardType: "numeric" }),
+            React.createElement(TextEntry_1.TextEntry, { label: "Bilirubin (mg/dL)", keyboardType: "numeric" }),
+            React.createElement(TextEntry_1.TextEntry, { label: "AST (mg/dL)", keyboardType: "numeric" }),
+            React.createElement(TextEntry_1.TextEntry, { label: "ALT (mg/dL)", keyboardType: "numeric" }),
+            React.createElement(TextEntry_1.TextEntry, { label: "Alkaline Phosphatase (mg/dL)", keyboardType: "numeric" }))));
 };
 exports.default = FollowUp;

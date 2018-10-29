@@ -10,10 +10,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __importStar(require("react"));
 var PropTypes = __importStar(require("prop-types"));
+var React = __importStar(require("react"));
 var react_native_1 = require("react-native");
-//Styles
+// styles
 var styles_1 = __importDefault(require("./styles"));
 var Container = function (_a) {
     var children = _a.children;

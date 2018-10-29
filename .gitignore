@@ -77,5 +77,8 @@ typings/
 
 # .js source files
 App.js
-app/**/*.js
+app/**/**/*.js
 app/*.js
+
+# Expo
+.expo/

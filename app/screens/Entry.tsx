@@ -1,51 +1,40 @@
 import * as React from "react";
 import { Picker, Text, TextInput, View } from "react-native";
-import { TextEntry } from "../components/TextEntry";
+import { DataEntry } from "../components/DataEntry";
 // styles
 import styles from "./styles";
 
 const today: Date = new Date();
 
 // TODO: Implement Accordion on each section; Green tick vs Red cross to indicate remaining fields
+// TODO: Add border between each entry element
 const Entry = () => {
     return (
         <View style={styles.container}>
         {/* Patient Demographics */}
             <View>
-                <View style={styles.container}>
+                <View>
                 {/* TODO: Android and iOS have separate DatePickers; need to implement scripts to render accordingly */}
                     <Text>string.concat(today.getDate(),today.getMonth(),today.getFullYear())</Text>
                 </View>
-                <View style={styles.container}>
+                <View>
                 {/* TODO: Automatically pull entrant name from stored ID */}
                     <Text>Entrant</Text>
                     <TextInput style={styles.input} />
                 </View>
-                {TextEntry("National Identity Card Number",
-                           "Enter the patient's NIC number")}
-//              <View>
-//                  <View style={styles.container}>
-//                      <Text style={styles.label}>National Identity Card Number</Text>
-//                      <TextInput style={styles.input} />
-//                  </View>
-//                  <View>
-//                      <Text style={styles.helpText}>Enter the National ID Card number</Text>
-//                  </View>
-//              </View>
-                <View>
-                    <View style={styles.container}>
-                        <Text style={styles.label}>Name</Text>
-                        <Text style={styles.helpText}>Name Patient</Text>
-                    </View>
-                    <View>
-                        <TextInput style={styles.input} />
-                    </View>
-                </View>
-                <View style={styles.container}>
-                    <Text style={styles.label}>Age</Text>
-                    <Text style={styles.helpText}>Age of Patient at the time of Registration</Text>
-                    <TextInput style={styles.input} />
-                </View>
+                <DataEntry
+                    label="NIC Number"
+                    helptext="Enter the National ID Card number of the patient"
+                />
+                <DataEntry
+                    label="Name"
+                    helptext="Name of the Patient"
+                />
+                <DataEntry
+                    label="Age"
+                    helptext="Age of Patient at the time of Registration"
+                    keyboardType="numeric"
+                />
                 <View style={styles.container}>
                     <Text>Gender</Text>
                     <Text>Gender of Patient</Text>
@@ -54,28 +43,23 @@ const Entry = () => {
                         <Picker.Item label="female" value={1} />
                     </Picker>
                 </View>
-                <View style={styles.container}>
-                    <Text>Consent</Text>
-                    <Text>Has the patient given consent to be registered?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
+                <DataEntry
+                    label="Consent"
+                    helptext="Has the patient given consent to be registered?"
+                    picker={true}
+                />
             </View>
             {/* DILI Episode */}
             <View>
-                <View>
-                    <Text>Drug</Text>
-                    <Text>Drug Suspected to have Caused DILI</Text>
-                    {/* TODO: implement RxNorm coding system */}
-                    <TextInput />
-                </View>
-                <View>
-                    <Text>Drug Dose</Text>
-                    <Text>Dose at which Suspected Drug was taken by the patient</Text>
-                    <TextInput />
-                </View>
+            {/* TODO: implement RxNorm coding system */}
+                <DataEntry
+                    label="Drug"
+                    helptext="Drug suspected to have caused drug induced liver injury"
+                />
+                <DataEntry
+                    label="Drug Dose"
+                    helptext="Dose at which suspected drug was taken by the patient"
+                />
                 <View>
                     <Text>Drug Dose Unit</Text>
                     <Text>Unit of Dose of Suspected Drug</Text>
@@ -87,22 +71,19 @@ const Entry = () => {
                     </Picker>
                 </View>
                 <View>
-                    <Text>Indication</Text>
-                    <Text>Indication for which suspected drug was originally prescribed</Text>
+                    <Text style={styles.label}>Indication</Text>
                     <TextInput multiline={true} />
+                    <Text style={styles.helpText}>Indication for which suspected drug was originally prescribed</Text>
                 </View>
+                <DataEntry
+                    label="Re-Challenged?"
+                    helptext="Was the patient re-challenged with the drug suspected to have caused liver injury>"
+                    picker={true}
+                />
                 <View>
-                    <Text>Re-Challenged?</Text>
-                    <Text>Was the patient re-challenged with the drug suspected to have caused liver injury?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Result of Re-Challenge</Text>
-                    <Text>What was the result of the Re-challenge?</Text>
+                    <Text style={styles.label}>Result of Re-Challenge</Text>
                     <TextInput multiline={true} />
+                    <Text style={styles.helpText}>What was the result of the Re-challenge?</Text>
                 </View>
             </View>
             {/* Patient History */ }
@@ -112,157 +93,98 @@ const Entry = () => {
                     <Text>Date of Onset of Symptoms</Text>
                     <TextInput></TextInput>
                 </View>
-                <View>
-                    <Text>Nausea</Text>
-                    <Text>Is the patient complain of nausea on initial presentation?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Vomiting</Text>
-                    <Text>Is the patient complain of vomiting on initial presentation?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Anorexia</Text>
-                    <Text>Is the patient complain of anorexia on initial presentation?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Abdominal Pain</Text>
-                    <Text>Is the patient complain of abdominal pain on initial presentation?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Dark Urine</Text>
-                    <Text>Is the patient complain of dark urine on initial presentation?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Pruritis</Text>
-                    <Text>Is the patient complain of pruritis on initial presentation?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Rash</Text>
-                    <Text>Is the patient complain of rash on initial presentation?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Fever</Text>
-                    <Text>Is the patient complain of fever (> 38C) on initial presentation?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Icteric</Text>
-                    <Text>Is the patient complain of jaundice on initial presentation?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
+                <DataEntry
+                    label="Nausea"
+                    helptext="Is the patient complaining of nausea on initial presentation?"
+                    picker={true}
+                />
+                <DataEntry
+                    label="Vomiting"
+                    helptext="Is the patient complain of vomiting on initial presentation?"
+                    picker={true}
+                />
+                <DataEntry
+                    label="Anorexia"
+                    helptext="Is the patient complain of anorexia on initial presentation?Is the patient complain of
+                        vomiting on initial presentation?"
+                    picker={true}
+                />
+                <DataEntry
+                    label="Abdominal Pain"
+                    helptext="Is the patient complain of abdominal pain on initial presentation?"
+                    picker={true}
+                />
+                <DataEntry
+                    label="Dark Urine"
+                    helptext="Is the patient complain of dark urine on initial presentation?"
+                    picker={true}
+                />
+                <DataEntry
+                    label="Pruritis"
+                    helptext="Is the patient complain of pruritis on initial presentation?"
+                    picker={true}
+                />
+                <DataEntry
+                    label="Rash"
+                    helptext="Is the patient complain of rash on initial presentation?"
+                    picker={true}
+                />
+                <DataEntry
+                    label="Fever"
+                    helptext="Is the patient complaining of fever (> 38C) on initial presentation?"
+                    picker={true}
+                />
+                <DataEntry
+                    label="Icteric"
+                    helptext="Is the patient complaining of jaundice on initial presentation?"
+                    picker={true}
+                />
             </View>
             {/* Patient Physical Examination */}
             <View>
-                <View>
-                    <Text>Rash</Text>
-                    <Text>Is the patient presenting with rash on initial examination?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Fever</Text>
-                    <Text>Is the patient presenting with fever (> 38C) on initial examination?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Icteric</Text>
-                    <Text>Is the patient presenting with jaundice on initial examination?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Hepatic Tenderness</Text>
-                    <Text>Is the patient presenting with hepatic tenderness on initial examination?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Stigmata of Hepatic Failure</Text>
-                    <Text>Is the patient presenting with stigmata of hepatic failure on initial examination?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Septic</Text>
-                    <Text>Is the patient septic  on initial examination?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Hypotension</Text>
-                    <Text>Is the patient hypotensive on initial examination?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
+                <DataEntry
+                    label="Rash"
+                    helptext="Is the patient presenting with rash on initial examination?"
+                />
+                <DataEntry
+                    label="Fever"
+                    helptext="Is the patient presenting with fever (> 38C) on initial examination?"
+                />
+                <DataEntry
+                    label="Icteric"
+                    helptext="Is the patient presenting with jaundice on initial examination?"
+                />
+                <DataEntry
+                    label="Hepatic Tenderness"
+                    helptext="Is the patient presenting with hepatic tenderness on initial examination?"
+                />
+                <DataEntry
+                    label="Stigmata of Hepatic Failure"
+                    helptext="Is the patient presenting with stigmata of hepatic failure on initial examination?"
+                />
+                <DataEntry
+                    label="Septic"
+                    helptext="Is the patient septic  on initial examination?"
+                />
+                <DataEntry
+                    label="Hypotension"
+                    helptext="Is the patient hypotensive on initial examination?"
+                />
             </View>
             {/* Past Medical History */}
             <View>
-                <View>
-                    <Text>Heart Failure</Text>
-                    <Text>Is the patient known to have heart failure?</Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
-                <View>
-                    <Text>Total Parenteral Nutrition</Text>
-                    <Text>Is the patient known to have received total parenteral nutrition within the past 3 months?
-                    </Text>
-                    <Picker>
-                        <Picker.Item label="No" value={0} />
-                        <Picker.Item label="Yes" value={1} />
-                    </Picker>
-                </View>
+                <DataEntry
+                    label="Heart Failure"
+                    helptext="Is the patient known to have heart failure?"
+                />
+                <DataEntry
+                    label="Heart Failure"
+                    helptext="Is the patient known to have received total parenteral nutrition within the past 3 months?"
+                />
+                <DataEntry
+                    label="Heart Failure"
+                    helptext="Is the patient known to have active hepatitis B at the time of presentation?"
+                />
                 <View>
                     <Text>Hepatitis B</Text>
                     <Text>Is the patient known to have active hepatitis B at the time of presentation?</Text>
@@ -271,6 +193,10 @@ const Entry = () => {
                         <Picker.Item label="Yes" value={1} />
                     </Picker>
                 </View>
+                <DataEntry
+                    label="Heart Failure"
+                    helptext=""
+                />
                 <View>
                     <Text>Hepatitis C</Text>
                     <Text>Is the patient known to have active hepatitis C at the time of presentation?</Text>
@@ -279,6 +205,10 @@ const Entry = () => {
                         <Picker.Item label="Yes" value={1} />
                     </Picker>
                 </View>
+                <DataEntry
+                    label="Heart Failure"
+                    helptext=""
+                />
                 <View>
                     <Text>Alcohol Abuse</Text>
                     <Text>Is the patient known to abuse alcohol as per CAGE criteria?</Text>
