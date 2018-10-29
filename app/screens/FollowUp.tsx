@@ -1,6 +1,6 @@
 import * as React from "react";
 import { KeyboardAvoidingView, Picker, Text, TextInput, View } from "react-native";
-import { TextEntry } from "../components/TextEntry";
+import { DataEntry } from "../components/DataEntry";
 // styles
 import styles from "./styles";
 
@@ -14,16 +14,16 @@ const FollowUp = () => {
             </View>
             {/* TODO: implement fuzzy search */}
                 <KeyboardAvoidingView behavior="padding">
-                    <TextEntry label="NIC number"
+                    <DataEntry label="NIC number"
                            helptext="Enter the National ID Card number of the patient"
                            keyboardType="numeric" />
-                    <TextEntry label="Bilirubin (mg/dL)"
+                    <DataEntry label="Bilirubin (mg/dL)"
                            keyboardType="numeric" />
-                    <TextEntry label="AST (mg/dL)"
+                    <DataEntry label="AST (mg/dL)"
                            keyboardType="numeric" />
-                    <TextEntry label="ALT (mg/dL)"
+                    <DataEntry label="ALT (mg/dL)"
                            keyboardType="numeric" />
-                    <TextEntry label="Alkaline Phosphatase (mg/dL)"
+                    <DataEntry label="Alkaline Phosphatase (mg/dL)"
                            keyboardType="numeric" />
             </KeyboardAvoidingView>
         </View>
