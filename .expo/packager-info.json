@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://bd-5s9.naveedpash.liverinjury.exp.direct",
+  "packagerNgrokUrl": "https://packager.bd-5s9.naveedpash.liverinjury.exp.direct",
+  "ngrokPid": 7584
 }
