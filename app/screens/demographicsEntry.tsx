@@ -49,43 +49,6 @@ const Entry = () => {
                     picker={true}
                 />
             </View>
-            {/* DILI Episode */}
-            <View>
-            {/* TODO: implement RxNorm coding system */}
-                <DataEntry
-                    label="Drug"
-                    helptext="Drug suspected to have caused drug induced liver injury"
-                />
-                <DataEntry
-                    label="Drug Dose"
-                    helptext="Dose at which suspected drug was taken by the patient"
-                />
-                <View>
-                    <Text>Drug Dose Unit</Text>
-                    <Text>Unit of Dose of Suspected Drug</Text>
-                    <Picker>
-                        <Picker.Item label="Milligrams" value="mg" />
-                        <Picker.Item label="Grams" value="g" />
-                        <Picker.Item label="Milliliters" value="mL" />
-                        <Picker.Item label="Micrograms" value="mcg" />
-                    </Picker>
-                </View>
-                <View>
-                    <Text style={styles.label}>Indication</Text>
-                    <TextInput multiline={true} />
-                    <Text style={styles.helpText}>Indication for which suspected drug was originally prescribed</Text>
-                </View>
-                <DataEntry
-                    label="Re-Challenged?"
-                    helptext="Was the patient re-challenged with the drug suspected to have caused liver injury>"
-                    picker={true}
-                />
-                <View>
-                    <Text style={styles.label}>Result of Re-Challenge</Text>
-                    <TextInput multiline={true} />
-                    <Text style={styles.helpText}>What was the result of the Re-challenge?</Text>
-                </View>
-            </View>
             {/* Patient History */ }
             <View>
                 <View>
