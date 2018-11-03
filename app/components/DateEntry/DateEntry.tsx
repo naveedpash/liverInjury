@@ -6,6 +6,10 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 // styles
 import styles from "./styles";
 
+//  interface IDateEntryProps {
+//      handler: (date: Date) => void;
+//  }
+
 interface IDateEntryState {
     isDateTimePickerVisible: boolean;
     date: Date;
@@ -38,9 +42,9 @@ class DateEntry extends React.Component<any, IDateEntryState> {
     private hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
     private handleDatePicked = (date: Date) => {
         this.hideDateTimePicker();
-        this.setState({date: date});
+        // this.props.handler(date);
     }
 
 }
 
-export default () => <DateEntry />;
+export default DateEntry;
