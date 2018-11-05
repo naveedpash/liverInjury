@@ -1,26 +1,25 @@
-import * as React from 'react';
-import { View, Image, ImageBackground, Text } from 'react-native';
-import { Container } from '../Container';
+import * as React from "react";
+import { View, Image, ImageBackground, Text } from "react-native";
 //Images
-import Splash from './images/splash.png';
-import Icon from './images/icon.png';
+import Splash from "./images/splash.png";
+import Icon from "./images/icon.png";
 //Styles
-import styles from './styles';
+import styles from "./styles";
 
 const Logo = () => {
     return (
-        <Container>
-            <ImageBackground resizeMode='contain' 
+        <View style={styles.container}>
+            <ImageBackground resizeMode="contain" 
                              style={styles.containerImage} 
                              source={Splash} >
-                 <Image resizeMode='contain'
+                 <Image resizeMode="contain"
                         style={styles.image}
                         source={Icon} />
             </ImageBackground>
             <Text style={styles.text}>
-                Cross-institutional Registry for Drug Induced Liver Injury
+                Karachi Registry for Drug Induced Liver Injury
             </Text>
-        </Container>
+        </View>
     )
 };
 

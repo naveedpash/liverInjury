@@ -1,11 +1,15 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from "react-native";
 
-const imageWidth = Dimensions.get('window').width / 2;
+const imageWidth = Dimensions.get("window").width / 2;
 
 const styles = StyleSheet.create({
+    container: {
+        alignItems: "center",
+        marginVertical: 15,
+    },
     containerImage: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         width: imageWidth,
         height: imageWidth,
     },
@@ -13,12 +17,12 @@ const styles = StyleSheet.create({
         width: imageWidth / 2,
     },
     text: {
-        fontWeight: '500',
+        fontWeight: "500",
         fontSize: 20,
         letterSpacing: -0.5,
         marginTop: 15,
-        color: '#785537',
-        textAlign: 'center',
+        color: "#785537",
+        textAlign: "center",
     },
 })
 

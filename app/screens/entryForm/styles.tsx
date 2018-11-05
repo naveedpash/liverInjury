@@ -1,8 +1,7 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 const INPUT_HEIGHT: number = 48;
-const BORDER_RADIUS: number = 9;
-const TOUCHABLE_WIDTH: number = Dimensions.get("window").width/3;
+const BORDER_RADIUS: number = 4;
 
 const styles = StyleSheet.create({
     // Heading for each section
@@ -12,14 +11,6 @@ const styles = StyleSheet.create({
     //      their labels
     //  Subtle border between fields in same section
     //  Accordion border between sections
-    buttonText: {
-        color: "blue",
-        fontSize: 15,
-        fontWeight: "500",
-        height: INPUT_HEIGHT,
-        justifyContent: "center",
-        letterSpacing: -0.5,
-    },
     container: {
         alignItems: "stretch",
         paddingHorizontal: 15,
@@ -57,19 +48,9 @@ const styles = StyleSheet.create({
         letterSpacing: -0.5,
         marginRight: 10,
     },
-    touchable: {
-        alignItems: "center",
-        backgroundColor: "red",
-        borderRadius: BORDER_RADIUS,
-        height: TOUCHABLE_WIDTH,
-        justifyContent: "center",
-        width: TOUCHABLE_WIDTH,
-    },
     wrapper: {
-        alignContent: "space-around",
-        justifyContent: "space-evenly",
         flexDirection: "row",
-        padding: 11,
+        paddingVertical: 11,
     },
 });
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Picker, Text, TextInput, View } from "react-native";
-import { DateEntry } from "../components/DateEntry";
+import { DateEntry } from "../../components/DateEntry";
 // styles
 import styles from "./styles";
 

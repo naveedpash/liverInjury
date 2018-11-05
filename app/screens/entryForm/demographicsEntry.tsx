@@ -13,7 +13,6 @@ const Entry = () => {
         {/* Patient Demographics */}
             <View>
                 <View>
-                {/* TODO: Android and iOS have separate DatePickers; need to implement scripts to render accordingly */}
                     <Text>{moment(today).format("DD/MM/YYYY")}</Text>
                 </View>
                 <View>
