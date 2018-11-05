@@ -11,6 +11,7 @@ import pastEntry from "./screens/entryForm/pastEntry";
 import pastRxEntry from "./screens/entryForm/pastRxEntry";
 import FollowUp from "./screens/FollowUp";
 import Home from "./screens/Home";
+import Mortality from "./screens/Mortality";
 
 const entry = createStackNavigator({
     entry: {
@@ -37,6 +38,8 @@ const entry = createStackNavigator({
     labHx: {
         screen: labHxEntry,
     },
+},{
+    headerMode: "none",
 });
 
 export default createStackNavigator({
@@ -46,5 +49,13 @@ export default createStackNavigator({
     entry: {
         screen: entry,
     },
+    followUp: {
+        screen: FollowUp,
+    },
+    mortality: {
+        screen: Mortality,
+    },
+},{
+    headerMode: "screen",
 });
 

@@ -1,6 +1,5 @@
 import * as React from "react";
-import { KeyboardAvoidingView, Picker, Text, TextInput, View } from "react-native";
-import { DataEntry } from "../components/DataEntry";
+import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
 // styles
 import styles from "./styles";
 
@@ -13,18 +12,36 @@ const FollowUp = () => {
                  have drug induced liver injury</Text>
             </View>
             {/* TODO: implement fuzzy search */}
-                <KeyboardAvoidingView behavior="padding">
-                    <DataEntry label="NIC number"
-                           helptext="Enter the National ID Card number of the patient"
-                           keyboardType="numeric" />
-                    <DataEntry label="Bilirubin (mg/dL)"
-                           keyboardType="numeric" />
-                    <DataEntry label="AST (mg/dL)"
-                           keyboardType="numeric" />
-                    <DataEntry label="ALT (mg/dL)"
-                           keyboardType="numeric" />
-                    <DataEntry label="Alkaline Phosphatase (mg/dL)"
-                           keyboardType="numeric" />
+            <KeyboardAvoidingView behavior="padding">
+                <View>
+                    <View style={styles.wrapper}>
+                        <Text>NIC Number</Text>
+                        <TextInput keyboardType="numeric" />
+                    </View>
+                    <Text style={styles.helpText}>
+                        Enter the National ID Card Number of the Patient
+                    </Text>
+                </View>
+                <View style={styles.wrapper}>
+                    <Text>Bilirubin (U/L)</Text>
+                    <TextInput keyboardType="numeric" />
+                </View>
+                <View style={styles.wrapper}>
+                    <Text>AST (U/L)</Text>
+                    <TextInput keyboardType="numeric" />
+                </View>
+                <View style={styles.wrapper}>
+                    <Text>ALT (U/L)</Text>
+                    <TextInput keyboardType="numeric" />
+                </View>
+                <View style={styles.wrapper}>
+                    <Text>Alkaline Phosphatase (U/L)</Text>
+                    <TextInput keyboardType="numeric" />
+                </View>
+                <View style={styles.wrapper}>
+                    <Text>INR</Text>
+                    <TextInput keyboardType="numeric" />
+                </View>
             </KeyboardAvoidingView>
         </View>
     );

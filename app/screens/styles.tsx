@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
         height: INPUT_HEIGHT,
         justifyContent: "center",
         letterSpacing: -0.5,
+        textAlign: "center",
     },
     container: {
         alignItems: "stretch",
