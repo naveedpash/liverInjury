@@ -76,9 +76,7 @@ typings/
 .jest/
 
 # .js source files
-App.js
-app/**/**/*.js
-app/*.js
+*.js
 
 # Expo
 .expo/
