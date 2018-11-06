@@ -1,14 +1,19 @@
 import * as React from "react";
-import { Picker, Text, TextInput, View } from "react-native";
+import { Button, Picker, Text, TextInput, View } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../../components/DateEntry";
 // styles
 import styles from "./styles";
 
-const historyEntry = () => {
+export interface IHistoryScreenProps {
+    navigation: NavigationScreenProp<any, any>;
+};
+
+export default class historyEntry extends React.Component<IHistoryScreenProps, object> {
+    render() {
     {/* Patient History */ }
-    return (
-        <View style={styles.container}>
-            <View>
+        return (
+            <View style={styles.container}>
                 <View>
                     <View style={styles.wrapper}>
                         <Text>Onset</Text>
@@ -106,9 +111,11 @@ const historyEntry = () => {
                     </View>
                     <Text>Is the patient complaining of jaundice on initial presentation?</Text>
                 </View>
+                <Button title="Next"
+                        color="black"
+                        onPress={() => this.props.navigation.navigate('exam')}
+                />
             </View>
-        </View>
-    );
+        );
+    };
 };
-
-export default historyEntry;

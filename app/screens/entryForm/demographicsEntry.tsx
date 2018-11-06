@@ -1,17 +1,22 @@
 import moment from "moment";
 import * as React from "react";
-import { Picker, Text, TextInput, View } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
+import { Button, Picker, Text, TextInput, View } from "react-native";
 // styles
 import styles from "./styles";
 
 const today: Date = new Date();
 
 // TODO: Add border between each entry element
-const Entry = () => {
-    return (
-        <View style={styles.container}>
-        {/* Patient Demographics */}
-            <View>
+export interface IEntryScreenProps {
+    navigation: NavigationScreenProp<any, any>;
+};
+
+export default class Entry extends React.Component<IEntryScreenProps, object> {
+    render() {
+        return (
+            <View style={styles.container}>
+            {/* Patient Demographics */}
                 <View>
                     <Text>{moment(today).format("DD/MM/YYYY")}</Text>
                 </View>
@@ -59,9 +64,12 @@ const Entry = () => {
                     </View>
                     <Text style={styles.helpText}>Has the patient given consent to be registered?</Text>
                 </View>
+                <View>
+                    <Button title="Next"
+                            onPress={() => this.props.navigation.navigate('dili')}
+                            color="black" />
+                </View>
             </View>
-        </View>
-    );
+        );
+    };
 };
-
-export default Entry;

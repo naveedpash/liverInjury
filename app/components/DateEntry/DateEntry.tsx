@@ -18,16 +18,18 @@ interface IDateEntryState {
 class DateEntry extends React.Component<any, IDateEntryState> {
     constructor(props: any) {
         super(props);
-        this.setState({isDateTimePickerVisible: false});
-
+        this.state = { 
+            isDateTimePickerVisible: false,
+            date: new Date()
+        };
     }
 
     public render() {
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.wrapper} onPress={this.showDateTimePicker}>
-                    <Text>{moment(this.state.date).format("DD/MM/YYYY")}</Text>
-                    <FontAwesome name="calendar" color="black" size={38} />
+                    <Text style={styles.text}>{moment(this.state.date).format("DD/MM/YYYY")}</Text>
+                    <FontAwesome name="calendar" color="black" size={18} />
                 </TouchableOpacity>
                 <DateTimePicker
                     isVisible={this.state.isDateTimePickerVisible}
@@ -43,8 +45,8 @@ class DateEntry extends React.Component<any, IDateEntryState> {
     private handleDatePicked = (date: Date) => {
         this.hideDateTimePicker();
         // this.props.handler(date);
-    }
-
+        this.setState({date: date});
+    };
 }
 
 export default DateEntry;

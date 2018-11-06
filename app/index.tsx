@@ -16,30 +16,71 @@ import Mortality from "./screens/Mortality";
 const entry = createStackNavigator({
     entry: {
         screen: demographicsEntry,
+        navigationOptions: () => ({
+            title: `Register New Patient`,
+            headerBackTitle: "Back to Main Screen",
+            headerTruncatedBackTitle: "MainScreen",
+        }),
     },
     dili: {
         screen: diliEntry,
+        navigationOptions: () => ({
+            title: `Register New Patient`,
+            headerBackTitle: "Back to Main Screen",
+            headerTruncatedBackTitle: "MainScreen",
+        }),
     },
     history: {
         screen: historyEntry,
+        navigationOptions: () => ({
+            title: `Register New Patient`,
+            headerBackTitle: "Back to Main Screen",
+            headerTruncatedBackTitle: "MainScreen",
+        }),
     },
     exam: {
         screen: examEntry,
+        navigationOptions: () => ({
+            title: `Register New Patient`,
+            headerBackTitle: "Back to Main Screen",
+            headerTruncatedBackTitle: "MainScreen",
+        }),
     },
     past: {
         screen: pastEntry,
+        navigationOptions: () => ({
+            title: `Register New Patient`,
+            headerBackTitle: "Back to Main Screen",
+            headerTruncatedBackTitle: "MainScreen",
+        }),
     },
     pastRx: {
         screen: pastRxEntry,
+        navigationOptions: () => ({
+            title: `Register New Patient`,
+            headerBackTitle: "Back to Main Screen",
+            headerTruncatedBackTitle: "MainScreen",
+        }),
     },
     lab: {
         screen: labEntry,
+        navigationOptions: () => ({
+            title: `Register New Patient`,
+            headerBackTitle: "Back to Main Screen",
+            headerTruncatedBackTitle: "MainScreen",
+        }),
     },
     labHx: {
         screen: labHxEntry,
+        navigationOptions: () => ({
+            title: `Register New Patient`,
+            headerBackTitle: "Back to Main Screen",
+            headerTruncatedBackTitle: "MainScreen",
+        }),
     },
 },{
-    headerMode: "none",
+    headerMode: "screen",
+    mode: "modal",
 });
 
 export default createStackNavigator({
@@ -56,6 +97,6 @@ export default createStackNavigator({
         screen: Mortality,
     },
 },{
-    headerMode: "screen",
+    headerMode: "none",
 });
 

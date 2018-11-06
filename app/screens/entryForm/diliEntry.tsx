@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Picker, Text, TextInput, View } from "react-native";
+import { Button, Picker, Text, TextInput, View } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../../components/DateEntry";
 // styles
 import styles from "./styles";
@@ -7,12 +8,16 @@ import styles from "./styles";
 const today: Date = new Date();
 
 // TODO: Add border between each entry element
-const diliEntry = () => {
-    return (
-        <View style={styles.container}>
-            {/* DILI Episode */}
-            <View>
-            {/* TODO: implement RxNorm coding system */}
+export interface IDiliScreenProps {
+    navigation: NavigationScreenProp<any, any>;
+};
+
+export default class diliEntry extends React.Component<IDiliScreenProps, object> {
+    render() {
+        return (
+            <View style={styles.container}>
+                {/* DILI Episode */}
+                {/* TODO: implement RxNorm coding system */}
                 <View>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Drug</Text>
@@ -55,9 +60,11 @@ const diliEntry = () => {
                     <TextInput multiline={true} />
                     <Text style={styles.helpText}>What was the result of the Re-challenge?</Text>
                 </View>
+                <Button title="Next"
+                        color="black"
+                        onPress={() => this.props.navigation.navigate('history')}
+                />
             </View>
-        </View>
-    );
+        );
+    }
 };
-
-export default diliEntry;

@@ -1,14 +1,19 @@
 import * as React from "react";
-import { Picker, Text, TextInput, View } from "react-native";
+import { Button, Picker, Text, TextInput, View } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../../components/DateEntry";
 // styles
 import styles from "./styles";
 
-const examEntry = () => {
+export interface IExamScreenProps {
+    navigation: NavigationScreenProp<any, any>;
+};
+
+export default class examEntry extends React.Component<IExamScreenProps, object> {
+    render() {
     {/* Patient Physical Examination */}
-    return (
-        <View style={styles.container}>
-            <View>
+        return (
+            <View style={styles.container}>
                 <View>
                     <View>
                         <Text style={styles.label}>Rash</Text>
@@ -51,9 +56,11 @@ const examEntry = () => {
                     </View>
                     <Text style={styles.helpText}>Is the patient hypotensive on initial examination?</Text>
                 </View>
+                <Button title="Next"
+                        color="black"
+                        onPress={() => this.props.navigation.navigate('lab')}
+                />
             </View>
-        </View>
-    );
+        );
+    }
 };
-
-export default examEntry;
