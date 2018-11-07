@@ -7,12 +7,12 @@ import styles from "./styles";
 
 export interface IHistoryScreenProps {
     navigation: NavigationScreenProp<any, any>;
-};
+}
 
-export default class historyEntry extends React.Component<IHistoryScreenProps, object> {
-    render() {
+export default class HistoryEntry extends React.Component<IHistoryScreenProps, object> {
+    public render() {
     {/* Patient History */ }
-        return (
+    return (
             <View style={styles.container}>
                 <View>
                     <View style={styles.wrapper}>
@@ -113,9 +113,9 @@ export default class historyEntry extends React.Component<IHistoryScreenProps, o
                 </View>
                 <Button title="Next"
                         color="black"
-                        onPress={() => this.props.navigation.navigate('exam')}
+                        onPress={() => this.props.navigation.navigate("past")}
                 />
             </View>
         );
-    };
-};
+    }
+}

@@ -1,10 +1,16 @@
 import * as React from "react";
-import { Picker, Text, TextInput, View } from "react-native";
+import { Button, Picker, Text, TextInput, View } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../../components/DateEntry";
 // styles
 import styles from "./styles";
 
-const labHxEntry = () => {
+export interface ILabHxScreenProps {
+    navigation: NavigationScreenProp<any, any>;
+}
+
+export default class LabHxEntry extends React.Component<ILabHxScreenProps, object> {
+    public render() {
     {/* Prior Lab Tests */}
     return (
         <View style={styles.container}>
@@ -36,8 +42,10 @@ const labHxEntry = () => {
                     <DateEntry />
                 </View>
             </View>
+            <Button onPress={() => console.log("save")}
+                    title="Save"
+                    color="black" />
         </View>
     );
-};
-
-export default labHxEntry;
+    }
+}

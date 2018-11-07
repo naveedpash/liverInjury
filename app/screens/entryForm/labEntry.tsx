@@ -1,10 +1,16 @@
 import * as React from "react";
 import { Picker, Text, TextInput, View } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../../components/DateEntry";
 // styles
 import styles from "./styles";
 
-const labEntry = () => {
+export interface ILabScreenProps {
+    navigation: NavigationScreenProp<any, any>;
+}
+
+export default class ExamEntry extends React.Component<ILabScreenProps, object> {
+    public render() {
     {/* Laboratory Tests */}
     return (
         <View>
@@ -87,6 +93,5 @@ const labEntry = () => {
             </View>
         </View>
     );
-};
-
-export default labEntry;
+    }
+}

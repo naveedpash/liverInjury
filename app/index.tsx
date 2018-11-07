@@ -38,14 +38,6 @@ const entry = createStackNavigator({
             headerTruncatedBackTitle: "MainScreen",
         }),
     },
-    exam: {
-        screen: examEntry,
-        navigationOptions: () => ({
-            title: `Register New Patient`,
-            headerBackTitle: "Back to Main Screen",
-            headerTruncatedBackTitle: "MainScreen",
-        }),
-    },
     past: {
         screen: pastEntry,
         navigationOptions: () => ({
@@ -56,6 +48,14 @@ const entry = createStackNavigator({
     },
     pastRx: {
         screen: pastRxEntry,
+        navigationOptions: () => ({
+            title: `Register New Patient`,
+            headerBackTitle: "Back to Main Screen",
+            headerTruncatedBackTitle: "MainScreen",
+        }),
+    },
+    exam: {
+        screen: examEntry,
         navigationOptions: () => ({
             title: `Register New Patient`,
             headerBackTitle: "Back to Main Screen",
@@ -78,7 +78,7 @@ const entry = createStackNavigator({
             headerTruncatedBackTitle: "MainScreen",
         }),
     },
-},{
+}, {
     headerMode: "screen",
     mode: "modal",
 });
@@ -96,7 +96,6 @@ export default createStackNavigator({
     mortality: {
         screen: Mortality,
     },
-},{
+}, {
     headerMode: "none",
 });
-
