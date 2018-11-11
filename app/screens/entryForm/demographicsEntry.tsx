@@ -1,7 +1,7 @@
 import moment from "moment";
 import * as React from "react";
+import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
-import { Button, Picker, Text, TextInput, View } from "react-native";
 // styles
 import styles from "./styles";
 
@@ -10,66 +10,72 @@ const today: Date = new Date();
 // TODO: Add border between each entry element
 export interface IEntryScreenProps {
     navigation: NavigationScreenProp<any, any>;
-};
+}
 
 export default class Entry extends React.Component<IEntryScreenProps, object> {
-    render() {
+    public render() {
         return (
             <View style={styles.container}>
             {/* Patient Demographics */}
-                <View>
-                    <Text>{moment(today).format("DD/MM/YYYY")}</Text>
-                </View>
-                <View>
-                {/* TODO: Automatically pull entrant name from stored ID */}
-                    <Text>Entrant</Text>
-                    <TextInput style={styles.input} />
-                </View>
-                <View>
+            <View>
+                <ScrollView>
+                    <View>
+                        <Text>{moment(today).format("DD/MM/YYYY")}</Text>
+                    </View>
+                    <View>
+                        {/* TODO: Automatically pull entrant name from stored ID */}
+                        <Text style={styles.label}>Entrant</Text>
+                        <TextInput style={styles.input} />
+                    </View>
+                    <View>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>NIC Number</Text>
-                        <TextInput />
+                        <TextInput style={styles.input}/>
                     </View>
-                    <Text style={styles.helpText}>Enter the National ID Card number of the patient</Text>
-                </View>
-                <View>
+                        <Text style={styles.helpText}>Enter the National ID Card number of the patient</Text>
+                    </View>
+                    <View>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Name</Text>
-                        <TextInput />
+                        <TextInput style={styles.input} />
                     </View>
-                    <Text style={styles.helpText}>Name of the Patient</Text>
-                </View>
-                <View>
+                        <Text style={styles.helpText}>Name of the Patient</Text>
+                    </View>
+                    <View>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Age</Text>
-                        <TextInput />
+                        <TextInput style={styles.input} />
                     </View>
-                    <Text style={styles.helpText}>Age of the Patient at the time of Registration</Text>
-                </View>
-                <View style={styles.wrapper}>
-                    <Text style={styles.label}>Gender</Text>
-                    <Text>Gender of Patient</Text>
-                    <Picker>
-                        <Picker.Item label="Male" value={0} />
-                        <Picker.Item label="Female" value={1} />
-                    </Picker>
-                </View>
-                <View>
+                        <Text style={styles.helpText}>Age of the Patient at the time of Registration</Text>
+                    </View>
+                    <View>
+                    <View style={styles.wrapper}>
+                        <Text style={styles.label}>Gender</Text>
+                        <Picker style={styles.input}>
+                            <Picker.Item label="Male" value={0} />
+                            <Picker.Item label="Female" value={1} />
+                        </Picker>
+                    </View>
+                        <Text style={styles.helpText}>Gender of Patient</Text>
+                    </View>
+                    <View>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Consent</Text>
-                        <Picker>
+                        <Picker style={styles.input}>
                             <Picker.Item label="No" value={0} />
                             <Picker.Item label="Yes" value={1} />
                         </Picker>
                     </View>
-                    <Text style={styles.helpText}>Has the patient given consent to be registered?</Text>
-                </View>
-                <View>
-                    <Button title="Next"
-                            onPress={() => this.props.navigation.navigate('dili')}
-                            color="black" />
-                </View>
+                        <Text style={styles.helpText}>Has the patient given consent to be registered?</Text>
+                    </View>
+                </ScrollView>
+        </View>
+            <View>
+                <Button title="Next"
+                    onPress={() => this.props.navigation.navigate("dili")}
+                    color="black" />
+            </View>
             </View>
         );
-    };
-};
+    }
+}

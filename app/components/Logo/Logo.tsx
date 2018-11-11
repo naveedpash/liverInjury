@@ -1,16 +1,16 @@
 import * as React from "react";
-import { View, Image, ImageBackground, Text } from "react-native";
-//Images
-import Splash from "./images/splash.png";
+import { Image, ImageBackground, Text, View } from "react-native";
+// Images
 import Icon from "./images/icon.png";
-//Styles
+import Splash from "./images/splash.png";
+// Styles
 import styles from "./styles";
 
 const Logo = () => {
     return (
         <View style={styles.container}>
-            <ImageBackground resizeMode="contain" 
-                             style={styles.containerImage} 
+            <ImageBackground resizeMode="contain"
+                             style={styles.containerImage}
                              source={Splash} >
                  <Image resizeMode="contain"
                         style={styles.image}
@@ -20,7 +20,7 @@ const Logo = () => {
                 Karachi Registry for Drug Induced Liver Injury
             </Text>
         </View>
-    )
+    );
 };
 
 export default Logo;

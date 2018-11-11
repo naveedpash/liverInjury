@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 
 const INPUT_HEIGHT: number = 48;
 const BORDER_RADIUS: number = 9;
-const TOUCHABLE_WIDTH: number = Dimensions.get("window").width/3;
+const TOUCHABLE_WIDTH: number = Dimensions.get("window").width / 3;
 
 const styles = StyleSheet.create({
     // Heading for each section

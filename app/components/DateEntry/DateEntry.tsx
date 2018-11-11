@@ -18,9 +18,9 @@ interface IDateEntryState {
 class DateEntry extends React.Component<any, IDateEntryState> {
     constructor(props: any) {
         super(props);
-        this.state = { 
+        this.state = {
             isDateTimePickerVisible: false,
-            date: new Date()
+            date: new Date(),
         };
     }
 
@@ -46,7 +46,7 @@ class DateEntry extends React.Component<any, IDateEntryState> {
         this.hideDateTimePicker();
         // this.props.handler(date);
         this.setState({date: date});
-    };
+    }
 }
 
 export default DateEntry;

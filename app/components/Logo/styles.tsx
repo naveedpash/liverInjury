@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const imageWidth = Dimensions.get("window").width / 2;
 
@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
         color: "#785537",
         textAlign: "center",
     },
-})
 
+});
 export default styles;

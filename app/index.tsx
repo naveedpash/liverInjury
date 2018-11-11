@@ -1,6 +1,9 @@
 import * as React from "react";
 import { StatusBar } from "react-native";
 import { createStackNavigator } from "react-navigation";
+//  import Loading from "./screens/auth/Loading";
+//  import Login from "./screens/auth/Login";
+//  import SignUp from "./screens/auth/SignUp";
 import demographicsEntry from "./screens/entryForm/demographicsEntry";
 import diliEntry from "./screens/entryForm/diliEntry";
 import examEntry from "./screens/entryForm/examEntry";
@@ -10,7 +13,7 @@ import labHxEntry from "./screens/entryForm/labHxEntry";
 import pastEntry from "./screens/entryForm/pastEntry";
 import pastRxEntry from "./screens/entryForm/pastRxEntry";
 import FollowUp from "./screens/FollowUp";
-import Home from "./screens/Home";
+import Main from "./screens/Main";
 import Mortality from "./screens/Mortality";
 
 const entry = createStackNavigator({
@@ -83,9 +86,9 @@ const entry = createStackNavigator({
     mode: "modal",
 });
 
-export default createStackNavigator({
-    home: {
-        screen: Home,
+export default  createStackNavigator({
+    main: {
+        screen: Main,
     },
     entry: {
         screen: entry,
@@ -99,3 +102,17 @@ export default createStackNavigator({
 }, {
     headerMode: "none",
 });
+
+//  export default createStackNavigator({
+//      Loading: {
+//          screen: Loading,
+//      },
+//      Login: {
+//          screen: Login,
+//      },
+//      SignUp: {
+//          screen: SignUp,
+//      },
+//  }, {
+//      headerMode: "none",
+//  })

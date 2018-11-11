@@ -10,10 +10,10 @@ const today: Date = new Date();
 // TODO: Add border between each entry element
 export interface IDiliScreenProps {
     navigation: NavigationScreenProp<any, any>;
-};
+}
 
-export default class diliEntry extends React.Component<IDiliScreenProps, object> {
-    render() {
+export default class DiliEntry extends React.Component<IDiliScreenProps, object> {
+    public render() {
         return (
             <View style={styles.container}>
                 {/* DILI Episode */}
@@ -62,9 +62,9 @@ export default class diliEntry extends React.Component<IDiliScreenProps, object>
                 </View>
                 <Button title="Next"
                         color="black"
-                        onPress={() => this.props.navigation.navigate('history')}
+                        onPress={() => this.props.navigation.navigate("history")}
                 />
             </View>
         );
     }
-};
+}
