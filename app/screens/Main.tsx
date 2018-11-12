@@ -1,5 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as React from "react";
+import firebase from "firebase";
 import { Text, TouchableOpacity, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { Logo } from "../components/Logo";
@@ -37,12 +38,20 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
                         <MaterialCommunityIcons name="emoticon-dead" size={32} color="black" />
                         <Text style={styles.buttonText}>Register Mortality</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchable}>
+                    <TouchableOpacity style={styles.touchable}
+                        onPress={this.handleSignOut}>
                         <MaterialCommunityIcons name="logout" size={32} color="black" />
                         <Text style={styles.buttonText}>Log Out</Text>
                     </TouchableOpacity>
                 </View>
             </View>
         );
+    }
+
+    private handleSignOut = () => {
+        firebase
+            .auth()
+            .signOut()
+            .catch((error: Error) => console.log(error.message));
     }
 }

@@ -26,12 +26,6 @@ export default class SignUp extends React.Component<IAuthProps, IAuthState> {
         return (
             <View style={styles.container}>
                 <Text>Sign Up</Text>
-                {
-                    this.state.errorMessage &&
-                    <Text style={{ color: "red" }}>
-                      {this.state.errorMessage}
-                    </Text>
-                }
                 <TextInput
                     placeholder="Email"
                     autoCapitalize="none"

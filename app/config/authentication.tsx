@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-import * as Expo from "expo";
+import Expo from "expo";
 
 interface IFirebaseConfig {
     apiKey: string;
@@ -15,35 +15,50 @@ export const firebaseConfig: IFirebaseConfig = {
     storageBucket: "gs://dili-16490.appspot.com",
 }
 
-const facebookAppID: string = "2207884789534473";
-const googleConfig: Expo.Google.LogInConfig = {
-    webClientId: "620460241347-f9q3fi5mjh6mgev1afnechqdn3l0hk58.apps.googleusercontent.com",
-
-}
+// TODO: for facebook login to work, it needs Expo or Facebook SDK
+//      therefore, it needs another secret ID
+//  private handleFacebookLogin = () => {
+//      const provider = new firebase.auth.FacebookAuthProvider();
+//      firebase
+//          .auth()
+//          .signInWithPopup(provider)
+//          .then((result) => {
+//              firebase.auth().signInWithCredential(result.credential!)
+//          })
+//          .then(() => this.props.navigation.navigate("Main"))
+//          .catch((error: Error) => this.setState({ errorMessage: error.message }));
+//  }
+//  private handleGoogleLogin = () => {
+//      const provider = new firebase.auth.GoogleAuthProvider();
+//      firebase
+//          .auth()
+//          .signInWithPopup(provider)
+//          .then((result) => {
+//              firebase.auth().signInWithCredential(result.credential!)
+//          })
+//          .then(() => this.props.navigation.navigate("Main"))
+//          .catch((error: Error) => this.setState({ errorMessage: error.message }));
+//  }
 
 export async function loginWithFacebook() {
-    const loginResult = await Expo.Facebook.logInWithReadPermissionsAsync(
-        facebookAppID,
-        { permissions: ["public_profile"] }
-    );
-
-    if (loginResult.type === "success") {
-        // Build Firebase credential with the Facebook access token.
-        const credential = firebase.auth.FacebookAuthProvider.credential(loginResult.token!);
-        // Sign in with credential from the Facebook user.
-        firebase.auth().signInWithCredential(credential)
-            .catch((error) => console.log(error.message));
-    }
+    const provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+            firebase.auth().signInWithCredential(result.credential!)
+        })
+        .catch((error: Error) => console.log(error.message));
 }
 
 export async function loginWithGoogle() {
-    const loginResult = await Expo.Google.logInAsync( googleConfig );
-
-    if (loginResult.type === "success") {
-        // Build Firebase credential with the Google access token.
-        const credential = firebase.auth.GoogleAuthProvider.credential(loginResult.accessToken);
-        // Sign in with credential from the Google user.
-        firebase.auth().signInWithCredential(credential)
-            .catch((error) => { console.log(error.message) });
-    }
+//  Expo.Google.logInAsync({
+//      webClientId: "620460241347-f9q3fi5mjh6mgev1afnechqdn3l0hk58.apps.googleusercontent.com",
+//  })
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+            firebase.auth().signInWithCredential(result.credential!)
+        })
+        .catch((error: Error) => console.log(error.message));
 }

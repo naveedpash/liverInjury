@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import firebase from "firebase";
 import { firebaseConfig } from "../../config/authentication";
@@ -15,7 +15,7 @@ export interface IAuthProps {
 export default class Loading extends React.Component<IAuthProps, any> {
     public componentDidMount() {
         firebase.auth().onAuthStateChanged(( user: any ) => {
-            this.props.navigation.navigate(user ? "main" : "Login");
+            this.props.navigation.navigate(user ? "Main" : "Login");
         });
     }
 

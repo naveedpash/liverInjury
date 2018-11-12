@@ -1,9 +1,13 @@
 import * as React from "react";
-import { KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+import { Button, KeyboardAvoidingView, Text, TextInput, View } from "react-native";
+import { reduxForm } from "redux-form";
 // styles
 import styles from "./styles";
 
-const FollowUp = () => {
+const FollowUp = (props: any) => {
+    const handleSubmit = props;
+    const submit = ( values: any ) => console.log(values);
+
     return (
         <View>
             <View style={styles.container}>
@@ -42,9 +46,12 @@ const FollowUp = () => {
                     <Text>INR</Text>
                     <TextInput keyboardType="numeric" />
                 </View>
+                <Button title="Submit" onPress={handleSubmit(submit)} color="black" />
             </KeyboardAvoidingView>
         </View>
     );
 };
 
-export default FollowUp;
+export default reduxForm({
+    form: "FollowUp"
+})(FollowUp);

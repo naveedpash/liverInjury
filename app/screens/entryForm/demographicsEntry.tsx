@@ -2,6 +2,7 @@ import moment from "moment";
 import * as React from "react";
 import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
+import { reduxForm } from "redux-form";
 // styles
 import styles from "./styles";
 

@@ -3,7 +3,6 @@ import * as Expo from "expo";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import * as firebase from "firebase";
-import { loginWithFacebook, loginWithGoogle } from "../../config/authentication";
 // styles
 import styles from "./styles";
 
@@ -25,14 +24,8 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
 
     public render() {
         return (
-            <View style={styles.container}>
+            <View>
                 <Text>Login</Text>
-                {
-                    this.state.errorMessage &&
-                    <Text style={{ color: "red" }}>
-                        {this.state.errorMessage}
-                    </Text>
-                }
                 <TextInput
                     style={styles.textInput}
                     autoCapitalize="none"
@@ -49,28 +42,13 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
                     value={this.state.password}
                 />
                 <Button title="Login" onPress={this.handleLogin} />
-                <Text>Don't have and account?</Text>
-                <Button title="Login with Facebook" onPress={this.handleFacebookLogin} />
-                <Button title="Login with Google" onPress={this.handleGoogleLogin} />
-                <Text>or...</Text>
+                <Text>Don't have and account</Text>
                 <Button
-                    title="Make an acount with us"
+                    title="Create your own account"
                     onPress={() => this.props.navigation.navigate("SignUp")}
                 />
                 </View>
         );
-    }
-
-    private handleFacebookLogin = () => {
-        loginWithFacebook()
-        .then(() => this.props.navigation.navigate("main"))
-        .catch((error: Error) => this.setState({ errorMessage: error.message }));
-    }
-
-    private handleGoogleLogin = () => {
-        loginWithGoogle()
-            .then(() => this.props.navigation.navigate("main"))
-            .catch((error: Error) => this.setState({ errorMessage: error.message }));
     }
 
     private handleLogin = () => {
@@ -80,7 +58,7 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
                 this.state.email,
                 this.state.password,
             )
-            .then(() => this.props.navigation.navigate("main"))
+            .then(() => this.props.navigation.navigate("Main"))
             .catch((error: Error) => this.setState({ errorMessage: error.message }));
     }
 }
