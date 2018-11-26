@@ -68,12 +68,13 @@ const entry = createMaterialTopTabNavigator({
 }, {
     tabBarOptions: {
         labelStyle: {
-            fontSize: 10,
+            fontSize: 12,
             padding: 5,
             margin: 0,
         },
         tabStyle: {
-            width: 85,
+            width: 103,
+            backgroundColor: "#910505",
         },
         scrollEnabled: true,
     },

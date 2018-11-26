@@ -1,9 +1,10 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as React from "react";
 import firebase from "firebase";
-import { Text, TouchableOpacity, View } from "react-native";
+import { AsyncStorage, NetInfo, Text, TouchableOpacity, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { Logo } from "../components/Logo";
+import { handleConnectivityChange } from "../config/dataHandler";
 // styles
 import styles from "./styles";
 
@@ -30,6 +31,26 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
             fontWeight: "300",
             textAlign: "left",
         },
+    }
+
+    public componentWillMount() {
+        AsyncStorage.getItem("islistening")
+        .then((islistening) => {
+            if (islistening === "true") {
+                NetInfo.isConnected.addEventListener("connectionChange", handleConnectivityChange)
+            }
+        })
+        .catch((error: Error) => console.log(error.message));
+    }
+
+    public componentWillUnmount() {
+        AsyncStorage.getItem("islistening")
+        .then((islistening) => {
+            if (islistening === "true") {
+                NetInfo.isConnected.removeEventListener("connectionChange", handleConnectivityChange)
+            }
+        })
+        .catch((error: Error) => console.log(error.message));
     }
 
     public render() {

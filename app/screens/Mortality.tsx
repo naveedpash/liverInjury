@@ -69,7 +69,7 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
                 <Text style={styles.label}>NIC Number</Text>
                 <TextInput
                     keyboardType="numeric"
-                    onChangeText={(text) => { this.setState({nic: text}); }}
+                    onChangeText={(text) => this.setState({nic: text})}
                     style={styles.input}
                 />
             </View>
