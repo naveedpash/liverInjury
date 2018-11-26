@@ -23,24 +23,24 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
                 <View style={styles.wrapper}>
                     <TouchableOpacity style={styles.touchable}
                         onPress={() => this.props.navigation.navigate("entry")}>
-                        <MaterialCommunityIcons name="plus-circle" size={32} color="black" />
+                        <MaterialCommunityIcons name="plus-circle" size={32} color="white" />
                         <Text style={styles.buttonText}>Register New Patient</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.touchable}
                         onPress={() => this.props.navigation.navigate("followUp")}>
-                        <MaterialCommunityIcons name="test-tube" size={32} color="black" />
+                        <MaterialCommunityIcons name="test-tube" size={32} color="white" />
                         <Text style={styles.buttonText}>Enter FollowUp LFTs</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.wrapper}>
                     <TouchableOpacity style={styles.touchable}
                         onPress={() => this.props.navigation.navigate("mortality")}>
-                        <MaterialCommunityIcons name="emoticon-dead" size={32} color="black" />
+                        <MaterialCommunityIcons name="emoticon-dead" size={32} color="white" />
                         <Text style={styles.buttonText}>Register Mortality</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.touchable}
                         onPress={this.handleSignOut}>
-                        <MaterialCommunityIcons name="logout" size={32} color="black" />
+                        <MaterialCommunityIcons name="logout" size={32} color="white" />
                         <Text style={styles.buttonText}>Log Out</Text>
                     </TouchableOpacity>
                 </View>

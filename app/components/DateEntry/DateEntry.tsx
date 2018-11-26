@@ -1,26 +1,29 @@
 import { FontAwesome } from "@expo/vector-icons";
 import moment from "moment";
 import * as React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker";
+import { validateDate } from "../../config/validation";
 // styles
 import styles from "./styles";
 
-//  interface IDateEntryProps {
-//      handler: (date: Date) => void;
-//  }
+interface IDateEntryProps {
+    dateHandler: (date: moment.Moment) => any;
+    validateAgainst: string;
+    validationMessage: string;
+}
 
 interface IDateEntryState {
     isDateTimePickerVisible: boolean;
-    date: Date;
+    date: string;
 }
 
-class DateEntry extends React.Component<any, IDateEntryState> {
-    constructor(props: any) {
+class DateEntry extends React.Component<IDateEntryProps, IDateEntryState> {
+    constructor(props: IDateEntryProps) {
         super(props);
         this.state = {
             isDateTimePickerVisible: false,
-            date: new Date(),
+            date: "Pick a Date",
         };
     }
 
@@ -28,7 +31,7 @@ class DateEntry extends React.Component<any, IDateEntryState> {
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.wrapper} onPress={this.showDateTimePicker}>
-                    <Text style={styles.text}>{moment(this.state.date).format("DD/MM/YYYY")}</Text>
+                    <Text style={styles.text}>{this.state.date}</Text>
                     <FontAwesome name="calendar" color="black" size={18} />
                 </TouchableOpacity>
                 <DateTimePicker
@@ -44,8 +47,13 @@ class DateEntry extends React.Component<any, IDateEntryState> {
     private hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
     private handleDatePicked = (date: Date) => {
         this.hideDateTimePicker();
-        // this.props.handler(date);
-        this.setState({date: date});
+        if (validateDate(moment(date), this.props.validateAgainst)) {
+            Alert.alert(this.props.validationMessage);
+            return;
+        } else {
+            this.setState({date: moment(date).format("YYYY-MM-DD")});
+            this.props.dateHandler(moment(date));
+        };
     }
 }
 

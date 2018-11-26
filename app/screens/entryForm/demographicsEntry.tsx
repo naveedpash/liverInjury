@@ -1,3 +1,4 @@
+import firebase from "firebase";
 import moment from "moment";
 import * as React from "react";
 import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
@@ -15,18 +16,18 @@ export interface IEntryScreenProps {
 
 export default class Entry extends React.Component<IEntryScreenProps, object> {
     public render() {
+        const user = firebase.auth().currentUser;
         return (
             <View style={styles.container}>
             {/* Patient Demographics */}
-            <View>
                 <ScrollView>
                     <View>
-                        <Text>{moment(today).format("DD/MM/YYYY")}</Text>
+                        <Text style={styles.helpText}>{moment(today).format("DD/MM/YYYY")}</Text>
                     </View>
-                    <View>
+                    <View style={styles.wrapper}>
                         {/* TODO: Automatically pull entrant name from stored ID */}
                         <Text style={styles.label}>Entrant</Text>
-                        <TextInput style={styles.input} />
+                        <Text style={styles.input}>{user!.email}</Text>
                     </View>
                     <View>
                     <View style={styles.wrapper}>
@@ -52,7 +53,7 @@ export default class Entry extends React.Component<IEntryScreenProps, object> {
                     <View>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Gender</Text>
-                        <Picker style={styles.input}>
+                        <Picker style={styles.picker}>
                             <Picker.Item label="Male" value={0} />
                             <Picker.Item label="Female" value={1} />
                         </Picker>
@@ -62,7 +63,7 @@ export default class Entry extends React.Component<IEntryScreenProps, object> {
                     <View>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Consent</Text>
-                        <Picker style={styles.input}>
+                        <Picker style={styles.picker}>
                             <Picker.Item label="No" value={0} />
                             <Picker.Item label="Yes" value={1} />
                         </Picker>
@@ -70,12 +71,6 @@ export default class Entry extends React.Component<IEntryScreenProps, object> {
                         <Text style={styles.helpText}>Has the patient given consent to be registered?</Text>
                     </View>
                 </ScrollView>
-        </View>
-            <View>
-                <Button title="Next"
-                    onPress={() => this.props.navigation.navigate("dili")}
-                    color="black" />
-            </View>
             </View>
         );
     }

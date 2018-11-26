@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ActivityIndicator, Text, View } from "react-native";
-import { NavigationScreenProp } from "react-navigation";
+import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
 import firebase from "firebase";
 import { firebaseConfig } from "../../config/authentication";
 // styles
@@ -15,15 +15,43 @@ export interface IAuthProps {
 export default class Loading extends React.Component<IAuthProps, any> {
     public componentDidMount() {
         firebase.auth().onAuthStateChanged(( user: any ) => {
-            this.props.navigation.navigate(user ? "Main" : "Login");
+            if (user) {
+                const resetAction = StackActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({
+                            routeName: "main",
+                            params: { user: firebase.auth().currentUser }
+                        }),
+                    ]
+                });
+                this.props.navigation.dispatch(resetAction);
+                return;
+            }
+            const resetAction = StackActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({
+                        routeName: "Login",
+                        params: { user: firebase.auth().currentUser }
+                    }),
+                ]
+            });
+            this.props.navigation.dispatch(resetAction);
         });
     }
 
     public render() {
         return (
             <View style={styles.container}>
-                <Text>Loading</Text>
-                <ActivityIndicator size="large" />
+                <View style={styles.wrapper}>
+                    <Text style={styles.helpText}>Loading</Text>
+                </View>
+                <View style={styles.wrapper}>
+                    <ActivityIndicator 
+                        color="black"
+                        size="large" />
+                </View>
             </View>
         );
     }

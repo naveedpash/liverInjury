@@ -1,5 +1,5 @@
 import { StatusBar } from "react-native";
-import { createStackNavigator } from "react-navigation";
+import { createMaterialTopTabNavigator, createStackNavigator} from "react-navigation";
 import Loading from "../screens/auth/Loading";
 import Login from "../screens/auth/Login";
 import SignUp from "../screens/auth/SignUp";
@@ -14,75 +14,69 @@ import pastRxEntry from "../screens/entryForm/pastRxEntry";
 import FollowUp from "../screens/FollowUp";
 import Main from "../screens/Main";
 import Mortality from "../screens/Mortality";
+import Notification from "../screens/Notification";
 
-const entry = createStackNavigator({
+const entry = createMaterialTopTabNavigator({
     entry: {
         screen: demographicsEntry,
         navigationOptions: () => ({
-            title: `Register New Patient`,
-            headerBackTitle: "Back to Main Screen",
-            headerTruncatedBackTitle: "MainScreen",
+            tabBarLabel: "Demographics",
         }),
     },
     dili: {
         screen: diliEntry,
         navigationOptions: () => ({
-            title: `Register New Patient`,
-            headerBackTitle: "Back to Main Screen",
-            headerTruncatedBackTitle: "MainScreen",
+            tabBarLabel: "Suspected\nDrug",
         }),
     },
     history: {
         screen: historyEntry,
         navigationOptions: () => ({
-            title: `Register New Patient`,
-            headerBackTitle: "Back to Main Screen",
-            headerTruncatedBackTitle: "MainScreen",
+            tabBarLabel: "Presenting\nHistory",
         }),
     },
     past: {
         screen: pastEntry,
         navigationOptions: () => ({
-            title: `Register New Patient`,
-            headerBackTitle: "Back to Main Screen",
-            headerTruncatedBackTitle: "MainScreen",
+            tabBarLabel: "Past\nHistory",
         }),
     },
     pastRx: {
         screen: pastRxEntry,
         navigationOptions: () => ({
-            title: `Register New Patient`,
-            headerBackTitle: "Back to Main Screen",
-            headerTruncatedBackTitle: "MainScreen",
+            tabBarLabel: "Past\nMedications",
         }),
     },
     exam: {
         screen: examEntry,
         navigationOptions: () => ({
-            title: `Register New Patient`,
-            headerBackTitle: "Back to Main Screen",
-            headerTruncatedBackTitle: "MainScreen",
+            tabBarLabel: "Exam",
         }),
     },
     lab: {
         screen: labEntry,
         navigationOptions: () => ({
-            title: `Register New Patient`,
-            headerBackTitle: "Back to Main Screen",
-            headerTruncatedBackTitle: "MainScreen",
+            tabBarLabel: "Labs",
         }),
     },
     labHx: {
         screen: labHxEntry,
         navigationOptions: () => ({
-            title: `Register New Patient`,
-            headerBackTitle: "Back to Main Screen",
-            headerTruncatedBackTitle: "MainScreen",
+            tabBarLabel: "Labs\nHistory",
         }),
     },
 }, {
-    headerMode: "screen",
-    mode: "modal",
+    tabBarOptions: {
+        labelStyle: {
+            fontSize: 10,
+            padding: 5,
+            margin: 0,
+        },
+        tabStyle: {
+            width: 85,
+        },
+        scrollEnabled: true,
+    },
 });
 
 const main = createStackNavigator({
@@ -98,11 +92,14 @@ const main = createStackNavigator({
     mortality: {
         screen: Mortality,
     },
+    notification: {
+        screen: Notification,
+    },
 }, {
     headerMode: "none",
 });
 
-export default createStackNavigator({
+const auth = createStackNavigator({
     Loading: {
         screen: Loading,
     },
@@ -112,9 +109,29 @@ export default createStackNavigator({
     SignUp: {
         screen: SignUp,
     },
-    Main: {
-        screen: main,
+    main: {
+        screen: createStackNavigator({
+            main: {
+                screen: Main,
+            },
+            entry: {
+                screen: entry,
+            },
+            followUp: {
+                screen: FollowUp,
+            },
+            mortality: {
+                screen: Mortality,
+            },
+            notification: {
+                screen: Notification,
+            },
+        }, {
+            headerMode: "screen",
+        }),
     },
 }, {
     headerMode: "none",
 });
+
+export default auth;

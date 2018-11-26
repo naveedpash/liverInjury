@@ -17,7 +17,7 @@ export default class PastRxEntry extends React.Component<IPastRxScreenProps, obj
             <View>
                 <View style={styles.wrapper}>
                     <Text style={styles.label}>Past Reaction to Suspected Drug</Text>
-                    <Picker>
+                    <Picker style={styles.picker}>
                         <Picker.Item label="No" value={0} />
                         <Picker.Item label="Yes" value={1} />
                     </Picker>
@@ -31,15 +31,12 @@ export default class PastRxEntry extends React.Component<IPastRxScreenProps, obj
                 <Text style={styles.label}>
                     What medications has the patient been taking over the past 3 months?
                 </Text>
-                <Text>Please type the drug, its dose and dosage unit and duration the patient
+                <TextInput multiline={true} />
+                <Text style={styles.helpText}>Please type the drug, its dose and dosage unit and duration the patient
                  has been taking the drug
                 </Text>
                 {/* Button to add more row */}
-                <TextInput multiline={true} />
             </View>
-            <Button onPress={() => this.props.navigation.navigate("exam")}
-                    color="black"
-                    title="Next" />
         </View>
     );
     }

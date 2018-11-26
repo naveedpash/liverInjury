@@ -15,9 +15,9 @@ export default class ExamEntry extends React.Component<IExamScreenProps, object>
     return (
         <View style={styles.container}>
             <View>
-                <View>
+                <View style={styles.wrapper}>
                     <Text style={styles.label}>Rash</Text>
-                    <Picker>
+                    <Picker style={styles.picker}>
                         <Picker.Item label="No" value={0} />
                         <Picker.Item label="Yes" value={1} />
                     </Picker>
@@ -25,9 +25,9 @@ export default class ExamEntry extends React.Component<IExamScreenProps, object>
                 <Text style={styles.helpText}>Is the patient presenting with rash on initial examination?</Text>
             </View>
             <View>
-                <View>
+                <View style={styles.wrapper}>
                     <Text style={styles.label}>Fever</Text>
-                    <Picker>
+                    <Picker style={styles.picker}>
                         <Picker.Item label="No" value={0} />
                         <Picker.Item label="Yes" value={1} />
                     </Picker>
@@ -37,9 +37,9 @@ export default class ExamEntry extends React.Component<IExamScreenProps, object>
                 </Text>
             </View>
             <View>
-                <View>
+                <View style={styles.wrapper}>
                     <Text style={styles.label}>Icteric</Text>
-                    <Picker>
+                    <Picker style={styles.picker}>
                         <Picker.Item label="No" value={0} />
                         <Picker.Item label="Yes" value={1} />
                     </Picker>
@@ -47,19 +47,15 @@ export default class ExamEntry extends React.Component<IExamScreenProps, object>
                 <Text style={styles.helpText}>Is the patient presenting with jaundice on initial examination?</Text>
             </View>
             <View>
-                <View>
+                <View style={styles.wrapper}>
                     <Text style={styles.label}>Hypotension</Text>
-                    <Picker>
+                    <Picker style={styles.picker}>
                         <Picker.Item label="No" value={0} />
                         <Picker.Item label="Yes" value={1} />
                     </Picker>
                 </View>
                 <Text style={styles.helpText}>Is the patient hypotensive on initial examination?</Text>
             </View>
-            <Button title="Next"
-                    color="black"
-                    onPress={() => this.props.navigation.navigate("lab")}
-            />
         </View>
     );
     }
