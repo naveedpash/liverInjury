@@ -2,8 +2,8 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 15071,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "packagerPid": 4458,
+  "expoServerNgrokUrl": "https://ip-33f.anonymous.liverinjury.exp.direct",
+  "packagerNgrokUrl": "https://packager.ip-33f.anonymous.liverinjury.exp.direct",
+  "ngrokPid": 4563
 }

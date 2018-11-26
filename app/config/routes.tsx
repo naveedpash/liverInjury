@@ -1,8 +1,10 @@
-import { StatusBar } from "react-native";
+import * as React from "react";
+import { StatusBar, Text } from "react-native";
 import { createMaterialTopTabNavigator, createStackNavigator} from "react-navigation";
 import Loading from "../screens/auth/Loading";
 import Login from "../screens/auth/Login";
 import SignUp from "../screens/auth/SignUp";
+import EntryForm from "../screens/entryForm";
 import demographicsEntry from "../screens/entryForm/demographicsEntry";
 import diliEntry from "../screens/entryForm/diliEntry";
 import examEntry from "../screens/entryForm/examEntry";
@@ -72,8 +74,10 @@ const entry = createMaterialTopTabNavigator({
             padding: 5,
             margin: 0,
         },
+        activeBackgroundColor: "#910505",
+        inactiveBackgroundColor: "#910505",
         tabStyle: {
-            width: 103,
+            width: 105,
             backgroundColor: "#910505",
         },
         scrollEnabled: true,
@@ -116,7 +120,7 @@ const auth = createStackNavigator({
                 screen: Main,
             },
             entry: {
-                screen: entry,
+                screen: EntryForm,
             },
             followUp: {
                 screen: FollowUp,
