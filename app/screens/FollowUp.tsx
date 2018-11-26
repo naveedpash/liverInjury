@@ -74,13 +74,11 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
-            alignSelf: "center",
             color: "#ffffff",
             flex: 1,
-            fontSize: 32,
-            fontWeight: "600",
-            paddingBottom: 10,
-            textAlign: "center",
+            fontSize: 18,
+            fontWeight: "300",
+            textAlign: "left",
         },
     }
 

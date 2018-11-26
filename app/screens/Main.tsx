@@ -16,34 +16,46 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
         super(props);
     }
 
+    static navigationOptions = {
+        title: 'Karachi Registery for Drug Induced Liver Injury',
+        headerStyle: {
+            backgroundColor: '#910505',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            alignSelf: "center",
+            color: "#ffffff",
+            flex: 1,
+            fontSize: 18,
+            fontWeight: "300",
+            textAlign: "left",
+        },
+    }
+
     public render() {
         return (
             <View style={styles.container}>
+                <TouchableOpacity style={styles.touchable}
+                    onPress={() => this.props.navigation.navigate("entry")}>
+                    <MaterialCommunityIcons name="plus-circle" size={32} color="white" />
+                    <Text style={styles.buttonText}>Register New Patient</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.touchable}
+                    onPress={() => this.props.navigation.navigate("followUp")}>
+                    <MaterialCommunityIcons name="test-tube" size={32} color="white" />
+                    <Text style={styles.buttonText}>Enter FollowUp LFTs</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.touchable}
+                    onPress={() => this.props.navigation.navigate("mortality")}>
+                    <MaterialCommunityIcons name="emoticon-dead" size={32} color="white" />
+                    <Text style={styles.buttonText}>Register Mortality</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.touchable}
+                    onPress={this.handleSignOut}>
+                    <MaterialCommunityIcons name="logout" size={32} color="white" />
+                    <Text style={styles.buttonText}>Log Out</Text>
+                </TouchableOpacity>
                 <Logo />
-                <View style={styles.wrapper}>
-                    <TouchableOpacity style={styles.touchable}
-                        onPress={() => this.props.navigation.navigate("entry")}>
-                        <MaterialCommunityIcons name="plus-circle" size={32} color="white" />
-                        <Text style={styles.buttonText}>Register New Patient</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchable}
-                        onPress={() => this.props.navigation.navigate("followUp")}>
-                        <MaterialCommunityIcons name="test-tube" size={32} color="white" />
-                        <Text style={styles.buttonText}>Enter FollowUp LFTs</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.wrapper}>
-                    <TouchableOpacity style={styles.touchable}
-                        onPress={() => this.props.navigation.navigate("mortality")}>
-                        <MaterialCommunityIcons name="emoticon-dead" size={32} color="white" />
-                        <Text style={styles.buttonText}>Register Mortality</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchable}
-                        onPress={this.handleSignOut}>
-                        <MaterialCommunityIcons name="logout" size={32} color="white" />
-                        <Text style={styles.buttonText}>Log Out</Text>
-                    </TouchableOpacity>
-                </View>
             </View>
         );
     }

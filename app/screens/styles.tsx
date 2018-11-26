@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 
 const INPUT_HEIGHT: number = 48;
 const BORDER_RADIUS: number = 9;
-const TOUCHABLE_WIDTH: number = Dimensions.get("window").width / 3;
+const TOUCHABLE_HEIGHT: number = Dimensions.get("window").width / 12;
 
 const styles = StyleSheet.create({
     // Heading for each section
@@ -18,11 +18,14 @@ const styles = StyleSheet.create({
     buttonText: {
         color: "#ffffff",
         fontSize: 15,
-        fontWeight: "500",
+        fontWeight: "200",
         height: INPUT_HEIGHT,
         justifyContent: "center",
         letterSpacing: -0.5,
+        marginLeft: 10,
+        paddingVertical: 5,
         textAlign: "center",
+        textAlignVertical: "center",
         textShadowColor: "black",
         textShadowOffset: {width: 5, height: 5},
         textShadowRadius: 5,
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
         alignItems: "stretch",
         backgroundColor: "#31aa80",
         height: "100%",
-        paddingHorizontal: 15,
+        padding: 15,
     },
     heading: {
         color: "#910505",
@@ -51,21 +54,21 @@ const styles = StyleSheet.create({
     },
     input: {
         color: "#910505",
-        flex: 1,
-        fontSize: 18,
+        flex: 0.5,
+        fontSize: 16,
         height: INPUT_HEIGHT,
         textAlign: "right",
     },
     inputForm: {
         color: "#910505",
         flex: 1,
-        fontSize: 18,
+        fontSize: 16,
         height: INPUT_HEIGHT,
     },
     label: {
         color: "#ffffff",
         flex: 0.5,
-        fontSize: 20,
+        fontSize: 16,
         letterSpacing: -0.5,
         marginRight: 10,
         textAlign: "left",
@@ -75,13 +78,15 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#910505",
         borderRadius: BORDER_RADIUS,
-        height: TOUCHABLE_WIDTH,
-        justifyContent: "center",
-        width: TOUCHABLE_WIDTH,
+        flexDirection: "row",
+        height: TOUCHABLE_HEIGHT,
+        justifyContent: "flex-start",
         shadowColor: "black",
         shadowOffset: {width: 5, height: 5},
         shadowRadius: 5,
         elevation: 15,
+        paddingHorizontal: 10,
+        marginVertical: 5,
     },
     wrapper: {
         alignContent: "space-around",

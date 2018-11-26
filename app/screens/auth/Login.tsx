@@ -32,31 +32,42 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
 
     public render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Loading isLoading={this.state.isSubmitting} />
-                <Text>Login</Text>
-                <TextInput
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    placeholder="Email"
-                    onChangeText={( email ) => this.setState({ email })}
-                    value={this.state.email}
-                />
-                <TextInput
-                    secureTextEntry
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    placeholder="Password"
-                    onChangeText={( password ) => this.setState({ password })}
-                    value={this.state.password}
-                />
-                <Button title="Login" onPress={this.handleLogin} />
-                <Text>Don't have and account</Text>
-                <Button
-                    title="Create your own account"
-                    onPress={() => this.props.navigation.navigate("SignUp")}
-                />
+                <Text style={styles.heading}>Login</Text>
+                <View style={styles.wrapperForm}>
+                    <TextInput
+                        style={styles.inputForm}
+                        autoCapitalize="none"
+                        placeholder="Email"
+                        onChangeText={( email ) => this.setState({ email })}
+                        value={this.state.email}
+                    />
                 </View>
+                <View style={styles.wrapperForm}>
+                    <TextInput
+                        style={styles.inputForm}
+                        secureTextEntry
+                        autoCapitalize="none"
+                        placeholder="Password"
+                        onChangeText={( password ) => this.setState({ password })}
+                        value={this.state.password}
+                    />
+                </View>
+                <View style={styles.button}>
+                    <Button title="Login" 
+                        color="black"
+                        onPress={this.handleLogin} />
+                </View>
+                <Text style={styles.helpText}>Don't have and account</Text>
+                <View style={styles.button}>
+                    <Button
+                        title="Create your own account"
+                        color="black"
+                        onPress={() => this.props.navigation.navigate("SignUp")}
+                    />
+                </View>
+            </View>
         );
     }
 
@@ -74,16 +85,8 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
             )
             .then(() => {
                 this.setState({isSubmitting: false});
-                const resetAction = StackActions.reset({
-                    index: 0,
-                    actions: [
-                        NavigationActions.navigate({
-                            routeName: "Main",
-                        })
-                    ]
-                });
-                this.props.navigation.dispatch(resetAction);
+                this.props.navigation.navigate("main");
             })
-            .catch((error: Error) => console.log(error.message));
+            .catch((error: Error) => Alert.alert(error.message));
     }
 }
