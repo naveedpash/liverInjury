@@ -59,13 +59,13 @@ const Entry = createMaterialTopTabNavigator({
     tabBarOptions: {
         labelStyle: {
             fontSize: 12,
-            padding: 5,
+            paddingHorizontal: 5,
             margin: 0,
         },
         activeBackgroundColor: "#910505",
         inactiveBackgroundColor: "#910505",
         tabStyle: {
-            width: 105,
+            width: 108,
             backgroundColor: "#910505",
         },
         scrollEnabled: true,
