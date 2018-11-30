@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet } from "react-native";
 const INPUT_HEIGHT: number = 48;
 const BORDER_RADIUS: number = 9;
 const TOUCHABLE_HEIGHT: number = Dimensions.get("window").width / 12;
+const LOGO_HEIGHT: number = Dimensions.get("window").height / 8;
 
 const styles = StyleSheet.create({
     // Heading for each section
@@ -34,6 +35,11 @@ const styles = StyleSheet.create({
         alignItems: "stretch",
         backgroundColor: "#31aa80",
         height: "100%",
+        padding: 15,
+    },
+    containerMenu: {
+        backgroundColor: "#31aa80",
+        height: LOGO_HEIGHT * 7,
         padding: 15,
     },
     heading: {

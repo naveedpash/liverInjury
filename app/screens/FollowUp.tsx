@@ -48,7 +48,22 @@ export interface IFollowUpState {
 }
 
 export default class FollowUp extends React.Component<IFollowUpProps, any> {
-    constructor(props: IFollowUpProps) {
+    public static navigationOptions = {
+        title: 'Enter FollowUp LFTs',
+        headerStyle: {
+            backgroundColor: '#910505',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            color: "#ffffff",
+            flex: 1,
+            fontSize: 18,
+            fontWeight: "300",
+            textAlign: "left",
+        },
+    }
+
+    private constructor(props: IFollowUpProps) {
         super(props);
         this.state = {
             nic: "",
@@ -65,21 +80,6 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
             user: firebase.auth().currentUser,
             isSubmitting: false,
         };
-    }
-
-    static navigationOptions = {
-        title: 'Enter FollowUp LFTs',
-        headerStyle: {
-            backgroundColor: '#910505',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            color: "#ffffff",
-            flex: 1,
-            fontSize: 18,
-            fontWeight: "300",
-            textAlign: "left",
-        },
     }
 
     public render() {
@@ -209,13 +209,13 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
             .then((islistening) => {
                 this.setState({isSubmitting: false});
                 if (!islistening) {
-                    this.props.navigation.push("notification", {
+                    this.props.navigation.push("Notification", {
                         heading: "Success!",
                         message: "Your data has been stored online.",
                         type: "success",
                     });
                 } else {
-                    this.props.navigation.push("notification", {
+                    this.props.navigation.push("Notification", {
                         heading: "Saved",
                         message: "We could not establish an internet connection." + "\n" +
                             "Your data has been stored on this device." + "\n" + 

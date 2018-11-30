@@ -1,8 +1,10 @@
 import * as React from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, ImageBackground, Text, View } from "react-native";
 import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
 import firebase from "firebase";
 import { firebaseConfig } from "../../config/authentication";
+import { Logo } from "../../components/Logo";
+import background from "../background.jpg";
 // styles
 import styles from "./styles";
 
@@ -43,14 +45,13 @@ export default class Loading extends React.Component<IAuthProps, any> {
 
     public render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.wrapper}>
-                    <Text style={styles.helpText}>Loading</Text>
-                </View>
-                <View style={styles.wrapper}>
-                    <ActivityIndicator 
-                        color="black"
-                        size="large" />
+            <View>
+                        <Logo />
+                <View style={styles.container}>
+                    <View style={styles.wrapper}>
+                        <Text style={styles.helpText}>Loading</Text>
+                        <ActivityIndicator color="black" size="large" />
+                    </View>
                 </View>
             </View>
         );

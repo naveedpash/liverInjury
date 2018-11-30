@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         alignItems: "stretch",
         backgroundColor: "#31aa80",
         height: "100%",
+        justifyContent: "center",
         paddingHorizontal: 15,
     },
     heading: {
@@ -87,7 +88,6 @@ const styles = StyleSheet.create({
         alignContent: "space-around",
         alignItems: "stretch",
         justifyContent: "space-evenly",
-        flexDirection: "row",
         padding: 11,
     },
     wrapperForm: {

@@ -18,6 +18,9 @@ const auth = createStackNavigator({
     SignUp: {
         screen: SignUp,
     },
+    Notification: {
+        screen: Notification,
+    },
     main: {
         screen: createStackNavigator({
             main: {
@@ -31,9 +34,6 @@ const auth = createStackNavigator({
             },
             mortality: {
                 screen: Mortality,
-            },
-            notification: {
-                screen: Notification,
             },
         }, {
             headerMode: "screen",

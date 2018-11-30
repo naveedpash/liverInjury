@@ -17,16 +17,30 @@ export default StyleSheet.create({
         fontWeight: "600",
         textAlign: "center",
     },
+    label: {
+        color: "#ffffff",
+        flex: 0.5,
+        fontSize: 16,
+        letterSpacing: -0.5,
+        marginHorizontal: 10,
+        textAlign: "center",
+        textAlignVertical: "center",
+    },
     text: {
         color: "#FFFFFF",
         fontSize: 16,
         letterSpacing: -0.5,
-        textAlign: "justify",
+        textAlign: "center",
     },
     touchable: {
         alignItems: "center",
         backgroundColor: "#910505",
         height: 40,
+        justifyContent: "center",
+    },
+    wrapper: {
+        flexDirection: "row",
+        alignItems: "center",
         justifyContent: "center",
     },
 })

@@ -1,20 +1,23 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 const imageWidth = Dimensions.get("window").width / 2;
+const imageHeight = Dimensions.get("window").height / 4;
 
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
-        marginVertical: 15,
-    },
-    containerImage: {
-        alignItems: "center",
         justifyContent: "center",
-        width: imageWidth,
-        height: imageWidth,
+        height: imageHeight,
+    },
+    imageContainer: {
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "center",
+        width: "100%",
+        height: imageHeight,
     },
     image: {
-        width: imageWidth / 2,
+        width: imageWidth,
     },
     text: {
         fontWeight: "500",

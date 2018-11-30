@@ -23,6 +23,7 @@ export interface INotificationState {
 }
 
 export default class Notification extends React.Component<INotificationProps, INotificationState> {
+
     private constructor(props: INotificationProps) {
         super(props);
         this.state = {
@@ -61,7 +62,7 @@ export default class Notification extends React.Component<INotificationProps, IN
         // Return desired appearance
         return (
             <View style={styles.container}>
-                <View style={styles.wrapperForm}>
+                <View style={styles.wrapper}>
                     <MaterialCommunityIcons
                         name={this.state.category.icon}
                         color={this.state.category.color}

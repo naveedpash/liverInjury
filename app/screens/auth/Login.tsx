@@ -59,24 +59,23 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
                         color="black"
                         onPress={this.handleLogin} />
                 </View>
-                <Text style={styles.helpText}>Don't have and account</Text>
+                <Text style={styles.helpText}>Don't have an account</Text>
                 <View style={styles.button}>
                     <Button
                         title="Create your own account"
                         color="black"
-                        onPress={() => this.props.navigation.navigate("SignUp")}
-                    />
+                        onPress={() => this.props.navigation.navigate("SignUp")} />
                 </View>
             </View>
         );
     }
 
     private handleLogin = () => {
+        this.setState({isSubmitting: true});
         if (!validateEmail) {
             Alert.alert(invalidEmailMessage);
             return;
         }
-        this.setState({isSubmitting: true});
         firebase
             .auth()
             .signInWithEmailAndPassword(
@@ -87,6 +86,9 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
                 this.setState({isSubmitting: false});
                 this.props.navigation.navigate("main");
             })
-            .catch((error: Error) => Alert.alert(error.message));
+            .catch((error: Error) => {
+                this.setState({isSubmitting: false});
+                Alert.alert(error.message) 
+            });
     }
 }
