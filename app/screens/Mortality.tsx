@@ -8,7 +8,7 @@ import {
     Text,
     TextInput,
     View } from "react-native";
-import { NavigationScreenProp } from "react-navigation";
+import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
 import { Loading } from "../components/Loading";
 import { handleData, listenStatus } from "../config/dataHandler";

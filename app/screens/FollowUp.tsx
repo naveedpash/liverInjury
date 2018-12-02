@@ -8,11 +8,13 @@ import { ActivityIndicator,
     Button,
     KeyboardAvoidingView,
     NetInfo,
+    ScrollView,
     Text,
     TextInput,
     View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
+import { Loading } from "../components/Loading";
 import { handleData,listenStatus } from "../config/dataHandler";
 import { validateNIC, validateLabValue } from "../config/validation";
 // styles
@@ -85,6 +87,7 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
     public render() {
         return (
             <View style={styles.container}>
+                <Loading isLoading={this.state.isSubmitting} />
                 <View>
                     <Text style={styles.helpText}>
                         Please enter the laboratory values of the registered patient suspected
@@ -92,88 +95,89 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                     </Text>
                 </View>
                 {/* TODO: implement fuzzy search */}
-                <KeyboardAvoidingView behavior="padding">
-                    <View>
-                        <View style={styles.wrapper}>
-                            <Text style={styles.label}>NIC Number</Text>
-                            <TextInput
-                                keyboardType="numeric"
-                                onChangeText={(text) => {this.setState({nic: text})}}
-                                style={styles.input}
-                            />
+                    <ScrollView keyboardShouldPersistTaps="always">
+                        <KeyboardAvoidingView behavior="padding">
+                        <View>
+                            <View style={styles.wrapper}>
+                                <Text style={styles.label}>NIC Number</Text>
+                                <TextInput
+                                    keyboardType="numeric"
+                                    onChangeText={(text) => {this.setState({nic: text})}}
+                                    style={styles.input}
+                                />
+                            </View>
+                            <Text style={styles.helpText}>
+                                Enter the National ID Card Number of the Patient
+                            </Text>
                         </View>
-                        <Text style={styles.helpText}>
-                            Enter the National ID Card Number of the Patient
-                        </Text>
-                    </View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>Bilirubin (U/L)</Text>
+                        <View style={styles.wrapper}>
+                            <Text style={styles.label}>Bilirubin (U/L)</Text>
                             <TextInput
                                 keyboardType="numeric"
                                 onChangeText={(text) => {this.setState({bilirubin: text})}}
                                 style={styles.inputForm}
                             />
-                        <DateEntry
-                            dateHandler={(date) => this.setState({bilirubinDate: date.format("YYYY-MM-DD")})}
-                            validateAgainst={validateAgainst}
-                            validationMessage={invalidDateMessage}
-                        />
-                    </View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>AST (U/L)</Text>
+                            <DateEntry
+                                dateHandler={(date) => this.setState({bilirubinDate: date.format("YYYY-MM-DD")})}
+                                validateAgainst={validateAgainst}
+                                validationMessage={invalidDateMessage}
+                            />
+                        </View>
+                        <View style={styles.wrapper}>
+                            <Text style={styles.label}>AST (U/L)</Text>
                             <TextInput
                                 keyboardType="numeric"
                                 onChangeText={(text) => {this.setState({ast: text})}}
                                 style={styles.inputForm}
                             />
-                        <DateEntry
-                            dateHandler={(date) => this.setState({astDate: date.format("YYYY-MM-DD")})}
-                            validateAgainst={validateAgainst}
-                            validationMessage={invalidDateMessage}
-                        />
-                    </View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>ALT (U/L)</Text>
+                            <DateEntry
+                                dateHandler={(date) => this.setState({astDate: date.format("YYYY-MM-DD")})}
+                                validateAgainst={validateAgainst}
+                                validationMessage={invalidDateMessage}
+                            />
+                        </View>
+                        <View style={styles.wrapper}>
+                            <Text style={styles.label}>ALT (U/L)</Text>
                             <TextInput
                                 keyboardType="numeric"
                                 onChangeText={(text) => {this.setState({alt: text})}}
                                 style={styles.inputForm}
                             />
-                        <DateEntry
-                            dateHandler={(date) => this.setState({altDate: date.format("YYYY-MM-DD")})}
-                            validateAgainst={validateAgainst}
-                            validationMessage={invalidDateMessage}
-                        />
-                    </View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>Alkaline Phosphatase{"\n"}(U/L)</Text>
+                            <DateEntry
+                                dateHandler={(date) => this.setState({altDate: date.format("YYYY-MM-DD")})}
+                                validateAgainst={validateAgainst}
+                                validationMessage={invalidDateMessage}
+                            />
+                        </View>
+                        <View style={styles.wrapper}>
+                            <Text style={styles.label}>Alkaline Phosphatase{"\n"}(U/L)</Text>
                             <TextInput
                                 keyboardType="numeric"
                                 onChangeText={(text) => {this.setState({alkphos: text})}}
                                 style={styles.inputForm}
                             />
-                        <DateEntry
-                            dateHandler={(date) => this.setState({alkphosDate: date.format("YYYY-MM-DD")})}
-                            validateAgainst={validateAgainst}
-                            validationMessage={invalidDateMessage}
-                        />
-                    </View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>INR</Text>
+                            <DateEntry
+                                dateHandler={(date) => this.setState({alkphosDate: date.format("YYYY-MM-DD")})}
+                                validateAgainst={validateAgainst}
+                                validationMessage={invalidDateMessage}
+                            />
+                        </View>
+                        <View style={styles.wrapper}>
+                            <Text style={styles.label}>INR</Text>
                             <TextInput
                                 keyboardType="numeric"
                                 onChangeText={(text) => {this.setState({inr: text})}}
                                 style={styles.inputForm}
                             />
-                        <DateEntry
-                            dateHandler={(date) => this.setState({inrDate: date.format("YYYY-MM-DD")})}
-                            validateAgainst={validateAgainst}
-                            validationMessage={invalidDateMessage}
-                        />
-                    </View>
-                    <ActivityIndicator animating={this.state.isSubmitting} />
-                    <Button title="Submit" onPress={this.submit} color="black" />
+                            <DateEntry
+                                dateHandler={(date) => this.setState({inrDate: date.format("YYYY-MM-DD")})}
+                                validateAgainst={validateAgainst}
+                                validationMessage={invalidDateMessage}
+                            />
+                        </View>
+                        <Button title="Submit" onPress={this.submit} color="black" />
                 </KeyboardAvoidingView>
+            </ScrollView>
             </View>
         );
     }

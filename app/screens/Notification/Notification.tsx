@@ -1,6 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as React from "react";
-import { Text, TouchableHighlight, View } from "react-native";
+import { BackHandler, Text, TouchableHighlight, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 // styles
 import styles from "./styles";

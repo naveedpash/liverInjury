@@ -5,6 +5,7 @@ import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
 import { Loading } from "../../components/Loading";
 import { validateEmail } from "../../config/validation";
+import { Logo } from "../../components/Logo";
 // styles
 import styles from "./styles";
 
@@ -32,40 +33,43 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
 
     public render() {
         return (
-            <View style={styles.container}>
-                <Loading isLoading={this.state.isSubmitting} />
-                <Text style={styles.heading}>Login</Text>
-                <View style={styles.wrapperForm}>
-                    <TextInput
-                        style={styles.inputForm}
-                        autoCapitalize="none"
-                        placeholder="Email"
-                        onChangeText={( email ) => this.setState({ email })}
-                        value={this.state.email}
-                    />
+            <View>
+                <View style={styles.container}>
+                    <Loading isLoading={this.state.isSubmitting} />
+                    <Text style={styles.heading}>Login</Text>
+                    <View style={styles.wrapperForm}>
+                        <TextInput
+                            style={styles.inputForm}
+                            autoCapitalize="none"
+                            placeholder="Email"
+                            onChangeText={( email ) => this.setState({ email })}
+                            value={this.state.email}
+                        />
+                    </View>
+                    <View style={styles.wrapperForm}>
+                        <TextInput
+                            style={styles.inputForm}
+                            secureTextEntry
+                            autoCapitalize="none"
+                            placeholder="Password"
+                            onChangeText={( password ) => this.setState({ password })}
+                            value={this.state.password}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button title="Login" 
+                            color="black"
+                            onPress={this.handleLogin} />
+                    </View>
+                    <Text style={styles.helpText}>Don't have an account</Text>
+                    <View style={styles.button}>
+                        <Button
+                            title="Create your own account"
+                            color="black"
+                            onPress={() => this.props.navigation.navigate("SignUp")} />
+                    </View>
                 </View>
-                <View style={styles.wrapperForm}>
-                    <TextInput
-                        style={styles.inputForm}
-                        secureTextEntry
-                        autoCapitalize="none"
-                        placeholder="Password"
-                        onChangeText={( password ) => this.setState({ password })}
-                        value={this.state.password}
-                    />
-                </View>
-                <View style={styles.button}>
-                    <Button title="Login" 
-                        color="black"
-                        onPress={this.handleLogin} />
-                </View>
-                <Text style={styles.helpText}>Don't have an account</Text>
-                <View style={styles.button}>
-                    <Button
-                        title="Create your own account"
-                        color="black"
-                        onPress={() => this.props.navigation.navigate("SignUp")} />
-                </View>
+                <Logo />
             </View>
         );
     }

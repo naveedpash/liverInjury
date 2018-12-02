@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet } from "react-native";
 const INPUT_HEIGHT: number = 48;
 const BORDER_RADIUS: number = 9;
 const TOUCHABLE_WIDTH: number = Dimensions.get("window").width / 3;
+const imageHeight = Dimensions.get("window").height / 4;
 
 const styles = StyleSheet.create({
     // Heading for each section
@@ -30,9 +31,13 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "stretch",
         backgroundColor: "#31aa80",
-        height: "100%",
+        height: imageHeight * 3,
         justifyContent: "center",
         paddingHorizontal: 15,
+        shadowColor: "black",
+        shadowRadius: 5,
+        shadowOffset: {width: 0, height: 35},
+        elevation: 3,
     },
     heading: {
         color: "#910505",

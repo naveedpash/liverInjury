@@ -14,11 +14,17 @@ export default class Loading extends React.Component<ILoadingProps, any> {
 
     public render() {
         return (
-            <Modal visible={this.props.isLoading}>
+            <Modal
+                transparent={true}
+                animationType="none"
+                onRequestClose={undefined}
+                visible={this.props.isLoading}>
+            <View style={styles.modalBackground}>
                 <View style={styles.activityIndicatorWrapper}>
                     <ActivityIndicator size="large" color="black" />
                     <Text>Loading</Text>
                 </View>
+            </View>
             </Modal>
         );
     }

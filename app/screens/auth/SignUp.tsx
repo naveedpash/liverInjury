@@ -4,6 +4,7 @@ import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { Loading } from "../../components/Loading";
 import { validateEmail } from "../../config/validation";
+import { Logo } from "../../components/Logo";
 // styles
 import styles from "./styles";
 
@@ -27,41 +28,44 @@ export default class SignUp extends React.Component<IAuthProps, IAuthState> {
     // TODO: integrate react-native popup alerts and define global colors
     public render() {
         return (
-            <View style={styles.container}>
-                <Loading isLoading={this.state.isSubmitting} />
-                <Text style={styles.heading}>Sign Up</Text>
-                <View style={styles.wrapperForm}>
-                    <TextInput
-                        placeholder="Email"
-                        autoCapitalize="none"
-                        style={styles.inputForm}
-                        onChangeText={( email ) => this.setState({ email })}
-                        value={this.state.email}
-                    />
+            <View>
+                <View style={styles.container}>
+                    <Loading isLoading={this.state.isSubmitting} />
+                    <Text style={styles.heading}>Sign Up</Text>
+                    <View style={styles.wrapperForm}>
+                        <TextInput
+                            placeholder="Email"
+                            autoCapitalize="none"
+                            style={styles.inputForm}
+                            onChangeText={( email ) => this.setState({ email })}
+                            value={this.state.email}
+                        />
+                    </View>
+                    <View style={styles.wrapperForm}>
+                        <TextInput
+                            secureTextEntry
+                            placeholder="Password"
+                            autoCapitalize="none"
+                            style={styles.inputForm}
+                            onChangeText={( password ) => this.setState({ password })}
+                            value={this.state.password}
+                        />
+                    </View>
+                    <View style={styles.button}>
+                        <Button title="Sign Up" 
+                            color="black"
+                            onPress={this.handleSignUp} />
+                    </View>
+                    <View style={styles.button}>
+                        <Button
+                            title="Already have an account? Login"
+                            color="black"
+                            onPress={() => this.props.navigation.navigate("Login")}
+                        />
+                    </View>
                 </View>
-                <View style={styles.wrapperForm}>
-                <TextInput
-                    secureTextEntry
-                    placeholder="Password"
-                    autoCapitalize="none"
-                    style={styles.inputForm}
-                    onChangeText={( password ) => this.setState({ password })}
-                    value={this.state.password}
-                />
-                </View>
-                <View style={styles.button}>
-                    <Button title="Sign Up" 
-                        color="black"
-                        onPress={this.handleSignUp} />
-                </View>
-                <View style={styles.button}>
-                    <Button
-                        title="Already have an account? Login"
-                        color="black"
-                        onPress={() => this.props.navigation.navigate("Login")}
-                    />
-                </View>
-                </View>
+                <Logo />
+            </View>
         );
     }
 

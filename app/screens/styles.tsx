@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 
 const INPUT_HEIGHT: number = 48;
 const BORDER_RADIUS: number = 9;
-const TOUCHABLE_HEIGHT: number = Dimensions.get("window").width / 12;
+const TOUCHABLE_HEIGHT: number = Dimensions.get("window").width / 11;
 const LOGO_HEIGHT: number = Dimensions.get("window").height / 8;
 
 const styles = StyleSheet.create({
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     containerMenu: {
         backgroundColor: "#31aa80",
-        height: LOGO_HEIGHT * 7,
+        height: LOGO_HEIGHT * 5,
         padding: 15,
     },
     heading: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     },
     inputForm: {
         color: "#910505",
-        flex: 1,
+        flex: 0.4,
         fontSize: 16,
         height: INPUT_HEIGHT,
     },
@@ -88,9 +88,9 @@ const styles = StyleSheet.create({
         height: TOUCHABLE_HEIGHT,
         justifyContent: "flex-start",
         shadowColor: "black",
-        shadowOffset: {width: 5, height: 5},
+        shadowOffset: {width: 0, height: 15},
         shadowRadius: 5,
-        elevation: 15,
+        elevation: 5,
         paddingHorizontal: 10,
         marginVertical: 5,
     },

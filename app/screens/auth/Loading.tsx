@@ -46,13 +46,13 @@ export default class Loading extends React.Component<IAuthProps, any> {
     public render() {
         return (
             <View>
-                        <Logo />
                 <View style={styles.container}>
                     <View style={styles.wrapper}>
                         <Text style={styles.helpText}>Loading</Text>
                         <ActivityIndicator color="black" size="large" />
                     </View>
                 </View>
+                <Logo />
             </View>
         );
     }

@@ -18,7 +18,7 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
     }
 
     static navigationOptions = {
-        title: 'Karachi Registery for Drug Induced Liver Injury',
+        title: 'What would you like to to?',
         headerStyle: {
             backgroundColor: '#910505',
         },
@@ -87,6 +87,7 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
         firebase
             .auth()
             .signOut()
+            .then(() => this.props.navigation.navigate("Login"))
             .catch((error: Error) => console.log(error.message));
     }
 }
