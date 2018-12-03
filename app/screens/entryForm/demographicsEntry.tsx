@@ -10,11 +10,23 @@ import styles from "./styles";
 const today: Date = new Date();
 
 // TODO: Add border between each entry element
-export interface IEntryScreenProps {
-    navigation: NavigationScreenProp<any, any>;
+
+export interface IEntryScreenParams {
+    consent: number;
 }
 
-export default class Entry extends React.Component<IEntryScreenProps, object> {
+export interface IEntryScreenProps {
+    navigation: NavigationScreenProp<any, IEntryScreenParams>;
+}
+
+export default class Entry extends React.Component<IEntryScreenProps, any> {
+    private constructor(props: IEntryScreenProps) {
+        super(props);
+        this.props.navigation.setParams({
+            consent: 0,
+        })
+    }
+    
     public render() {
         const user = firebase.auth().currentUser;
         return (
@@ -63,7 +75,10 @@ export default class Entry extends React.Component<IEntryScreenProps, object> {
                     <View>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Consent</Text>
-                        <Picker style={styles.picker}>
+                        <Picker 
+                            style={styles.picker}
+                            selectedValue={this.props.navigation.state.params.consent}
+                            onValueChange={(value) => this.props.navigation.setParams({consent: value})}>
                             <Picker.Item label="No" value={0} />
                             <Picker.Item label="Yes" value={1} />
                         </Picker>
