@@ -70,7 +70,7 @@ server <- function(input, output) {
                                     str_detect(drugname, "(m|M)ero") ~ "meropenem",
                                     str_detect(drugname, "(l|L)(ove|ev|EV)(o|O|f)") ~ "levofloxacin",
                                     str_detect(drugname, "lev(et)?(?!o|f)") ~ "levetiracitam",
-                                    str_detect(drugname, "(?<!c)(i|I)?(p|P)(r|R)(a|A)?(tropium)?") ~ "ipratropium",
+                                    str_detect(drugname, "^(i|I)?(p|P)(r|R)(?!o|O)(a|A)?(tropium)?") ~ "ipratropium",
                                     str_detect(drugname, "Pratropium") ~ "ipratropium",
                                     str_detect(drugname, "(h|H)ydro") ~ "hydrocortisone",
                                     str_detect(drugname, "(h|H)ydro") ~ "hydrocortisone",
@@ -78,7 +78,14 @@ server <- function(input, output) {
                                     str_detect(drugname, "gela") ~ "gelatin",
                                     str_detect(drugname, "GABAPETIN") ~ "gabapentin",
                                     str_detect(drugname, "(e|E)(th|TH)(?!y)") ~ "ethambutol",
-                                    )
-               )
+                                    str_detect(drugname, "(epin|EPIN)") ~ "epinephrine",
+                                    str_detect(drugname, "(ATT induce|DRUGS INDUCE|drugs induce)") ~ "ATT",
+                                    str_detect(drugname, "CLOP") ~ "clopidogrel",
+                                    str_detect(drugname, "(c|C)(e|E)(f|F)(i|I)?(l|t|T)?(r|R)?p?") ~ "ceftriaxone",
+                                    str_detect(drugname, "clinda") ~ "clindamycin",
+                                    str_detect(drugname, "(clarith|clirth)") ~ "clarithromycin",
+                                    str_detect(drugname, "(a|A)(m|M)(i|I)(k|K)?") ~ "amikacin",
+                                    str_detect(drugname, "a?(a|A)(s|S)(p|P)(r|R)?") ~ "aspirin",
+                                    TRUE ~ as.character(drugname))) %>% select(drugname, nameofdrug)
 
 }
