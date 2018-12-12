@@ -18,15 +18,11 @@ ui <- fluidPage(
                      plotOutput("drugsdrugsBarchart", width="500px", height="400px")
             ),
             tabPanel("Morbitidy",
-                fluidRow(
-                    column(5, align="right",
                         plotOutput("tbPlot", width="500px", height="400px"),
                         plotOutput("sgptPlot", width="500px", height="400px"),
                         plotOutput("apPlot", width="500px", height="400px"),
                         plotOutput("ggtPlot", width="500px", height="400px"),
                         plotOutput("ptPlot", width="500px", height="400px")
-                    )
-                )
             )
         ),
     )
