@@ -22,7 +22,8 @@ server <- function(input, output) {
 
     output$drugsBarchart <- renderPlot({
         drugsData %>% count(drugname, sort=TRUE) %>% filter(n>10) %>%
-            ggplot(aes(drugname,n,fill=drugname)) + geom_bar(stat="identity")
+            ggplot(aes(drugname,n,fill=drugname)) + geom_bar(stat="identity") +
+            theme(text = element_text(size = 18))
     })
     output$tbPlot <- renderPlot({
      drugsData %>% filter(drugname %in% input$drugs) %>%

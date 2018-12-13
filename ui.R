@@ -7,7 +7,7 @@ ui <- navbarPage("Menu",
               titlePanel("Karachi Registry for Drug Induced Liver Injury"),
               tabPanel("Summary",
                                   headerPanel("Summary of Suspected Medications"),
-                                  plotOutput("drugsBarchart", width="720px", height="680px")
+                                  plotOutput("drugsBarchart", width="1280px", height="720px")
                                   ),
               tabPanel("Morbidity",
                                   headerPanel("Effect of Suspected Medications on LFTs"),
