@@ -30,7 +30,7 @@ export default class SignUp extends React.Component<IAuthProps, IAuthState> {
         return (
             <View style={styles.container}>
                 <Loading isLoading={this.state.isSubmitting} />
-                <Logo />
+                <Logo portrait={true} />
                 <View style={{backgroundColor: "black", flex: 0.02}} />
                 <View style={styles.containerForm}>
                     <Text style={styles.heading}>Sign Up</Text>

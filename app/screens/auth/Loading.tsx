@@ -46,7 +46,7 @@ export default class Loading extends React.Component<IAuthProps, any> {
     public render() {
         return (
             <View style={styles.container}>
-                <Logo />
+                <Logo portrait={true} />
                 <View style={styles.containerForm}>
                     <View style={styles.wrapper}>
                         <Text style={styles.helpText}>Loading</Text>

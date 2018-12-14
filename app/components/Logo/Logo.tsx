@@ -12,9 +12,9 @@ export interface ILogoProps {
 
 const Logo: React.SFC<ILogoProps> = (props: ILogoProps = {portrait: true}) => {
     return (
-        <View style={props.portrait ? styles.container : styles.containerPortrait}>
-            <Image resizeMode="contain" style={props.portrait ? styles.image : styles.imagePortrait} source={Icon} />
-            <Text style={props.portrait ? styles.text : styles.textPortrait}>
+        <View style={props.portrait ? styles.containerPortrait : styles.container}>
+            <Image resizeMode="contain" style={props.portrait ? styles.imagePortrait : styles.image} source={Icon} />
+            <Text style={props.portrait ? styles.textPortrait : styles.text}>
                 Karachi Registry for{"\n"}Drug Induced Liver Injury
             </Text>
         </View>
