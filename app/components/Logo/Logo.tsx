@@ -1,20 +1,22 @@
 import * as React from "react";
 import { Image, ImageBackground, Text, View } from "react-native";
 // Images
-import Icon from "./images/Logo.png";
 import Splash from "./images/background.jpg";
+import Icon from "./images/Logo.png";
 // Styles
 import styles from "./styles";
 
-const Logo = () => {
+export interface ILogoProps {
+    portrait: boolean;
+}
+
+const Logo: React.SFC<ILogoProps> = (props: ILogoProps = {portrait: true}) => {
     return (
-        <View style={styles.container}>
-            <ImageBackground source={Splash} style={styles.imageContainer} resizeMode="cover">
-                <Image resizeMode="contain" style={styles.image} source={Icon} />
-                <Text style={styles.text}>
-                    Karachi Registry{"\n"}for{"\n"}Drug Induced Liver Injury
-                </Text>
-            </ImageBackground>
+        <View style={props.portrait ? styles.container : styles.containerPortrait}>
+            <Image resizeMode="contain" style={props.portrait ? styles.image : styles.imagePortrait} source={Icon} />
+            <Text style={props.portrait ? styles.text : styles.textPortrait}>
+                Karachi Registry for{"\n"}Drug Induced Liver Injury
+            </Text>
         </View>
     );
 };

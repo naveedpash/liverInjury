@@ -28,9 +28,11 @@ export default class SignUp extends React.Component<IAuthProps, IAuthState> {
     // TODO: integrate react-native popup alerts and define global colors
     public render() {
         return (
-            <View>
-                <View style={styles.container}>
-                    <Loading isLoading={this.state.isSubmitting} />
+            <View style={styles.container}>
+                <Loading isLoading={this.state.isSubmitting} />
+                <Logo />
+                <View style={{backgroundColor: "black", flex: 0.02}} />
+                <View style={styles.containerForm}>
                     <Text style={styles.heading}>Sign Up</Text>
                     <View style={styles.wrapperForm}>
                         <TextInput
@@ -64,7 +66,6 @@ export default class SignUp extends React.Component<IAuthProps, IAuthState> {
                         />
                     </View>
                 </View>
-                <Logo />
             </View>
         );
     }

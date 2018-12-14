@@ -55,7 +55,7 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
 
     public render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.containerMenu}>
                     <TouchableOpacity style={styles.touchable}
                         onPress={() => this.props.navigation.navigate("entry")}>
@@ -78,7 +78,8 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
                         <Text style={styles.buttonText}>Log Out</Text>
                     </TouchableOpacity>
                 </View>
-                <Logo />
+                <View style={{backgroundColor: "black", flex: 0.02}} />
+                <Logo portrait={false} />
             </View>
         );
     }

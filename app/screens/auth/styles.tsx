@@ -29,15 +29,15 @@ const styles = StyleSheet.create({
         textShadowRadius: 5,
     },
     container: {
-        alignItems: "stretch",
         backgroundColor: "#31aa80",
-        height: imageHeight * 3,
+        flexDirection: "column",
+        height: "100%",
+    },
+    containerForm: {
+        alignItems: "stretch",
+        flex: 3,
         justifyContent: "center",
         paddingHorizontal: 15,
-        shadowColor: "black",
-        shadowRadius: 5,
-        shadowOffset: {width: 0, height: 35},
-        elevation: 3,
     },
     heading: {
         color: "#910505",
@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
         letterSpacing: -0.5,
         margin: 15,
         textAlign: "center",
+        textShadowColor: "black",
+        textShadowOffset: {width: 1, height: 1},
+        textShadowRadius: 3,
     },
     helpText: {
         color: "black",

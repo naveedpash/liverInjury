@@ -33,9 +33,11 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
 
     public render() {
         return (
-            <View>
-                <View style={styles.container}>
-                    <Loading isLoading={this.state.isSubmitting} />
+            <View style={styles.container}>
+                <Loading isLoading={this.state.isSubmitting} />
+                <Logo />
+                <View style={{backgroundColor: "black", flex: 0.02}} />
+                <View style={styles.containerForm}>
                     <Text style={styles.heading}>Login</Text>
                     <View style={styles.wrapperForm}>
                         <TextInput
@@ -61,15 +63,13 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
                             color="black"
                             onPress={this.handleLogin} />
                     </View>
-                    <Text style={styles.helpText}>Don't have an account</Text>
                     <View style={styles.button}>
                         <Button
-                            title="Create your own account"
+                            title="Don't have an account? Create one"
                             color="black"
                             onPress={() => this.props.navigation.navigate("SignUp")} />
                     </View>
                 </View>
-                <Logo />
             </View>
         );
     }
