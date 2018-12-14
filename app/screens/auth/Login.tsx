@@ -4,8 +4,8 @@ import * as React from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
 import { Loading } from "../../components/Loading";
-import { validateEmail } from "../../config/validation";
 import { Logo } from "../../components/Logo";
+import { validateEmail } from "../../config/validation";
 // styles
 import styles from "./styles";
 
@@ -57,7 +57,7 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
                         />
                     </View>
                     <View style={styles.button}>
-                        <Button title="Login" 
+                        <Button title="Login"
                             color="black"
                             onPress={this.handleLogin} />
                     </View>
@@ -92,7 +92,7 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
             })
             .catch((error: Error) => {
                 this.setState({isSubmitting: false});
-                Alert.alert(error.message) 
+                Alert.alert(error.message);
             });
     }
 }

@@ -17,7 +17,7 @@ export default class Loading extends React.Component<ILoadingProps, any> {
             <Modal
                 transparent={true}
                 animationType="none"
-                onRequestClose={undefined}
+                onRequestClose={() => undefined}
                 visible={this.props.isLoading}>
             <View style={styles.modalBackground}>
                 <View style={styles.activityIndicatorWrapper}>
