@@ -12,6 +12,7 @@ import { ActivityIndicator,
     Text,
     TextInput,
     View } from "react-native";
+import { TextInputMask } from "react-native-masked-text";
 import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
 import { Loading } from "../components/Loading";
@@ -100,10 +101,13 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                         <View>
                             <View style={styles.wrapper}>
                                 <Text style={styles.label}>NIC Number</Text>
-                                <TextInput
+                                <TextInputMask 
                                     keyboardType="numeric"
                                     onChangeText={(text) => {this.setState({nic: text})}}
+                                    options={{mask: "99999-9999999-9"}}
                                     style={styles.input}
+                                    type="custom"
+                                    value={this.state.nic}
                                 />
                             </View>
                             <Text style={styles.helpText}>

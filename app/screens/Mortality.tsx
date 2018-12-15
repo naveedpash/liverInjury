@@ -8,6 +8,7 @@ import {
     Text,
     TextInput,
     View } from "react-native";
+import { TextInputMask } from "react-native-masked-text";
 import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
 import { Loading } from "../components/Loading";
@@ -67,10 +68,13 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
             {/* TODO: implement fuzzy search */}
             <View style={styles.wrapperForm}>
                 <Text style={styles.label}>NIC Number</Text>
-                <TextInput
+                <TextInputMask 
                     keyboardType="numeric"
-                    onChangeText={(text) => this.setState({nic: text})}
+                    onChangeText={(text) => {this.setState({nic: text})}}
+                    options={{mask: "99999-9999999-9"}}
                     style={styles.input}
+                    type="custom"
+                    value={this.state.nic}
                 />
             </View>
             <View style={styles.wrapperForm}>

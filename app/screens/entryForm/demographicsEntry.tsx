@@ -2,6 +2,7 @@ import firebase from "firebase";
 import moment from "moment";
 import * as React from "react";
 import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
+import { TextInputMask } from "react-native-masked-text";
 import { NavigationScreenProp } from "react-navigation";
 import { reduxForm } from "redux-form";
 // styles
@@ -37,7 +38,7 @@ export default class Entry extends React.Component<IEntryScreenProps, any> {
                     <View>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>NIC Number</Text>
-                        <TextInput style={styles.input}/>
+                        <TextInput style={styles.input} />
                     </View>
                         <Text style={styles.helpText}>Enter the National ID Card number of the patient</Text>
                     </View>
