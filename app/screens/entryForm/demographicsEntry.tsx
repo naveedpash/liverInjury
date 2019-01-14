@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { demographics } from "../../config/redux/types";
 import { saveDemographics } from "../../config/redux/actions";
-import { Actions, initialState } from "../../config/redux/reducers";
+import { demographicsAction, initialDemographics } from "../../config/redux/reducers";
 // styles
 import styles from "./styles";
 
@@ -18,13 +18,13 @@ const today: Date = new Date();
 
 export interface IEntryScreenProps {
     navigation: NavigationScreenProp<any, any>;
-    dispatch: Dispatch<Actions>;
+    dispatch: Dispatch<demographicsAction>;
 }
 
 class Entry extends React.Component<IEntryScreenProps, demographics> {
     constructor(props: IEntryScreenProps) {
         super(props);
-        this.state = initialState;
+        this.state = initialDemographics;
     }
 
     public render() {
@@ -112,9 +112,4 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
     };
 }
 
-
-// const mapDispatchToProps = (dispatch: Dispatch<Actions>) => bindActionCreators({
-//     next: saveDemographics,
-// }, dispatch)
-// 
 export default connect()(Entry);

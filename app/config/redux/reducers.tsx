@@ -1,21 +1,48 @@
-import { Reducer } from "redux";
+import { combineReducers, Reducer } from "redux";
 import { ActionType, getType } from "typesafe-actions";
-import { demographics } from "./types";
+import { demographics, dili, newpatient } from "./types";
+import * as types from "./types";
 import * as actions from "./actions";
 
-export type Actions = ActionType<typeof actions>;
+export type demographicsAction = ActionType<typeof actions.saveDemographics>;
+export type diliAction = ActionType<typeof actions.saveDili>;
 
-export const initialState: demographics = {
+export const initialDemographics: demographics = {
     nic: "",
     name: "",
     age: 0,
     gender: "male",
-    consent: "yes",
+    consent: "yes"
 }
 
-export const reducer: Reducer<demographics[], Actions> = (state: demographics[] = [initialState], action: Actions) => {
+export const demographicsReducer: Reducer<demographics[], demographicsAction> = (state: demographics[] = [initialDemographics], action: demographicsAction) => {
     switch (action.type) {
         case getType(actions.saveDemographics):
             return [...state, action.payload]
+        default:
+            return state
     }
 }
+
+export const initialDili: dili = {
+    drug: "",
+    dose: "",
+    unit: "milligrams",
+    indication: "",
+    rechallenged: "no",
+    challengeResult: ""
+}
+
+export const diliReducer: Reducer<dili[], diliAction> = (state: dili[] = [initialDili], action: diliAction) => {
+    switch (action.type) {
+        case getType(actions.saveDili):
+            return [...state, action.payload]
+        default:
+            return state
+    }
+}
+
+export const reducer = combineReducers({
+    demographics: demographicsReducer,
+    dili: diliReducer
+});

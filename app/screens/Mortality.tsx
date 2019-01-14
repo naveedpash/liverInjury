@@ -67,11 +67,11 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
             </Text>
             {/* TODO: implement fuzzy search */}
             <View style={styles.wrapperForm}>
-                <Text style={styles.label}>NIC Number</Text>
+                <Text style={styles.label}>MR Number</Text>
                 <TextInputMask 
                     keyboardType="numeric"
                     onChangeText={(text) => {this.setState({nic: text})}}
-                    options={{mask: "99999-9999999-9"}}
+                    options={{mask: "999-99-99"}}
                     style={styles.input}
                     type="custom"
                     value={this.state.nic}

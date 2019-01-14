@@ -31,10 +31,10 @@ export default class ExamEntry extends React.Component<ILabScreenProps, object> 
                     </View>
                 </View>
                 <View style={styles.wrapper}>
-                    <Text style={styles.label}>AST (mg/dL)</Text>
+                    <Text style={styles.label}>PT</Text>
                     <TextInput style={styles.inputForm}/>
                     <DateEntry
-                        dateHandler={(date) => this.setState({astDate: date.format("YYYY-MM-DD")})}
+                        dateHandler={(date) => this.setState({pt: date.format("YYYY-MM-DD")})}
                         validateAgainst={validateAgainst}
                         validationMessage={invalidDateMessage}
                     />
@@ -67,10 +67,10 @@ export default class ExamEntry extends React.Component<ILabScreenProps, object> 
                     />
                 </View>
                 <View style={styles.wrapper}>
-                    <Text style={styles.label}>Anti-HBc antibody</Text>
+                    <Text style={styles.label}>Anti-HEV IgM</Text>
                     <TextInput style={styles.inputForm}/>
                     <DateEntry
-                        dateHandler={(date) => this.setState({antiHBcDate: date.format("YYYY-MM-DD")})}
+                        dateHandler={(date) => this.setState({antiHEVDate: date.format("YYYY-MM-DD")})}
                         validateAgainst={validateAgainst}
                         validationMessage={invalidDateMessage}
                     />
@@ -92,28 +92,6 @@ export default class ExamEntry extends React.Component<ILabScreenProps, object> 
                         validateAgainst={validateAgainst}
                         validationMessage={invalidDateMessage}
                     />
-                </View>
-                <View style={styles.wrapper}>
-                    <Text style={styles.label}>HCV RNA</Text>
-                    <TextInput style={styles.inputForm}/>
-                    <DateEntry
-                        dateHandler={(date) => this.setState({rnaHCVDate: date.format("YYYY-MM-DD")})}
-                        validateAgainst={validateAgainst}
-                        validationMessage={invalidDateMessage}
-                    />
-                </View>
-                <View style={styles.wrapper}>
-                    <Text style={styles.label}>ANA</Text>
-                    <TextInput style={styles.inputForm}/>
-                    <DateEntry
-                        dateHandler={(date) => this.setState({anaDate: date.format("YYYY-MM-DD")})}
-                        validateAgainst={validateAgainst}
-                        validationMessage={invalidDateMessage}
-                    />
-                </View>
-                <View style={styles.wrapper}>
-                    <Text style={styles.label}>Biopsy Report</Text>
-                    {/* Camera Input */}
                 </View>
             </ScrollView>
         </View>

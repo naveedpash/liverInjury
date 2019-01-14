@@ -1,18 +1,27 @@
 import * as React from "react";
 import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { dili } from "../../config/redux/types";
+import { saveDili } from "../../config/redux/actions";
+import { diliAction, initialDili } from "../../config/redux/reducers";
 import { DateEntry } from "../../components/DateEntry";
 // styles
 import styles from "./styles";
 
-const today: Date = new Date();
-
 // TODO: Add border between each entry element
 export interface IDiliScreenProps {
     navigation: NavigationScreenProp<any, any>;
+    dispatch: Dispatch<diliAction>;
 }
 
-export default class DiliEntry extends React.Component<IDiliScreenProps, object> {
+class DiliEntry extends React.Component<IDiliScreenProps, dili> {
+    constructor(props: IDiliScreenProps) {
+        super(props);
+        this.state = initialDili;
+    }
+
     public render() {
         return (
             <View style={styles.container}>
@@ -22,15 +31,22 @@ export default class DiliEntry extends React.Component<IDiliScreenProps, object>
                     <View>
                         <View style={styles.wrapper}>
                             <Text style={styles.label}>Drug Name</Text>
-                            <TextInput style={styles.inputText}/>
+                            <TextInput style={styles.inputText}
+                                onChangeText={ value => this.setState({drug: value}) }
+                            />
                         </View>
                         <Text style={styles.helpText}>Drug suspected to have caused drug induced liver injury</Text>
                     </View>
                     <View>
                         <View style={styles.wrapper}>
                             <Text style={styles.label}>Drug Dose</Text>
-                            <TextInput style={styles.inputForm} />
-                            <Picker style={styles.picker}>
+                            <TextInput style={styles.inputForm}
+                                onChangeText={ value => this.setState({dose: value}) }
+                            />
+                            <Picker style={styles.picker}
+                                onValueChange={value => this.setState({unit: value})}
+                                selectedValue={this.state.unit}
+                            >
                                 <Picker.Item label="Milligrams" value="mg" />
                                 <Picker.Item label="Grams" value="g" />
                                 <Picker.Item label="Milliliters" value="mL" />
@@ -41,15 +57,20 @@ export default class DiliEntry extends React.Component<IDiliScreenProps, object>
                     </View>
                     <View>
                         <Text style={styles.label}>Indication</Text>
-                        <TextInput style={styles.inputText} multiline={true} />
+                        <TextInput style={styles.inputText} multiline={true}
+                                onChangeText={ value => this.setState({indication: value}) }
+                        />
                         <Text style={styles.helpText}>Indication for which suspected drug was originally prescribed</Text>
                     </View>
                     <View>
                         <View style={styles.wrapper}>
                             <Text style={styles.label}>Re-challenged?</Text>
-                            <Picker style={styles.picker}>
-                                <Picker.Item label="No" value={0} />
-                                <Picker.Item label="Yes" value={1} />
+                            <Picker style={styles.picker}
+                                onValueChange={value => this.setState({rechallenged: value})}
+                                selectedValue={this.state.rechallenged}
+                            >
+                                <Picker.Item label="No" value={"no"} />
+                                <Picker.Item label="Yes" value={"yes"} />
                             </Picker>
                         </View>
                         <Text style={styles.helpText}>
@@ -58,11 +79,21 @@ export default class DiliEntry extends React.Component<IDiliScreenProps, object>
                     </View>
                     <View>
                         <Text style={styles.label}>Result of Re-Challenge</Text>
-                        <TextInput style={styles.inputText} multiline={true} />
+                        <TextInput style={styles.inputText} multiline={true}
+                                onChangeText={ value => this.setState({challengeResult: value}) }
+                        />
                         <Text style={styles.helpText}>What was the result of the Re-challenge?</Text>
                     </View>
+                    <Button color="black" title="Next" onPress={this.next} />
                 </ScrollView>
             </View>
         );
     }
+
+    public next = () => {
+        this.props.dispatch({type: "SAVE_DILI", payload: this.state});
+        this.props.navigation.navigate("history");
+    };
 }
+
+export default connect()(DiliEntry);

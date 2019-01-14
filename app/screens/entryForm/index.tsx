@@ -4,12 +4,8 @@ import {
     createMaterialTopTabNavigator } from "react-navigation";
 import demographicsEntry from "./demographicsEntry";
 import diliEntry from "./diliEntry";
-import examEntry from "./examEntry";
 import historyEntry from "./historyEntry";
 import labEntry from "./labEntry";
-import labHxEntry from "./labHxEntry";
-import pastEntry from "./pastEntry";
-import pastRxEntry from "./pastRxEntry";
 
 const Entry = createAppContainer(createMaterialTopTabNavigator({
     entry: {
@@ -30,32 +26,11 @@ const Entry = createAppContainer(createMaterialTopTabNavigator({
             tabBarLabel: "Presenting\nHistory",
         }),
     },
-    past: {
-        screen: pastEntry,
-        navigationOptions: () => ({
-            tabBarLabel: "Past\nHistory",
-        }),
-    },
-    pastRx: {
-        screen: pastRxEntry,
-        navigationOptions: () => ({
-            tabBarLabel: "Past\nMedications",
-        }),
-    },
-    exam: {
-        screen: examEntry,
-        navigationOptions: () => ({
-            tabBarLabel: "Exam",
-        }),
-    },
     lab: {
         screen: labEntry,
         navigationOptions: () => ({
             tabBarLabel: "Labs",
         }),
-    },
-    labHx: {
-        screen: labHxEntry,
     },
 }, {
     tabBarOptions: {
