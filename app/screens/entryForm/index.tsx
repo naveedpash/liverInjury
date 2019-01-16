@@ -26,7 +26,7 @@ const Entry = createAppContainer(createMaterialTopTabNavigator({
             tabBarLabel: "Presenting\nHistory",
         }),
     },
-    lab: {
+    labs: {
         screen: labEntry,
         navigationOptions: () => ({
             tabBarLabel: "Labs",
