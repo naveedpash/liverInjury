@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
-import { NavigationScreenProp } from "react-navigation";
+import { NavigationScreenProp, NavigationEvents } from "react-navigation";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { labs } from "../../config/redux/types";
-import { saveLabs } from "../../config/redux/actions";
-import { labsAction, initialLabs } from "../../config/redux/reducers";
+import { newpatient } from "../../config/redux/types";
+import { savePatient } from "../../config/redux/actions";
+import { patientAction, initialPatient } from "../../config/redux/reducers";
+import store from "../../config/redux/store";
 import { DateEntry } from "../../components/DateEntry";
 // styles
 import styles from "./styles";
@@ -15,19 +16,28 @@ const invalidDateMessage: string = "Date of Labs must be after 31st December 201
 
 export interface ILabScreenProps {
     navigation: NavigationScreenProp<any, any>;
-    dispatch: Dispatch<labsAction>;
+    dispatch: Dispatch<patientAction>;
 }
 
-class LabsEntry extends React.Component<ILabScreenProps, labs> {
+class LabsEntry extends React.Component<ILabScreenProps, newpatient> {
     constructor(props: ILabScreenProps) {
         super(props);
-        this.state = initialLabs;
+        this.state = initialPatient;
     }
 
     public render() {
     {/* Laboratory Tests */}
     return (
         <View style={styles.container}>
+            <NavigationEvents
+                onDidFocus={payload => {
+                    const currentState = store.getState().slice(-1)[0];
+                    this.setState(currentState);
+                }}
+                onWillBlur={payload => {
+                    this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+                }}
+            />
             <ScrollView>
                 <Text style={styles.helpText}>Please enter the results of the following laboratory tests done on initial presentation</Text>
                 <View>
@@ -127,7 +137,7 @@ class LabsEntry extends React.Component<ILabScreenProps, labs> {
     }
 
     public save = () => {
-        this.props.dispatch({type: "SAVE_LABS", payload: this.state});
+        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
     };
 }
 

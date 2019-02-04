@@ -1,27 +1,18 @@
-export interface demographics {
+export interface newpatient {
     nic: string;
     name: string;
     age: number;
     gender: string;
     consent: string
-}
-
-export interface dili {
     drug: string;
     dose: string;
-    unit: string;
+    unit: "mg" | "g" | "mL" | "mcg";
     indication: string;
     rechallenged: "yes" | "no";
     challengeResult: string
-}
-
-export interface history {
     jaundice: string;
     pain: string;
     pruritis: string;
-}
-
-export interface labs {
     bilirubin: string;
     bilirubinDate: string;
     pt: string
@@ -39,5 +30,3 @@ export interface labs {
     antihcvigm: string;
     antihcvigmDate: string;
 }
-
-export type newpatient = demographics | dili | history;

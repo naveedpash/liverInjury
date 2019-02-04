@@ -3,12 +3,13 @@ import moment from "moment";
 import * as React from "react";
 import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
-import { NavigationScreenProp } from "react-navigation";
+import { NavigationScreenProp, NavigationEvents } from "react-navigation";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { demographics } from "../../config/redux/types";
-import { saveDemographics } from "../../config/redux/actions";
-import { demographicsAction, initialDemographics } from "../../config/redux/reducers";
+import { newpatient } from "../../config/redux/types";
+import { savePatient } from "../../config/redux/actions";
+import { patientAction, initialPatient } from "../../config/redux/reducers";
+import store from "../../config/redux/store";
 // styles
 import styles from "./styles";
 
@@ -18,13 +19,13 @@ const today: Date = new Date();
 
 export interface IEntryScreenProps {
     navigation: NavigationScreenProp<any, any>;
-    dispatch: Dispatch<demographicsAction>;
+    dispatch: Dispatch<patientAction>;
 }
 
-class Entry extends React.Component<IEntryScreenProps, demographics> {
+class Entry extends React.Component<IEntryScreenProps, newpatient> {
     constructor(props: IEntryScreenProps) {
         super(props);
-        this.state = initialDemographics;
+        this.state = initialPatient;
     }
 
     public render() {
@@ -32,6 +33,15 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
         return (
             <View style={styles.container}>
             {/* Patient Demographics */}
+                <NavigationEvents
+                    onDidFocus={payload => {
+                        const currentState = store.getState().slice(-1)[0];
+                        this.setState(currentState);
+                    }}
+                    onWillBlur={payload => {
+                        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+                    }}
+                />
                 <ScrollView>
                     <View>
                         <Text style={styles.helpText}>{moment(today).format("DD/MM/YYYY")}</Text>
@@ -107,7 +117,7 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
     }
 
     public next = () => {
-        this.props.dispatch({type: "SAVE_DEMOGRAPHICS", payload: this.state});
+        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
         this.props.navigation.navigate("dili");
     };
 }

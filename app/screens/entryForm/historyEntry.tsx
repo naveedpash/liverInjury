@@ -1,29 +1,39 @@
 import * as React from "react";
 import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
-import { NavigationScreenProp } from "react-navigation";
+import { NavigationScreenProp, NavigationEvents } from "react-navigation";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { history } from "../../config/redux/types";
-import { saveHistory } from "../../config/redux/actions";
-import { historyAction, initialHistory } from "../../config/redux/reducers";
+import { newpatient } from "../../config/redux/types";
+import { savePatient } from "../../config/redux/actions";
+import { patientAction, initialPatient } from "../../config/redux/reducers";
+import store from "../../config/redux/store"
 // styles
 import styles from "./styles";
 
 export interface IHistoryScreenProps {
     navigation: NavigationScreenProp<any, any>;
-    dispatch: Dispatch<historyAction>;
+    dispatch: Dispatch<patientAction>;
 }
 
-class HistoryEntry extends React.Component<IHistoryScreenProps, history> {
+class HistoryEntry extends React.Component<IHistoryScreenProps, newpatient> {
     constructor(props: IHistoryScreenProps) {
         super(props);
-        this.state = initialHistory;
+        this.state = initialPatient;
     }
 
     public render() {
     {/* Patient History */ }
     return (
             <View style={styles.container}>
+                <NavigationEvents
+                    onDidFocus={payload => {
+                        const currentState = store.getState().slice(-1)[0];
+                        this.setState(currentState);
+                    }}
+                    onWillBlur={payload => {
+                        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+                    }}
+                />
                 <ScrollView>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Jaundice</Text>
@@ -65,7 +75,7 @@ class HistoryEntry extends React.Component<IHistoryScreenProps, history> {
     }
 
     public next = () => {
-        this.props.dispatch({type: "SAVE_HISTORY", payload: this.state});
+        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
         this.props.navigation.navigate("labs");
     };
 }
