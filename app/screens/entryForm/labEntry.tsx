@@ -3,8 +3,8 @@ import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native"
 import { NavigationScreenProp, NavigationEvents } from "react-navigation";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { newpatient } from "../../config/redux/types";
-import { savePatient } from "../../config/redux/actions";
+import { labs } from "../../config/redux/types";
+import { saveLabs } from "../../config/redux/actions";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
 import store from "../../config/redux/store";
 import { DateEntry } from "../../components/DateEntry";
@@ -19,10 +19,27 @@ export interface ILabScreenProps {
     dispatch: Dispatch<patientAction>;
 }
 
-class LabsEntry extends React.Component<ILabScreenProps, newpatient> {
+class LabsEntry extends React.Component<ILabScreenProps, labs> {
     constructor(props: ILabScreenProps) {
         super(props);
-        this.state = initialPatient;
+        this.state = {
+            bilirubin: initialPatient.bilirubin,
+            bilirubinDate: initialPatient.bilirubinDate,
+            pt: initialPatient.pt,
+            ptDate: initialPatient.ptDate,
+            alt: initialPatient.alt,
+            altDate: initialPatient.altDate,
+            alkphos: initialPatient.alkphos,
+            alkphosDate: initialPatient.alkphosDate,
+            antihavigm: initialPatient.antihavigm,
+            antihavigmDate: initialPatient.antihavigmDate,
+            antihevigm: initialPatient.antihevigm,
+            antihevigmDate: initialPatient.antihevigmDate,
+            hbsag: initialPatient.hbsag,
+            hbsagDate: initialPatient.hbsagDate,
+            antihcvigm: initialPatient.antihcvigm,
+            antihcvigmDate: initialPatient.antihcvigmDate,
+        };
     }
 
     public render() {
@@ -30,12 +47,8 @@ class LabsEntry extends React.Component<ILabScreenProps, newpatient> {
     return (
         <View style={styles.container}>
             <NavigationEvents
-                onDidFocus={payload => {
-                    const currentState = store.getState().slice(-1)[0];
-                    this.setState(currentState);
-                }}
                 onWillBlur={payload => {
-                    this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+                    this.props.dispatch({type: "SAVE_LABS", payload: this.state});
                 }}
             />
             <ScrollView>
@@ -137,7 +150,7 @@ class LabsEntry extends React.Component<ILabScreenProps, newpatient> {
     }
 
     public save = () => {
-        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+        this.props.dispatch({type: "SAVE_LABS", payload: this.state});
     };
 }
 

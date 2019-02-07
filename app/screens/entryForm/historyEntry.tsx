@@ -3,8 +3,8 @@ import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native"
 import { NavigationScreenProp, NavigationEvents } from "react-navigation";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { newpatient } from "../../config/redux/types";
-import { savePatient } from "../../config/redux/actions";
+import { history } from "../../config/redux/types";
+import { saveHistory } from "../../config/redux/actions";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
 import store from "../../config/redux/store"
 // styles
@@ -15,10 +15,14 @@ export interface IHistoryScreenProps {
     dispatch: Dispatch<patientAction>;
 }
 
-class HistoryEntry extends React.Component<IHistoryScreenProps, newpatient> {
+class HistoryEntry extends React.Component<IHistoryScreenProps, history> {
     constructor(props: IHistoryScreenProps) {
         super(props);
-        this.state = initialPatient;
+        this.state = {
+            jaundice: initialPatient.jaundice,
+            pain: initialPatient.pain,
+            pruritis: initialPatient.pruritis,
+        };
     }
 
     public render() {
@@ -26,12 +30,8 @@ class HistoryEntry extends React.Component<IHistoryScreenProps, newpatient> {
     return (
             <View style={styles.container}>
                 <NavigationEvents
-                    onDidFocus={payload => {
-                        const currentState = store.getState().slice(-1)[0];
-                        this.setState(currentState);
-                    }}
                     onWillBlur={payload => {
-                        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+                        this.props.dispatch({type: "SAVE_HISTORY", payload: this.state});
                     }}
                 />
                 <ScrollView>
@@ -75,7 +75,7 @@ class HistoryEntry extends React.Component<IHistoryScreenProps, newpatient> {
     }
 
     public next = () => {
-        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+        this.props.dispatch({type: "SAVE_HISTORY", payload: this.state});
         this.props.navigation.navigate("labs");
     };
 }

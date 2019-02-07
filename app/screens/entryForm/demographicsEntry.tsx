@@ -6,8 +6,8 @@ import { TextInputMask } from "react-native-masked-text";
 import { NavigationScreenProp, NavigationEvents } from "react-navigation";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { newpatient } from "../../config/redux/types";
-import { savePatient } from "../../config/redux/actions";
+import { demographics } from "../../config/redux/types";
+import { saveDemographics } from "../../config/redux/actions";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
 import store from "../../config/redux/store";
 // styles
@@ -22,10 +22,16 @@ export interface IEntryScreenProps {
     dispatch: Dispatch<patientAction>;
 }
 
-class Entry extends React.Component<IEntryScreenProps, newpatient> {
+class Entry extends React.Component<IEntryScreenProps, demographics> {
     constructor(props: IEntryScreenProps) {
         super(props);
-        this.state = initialPatient;
+        this.state = {
+            nic: initialPatient.nic,
+            name: initialPatient.name,
+            age: initialPatient.age,
+            gender: initialPatient.gender,
+            consent: initialPatient.consent
+        };
     }
 
     public render() {
@@ -34,12 +40,8 @@ class Entry extends React.Component<IEntryScreenProps, newpatient> {
             <View style={styles.container}>
             {/* Patient Demographics */}
                 <NavigationEvents
-                    onDidFocus={payload => {
-                        const currentState = store.getState().slice(-1)[0];
-                        this.setState(currentState);
-                    }}
-                    onWillBlur={payload => {
-                        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+                    onWillBlur={() => {
+                        this.props.dispatch({type: "SAVE_DEMOGRAPHICS", payload: this.state});
                     }}
                 />
                 <ScrollView>
@@ -117,7 +119,7 @@ class Entry extends React.Component<IEntryScreenProps, newpatient> {
     }
 
     public next = () => {
-        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+        this.props.dispatch({type: "SAVE_DEMOGRAPHICS", payload: this.state});
         this.props.navigation.navigate("dili");
     };
 }

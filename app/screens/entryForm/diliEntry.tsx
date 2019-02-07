@@ -3,8 +3,8 @@ import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native"
 import { NavigationScreenProp, NavigationEvents } from "react-navigation";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { newpatient } from "../../config/redux/types";
-import { savePatient } from "../../config/redux/actions";
+import { dili } from "../../config/redux/types";
+import { saveDili } from "../../config/redux/actions";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
 import store from "../../config/redux/store";
 // styles
@@ -16,10 +16,17 @@ export interface IDiliScreenProps {
     dispatch: Dispatch<patientAction>;
 }
 
-class DiliEntry extends React.Component<IDiliScreenProps, newpatient> {
+class DiliEntry extends React.Component<IDiliScreenProps, dili> {
     constructor(props: IDiliScreenProps) {
         super(props);
-        this.state = initialPatient;
+        this.state = {
+            drug: initialPatient.dose,
+            dose: initialPatient.dose,
+            unit: initialPatient.unit,
+            indication: initialPatient.indication,
+            rechallenged: initialPatient.rechallenged,
+            challengeResult: initialPatient.challengeResult
+        };
     }
 
     public render() {
@@ -28,12 +35,8 @@ class DiliEntry extends React.Component<IDiliScreenProps, newpatient> {
                 {/* DILI Episode */}
                 {/* TODO: implement RxNorm coding system */}
                 <NavigationEvents
-                    onDidFocus={payload => {
-                        const currentState = store.getState().slice(-1)[0];
-                        this.setState(currentState);
-                    }}
-                    onWillBlur={payload => {
-                        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+                    onWillBlur={() => {
+                        this.props.dispatch({type: "SAVE_DILI", payload: this.state});
                     }}
                 />
                 <ScrollView>
@@ -100,7 +103,7 @@ class DiliEntry extends React.Component<IDiliScreenProps, newpatient> {
     }
 
     public next = () => {
-        this.props.dispatch({type: "SAVE_PATIENT", payload: this.state});
+        this.props.dispatch({type: "SAVE_DILI", payload: this.state});
         this.props.navigation.navigate("history");
     };
 }
