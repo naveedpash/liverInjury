@@ -38,6 +38,7 @@ export interface labs {
     hbsagDate: string;
     antihcvigm: string;
     antihcvigmDate: string;
+    isSubmitting: boolean;
 }
 
 export interface newpatient {

@@ -12,5 +12,5 @@ export const validateEmail = (value: string) => {
         return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
 }
 export const validateLabValue = (value: string): boolean => {
-    return /^\d+(\.\d{1,2})?$/.test(value) && (parseFloat(value) > 0);
+    return value === "" ? true : /^\d+(\.\d{1,2})?$/.test(value) && (parseFloat(value) > 0);
 }

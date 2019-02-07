@@ -1,5 +1,16 @@
+import * as _ from "lodash";
+import firebase from "firebase";
 import * as React from "react";
-import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator,
+    Alert,
+    AsyncStorage,
+    Button,
+    KeyboardAvoidingView,
+    NetInfo,
+    ScrollView,
+    Text,
+    TextInput,
+    View } from "react-native";
 import { NavigationScreenProp, NavigationEvents } from "react-navigation";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -8,6 +19,9 @@ import { saveLabs } from "../../config/redux/actions";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
 import store from "../../config/redux/store";
 import { DateEntry } from "../../components/DateEntry";
+import { Loading } from "../../components/Loading";
+import { handleData,listenStatus } from "../../config/dataHandler";
+import { validateNIC, validateLabValue } from "../../config/validation";
 // styles
 import styles from "./styles";
 
@@ -39,6 +53,7 @@ class LabsEntry extends React.Component<ILabScreenProps, labs> {
             hbsagDate: initialPatient.hbsagDate,
             antihcvigm: initialPatient.antihcvigm,
             antihcvigmDate: initialPatient.antihcvigmDate,
+            isSubmitting: false,
         };
     }
 
@@ -46,6 +61,7 @@ class LabsEntry extends React.Component<ILabScreenProps, labs> {
     {/* Laboratory Tests */}
     return (
         <View style={styles.container}>
+            <Loading isLoading={this.state.isSubmitting} />
             <NavigationEvents
                 onWillBlur={payload => {
                     this.props.dispatch({type: "SAVE_LABS", payload: this.state});
@@ -151,6 +167,51 @@ class LabsEntry extends React.Component<ILabScreenProps, labs> {
 
     public save = () => {
         this.props.dispatch({type: "SAVE_LABS", payload: this.state});
+        this.setState({isSubmitting: true});
+        const currentState = store.getState().slice(-1)[0];
+        const nic = currentState.nic;
+        if (!validateNIC(nic)) {
+            Alert.alert("Please enter a valid NIC number");
+            this.setState({isSubmitting: false});
+            return;
+        }
+        if (!validateLabValue(this.state.alt) 
+            || !validateLabValue(this.state.alkphos)
+            || !validateLabValue(this.state.antihavigm)
+            || !validateLabValue(this.state.antihcvigm)
+            || !validateLabValue(this.state.antihevigm)
+            || !validateLabValue(this.state.bilirubin)
+            || !validateLabValue(this.state.hbsag)
+            || !validateLabValue(this.state.pt)) {
+            Alert.alert("Please enter valid lab values");
+            this.setState({isSubmitting: false});
+            return;
+        }
+        const user = firebase.auth().currentUser;
+        const toSave = { ..._.omit(currentState, "nic"), user: user!.uid };
+        handleData("newpatient/", nic, toSave)
+        .then(() => {
+            listenStatus.get()
+            .then((islistening) => {
+                this.setState({isSubmitting: false});
+                if (!islistening) {
+                    this.props.navigation.push("Notification", {
+                        heading: "Success!",
+                        message: "Your data has been stored online.",
+                        type: "success",
+                    });
+                } else {
+                    this.props.navigation.push("Notification", {
+                        heading: "Saved",
+                        message: "We could not establish an internet connection." + "\n" +
+                            "Your data has been stored on this device." + "\n" + 
+                            "Data will be transferred online automatically when internet is connected",
+                        type: "warn",
+                    });
+                }
+            })
+        })
+        .catch((error: Error) => Alert.alert(error.message));
     };
 }
 
