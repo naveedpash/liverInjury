@@ -6,7 +6,6 @@ import { Dispatch } from "redux";
 import { dili } from "../../config/redux/types";
 import { saveDili } from "../../config/redux/actions";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
-import store from "../../config/redux/store";
 // styles
 import styles from "./styles";
 

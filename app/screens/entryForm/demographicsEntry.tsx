@@ -9,7 +9,6 @@ import { bindActionCreators, Dispatch } from "redux";
 import { demographics } from "../../config/redux/types";
 import { saveDemographics } from "../../config/redux/actions";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
-import store from "../../config/redux/store";
 // styles
 import styles from "./styles";
 
