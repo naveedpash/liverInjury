@@ -5,6 +5,6 @@ account: idili
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 614207
-bundleId: 1758694
+bundleId: 1879879
 url: https://idili.shinyapps.io/liverinjury/
-when: 1544629771.15366
+when: 1550341258.27724
