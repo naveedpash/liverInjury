@@ -9,7 +9,7 @@ export type patientAction = ActionType<typeof actions>;
 export const initialPatient: newpatient = {
       nic: ""
     , name: ""
-    , age: 0
+    , age: ""
     , gender: "male"
     , consent: "yes"
     , drug: ""
@@ -41,51 +41,160 @@ export const initialPatient: newpatient = {
 
 export const reducer: Reducer<newpatient[], patientAction> = (state: newpatient[] = [initialPatient], action: patientAction) => {
     switch (action.type) {
-        case getType(actions.saveDemographics):
+        case getType(actions.saveNIC):
             return [...state, {
             ...state.slice(-1)[0],
-            nic: action.payload.nic,
-            name: action.payload.name,
-            age: action.payload.age,
-            gender: action.payload.gender,
-            consent: action.payload.consent
+            nic: action.payload,
             }]
-        case getType(actions.saveDili):
+        case getType(actions.saveName):
             return [...state, {
             ...state.slice(-1)[0],
-            drug: action.payload.drug,
-            dose: action.payload.dose,
-            unit: action.payload.unit,
-            rechallenged: action.payload.rechallenged,
-            challengeResult: action.payload.challengeResult
+            name: action.payload,
             }]
-        case getType(actions.saveHistory):
+        case getType(actions.saveAge):
             return [...state, {
             ...state.slice(-1)[0],
-            jaundice: action.payload.jaundice,
-            pain: action.payload.pain,
-            pruritis: action.payload.pruritis
+            age: action.payload,
             }]
-        case getType(actions.saveLabs):
+        case getType(actions.saveGender):
             return [...state, {
-            ...state.slice(-1)[0]
-            , bilirubin: action.payload.bilirubin
-            , bilirubinDate: action.payload.bilirubinDate
-            , alt: action.payload.alt
-            , altDate: action.payload.altDate
-            , alkphos: action.payload.alkphos
-            , alkphosDate: action.payload.alkphosDate
-            , pt: action.payload.pt
-            , ptDate: action.payload.ptDate
-            , antihavigm: action.payload.antihavigm
-            , antihavigmDate: action.payload.antihavigmDate
-            , antihevigm: action.payload.antihevigm
-            , antihevigmDate: action.payload.antihevigmDate
-            , hbsag: action.payload.hbsag
-            , hbsagDate: action.payload.hbsagDate
-            , antihcvigm: action.payload.antihcvigm
-            , antihcvigmDate: action.payload.antihcvigmDate
+            ...state.slice(-1)[0],
+            gender: action.payload,
             }]
+        case getType(actions.saveConsent):
+            return [...state, {
+            ...state.slice(-1)[0],
+            consent: action.payload
+            }]
+        case getType(actions.saveDrug):
+            return [...state, {
+            ...state.slice(-1)[0],
+            drug: action.payload,
+            }]
+        case getType(actions.saveDose):
+            return [...state, {
+            ...state.slice(-1)[0],
+            dose: action.payload,
+            }]
+        case getType(actions.saveUnit):
+            return [...state, {
+            ...state.slice(-1)[0],
+            unit: action.payload,
+            }]
+        case getType(actions.saveIndication):
+            return [...state, {
+            ...state.slice(-1)[0],
+            indication: action.payload,
+            }]
+        case getType(actions.saveRechallenged):
+            return [...state, {
+            ...state.slice(-1)[0],
+            rechallenged: action.payload,
+            }]
+        case getType(actions.saveChallengeResult):
+            return [...state, {
+            ...state.slice(-1)[0],
+            challengeResult: action.payload
+            }]
+        case getType(actions.saveJaundice):
+            return [...state, {
+            ...state.slice(-1)[0],
+            jaundice: action.payload,
+            }]
+        case getType(actions.savePain):
+            return [...state, {
+            ...state.slice(-1)[0],
+            pain: action.payload,
+            }]
+        case getType(actions.savePruritis):
+            return [...state, {
+            ...state.slice(-1)[0],
+            pruritis: action.payload
+            }]
+        case getType(actions.saveBilirubin):
+            return [...state, {
+            ...state.slice(-1)[0],
+            bilirubin: action.payload
+            }]
+        case getType(actions.saveBilirubinDate):
+            return [...state, {
+            ...state.slice(-1)[0],
+            bilirubinDate: action.payload
+            }]
+        case getType(actions.saveALT):
+            return [...state, {
+            ...state.slice(-1)[0],
+            alt: action.payload
+            }]
+        case getType(actions.saveALTDate):
+            return [...state, {
+            ...state.slice(-1)[0],
+            altDate: action.payload
+            }]
+        case getType(actions.saveAlkPhos):
+            return [...state, {
+            ...state.slice(-1)[0],
+            alkphos: action.payload
+            }]
+        case getType(actions.saveAlkPhosDate):
+            return [...state, {
+            ...state.slice(-1)[0],
+            alkphosDate: action.payload
+            }]
+        case getType(actions.savePT):
+            return [...state, {
+            ...state.slice(-1)[0],
+            pt: action.payload
+            }]
+        case getType(actions.savePTDate):
+            return [...state, {
+            ...state.slice(-1)[0],
+            ptDate: action.payload
+            }]
+        case getType(actions.saveAntiHAVIgM):
+            return [...state, {
+            ...state.slice(-1)[0],
+            antihavigm: action.payload
+            }]
+        case getType(actions.saveAntiHAVIgMDate):
+            return [...state, {
+            ...state.slice(-1)[0],
+            antihavigmDate: action.payload
+            }]
+        case getType(actions.saveAntiHEVIgM):
+            return [...state, {
+            ...state.slice(-1)[0],
+            antihevigm: action.payload
+            }]
+        case getType(actions.saveAntiHEVIgMDate):
+            return [...state, {
+            ...state.slice(-1)[0],
+            antihevigmDate: action.payload
+            }]
+        case getType(actions.saveHBsAg):
+            return [...state, {
+            ...state.slice(-1)[0],
+            hbsag: action.payload
+            }]
+        case getType(actions.saveHBsAgDate):
+            return [...state, {
+            ...state.slice(-1)[0],
+            hbsagDate: action.payload
+            }]
+        case getType(actions.saveAntiHCVIgM):
+            return [...state, {
+            ...state.slice(-1)[0],
+            antihcvigm: action.payload
+            }]
+        case getType(actions.saveAntiHCVIgMDate):
+            return [...state, {
+            ...state.slice(-1)[0],
+            antihcvigmDate: action.payload
+            }]
+        case getType(actions.saveNewPatient):
+            return state
+        case getType(actions.resetPatient):
+            return [...state, action.payload]
         default:
             return state
     }

@@ -15,7 +15,6 @@ import { ActivityIndicator,
 import { TextInputMask } from "react-native-masked-text";
 import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
-import { Loading } from "../components/Loading";
 import { handleData,listenStatus } from "../config/dataHandler";
 import { validateNIC, validateLabValue } from "../config/validation";
 // styles
@@ -88,7 +87,6 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
     public render() {
         return (
             <View style={styles.container}>
-                <Loading isLoading={this.state.isSubmitting} />
                 <View>
                     <Text style={styles.helpText}>
                         Please enter the laboratory values of the registered patient suspected
@@ -100,11 +98,11 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                         <KeyboardAvoidingView behavior="padding">
                         <View>
                             <View style={styles.wrapper}>
-                                <Text style={styles.label}>NIC Number</Text>
+                                <Text style={styles.label}>MR Number</Text>
                                 <TextInputMask 
                                     keyboardType="numeric"
                                     onChangeText={(text) => {this.setState({nic: text})}}
-                                    options={{mask: "99999-9999999-9"}}
+                                    options={{mask: "999-99-99"}}
                                     style={styles.input}
                                     type="custom"
                                     value={this.state.nic}
@@ -179,7 +177,9 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                                 validationMessage={invalidDateMessage}
                             />
                         </View>
-                        <Button title="Submit" onPress={this.submit} color="black" />
+                        { this.state.isSubmitting 
+                            ? <ActivityIndicator color="black"/> 
+                            : <Button title="Submit" onPress={this.submit} color="black" /> }
                 </KeyboardAvoidingView>
             </ScrollView>
             </View>
@@ -190,6 +190,7 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
         this.setState({isSubmitting: true});
         if (!validateNIC(this.state.nic)) {
             Alert.alert("Please enter a valid NIC number");
+            this.setState({isSubmitting: false});
             return;
         }
         if (!validateLabValue(this.state.ast) 
@@ -197,6 +198,7 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
             || !validateLabValue(this.state.alkphos)
             || !validateLabValue(this.state.inr)) {
             Alert.alert("Please enter valid lab values");
+            this.setState({isSubmitting: false});
             return;
         }
         const user = firebase.auth().currentUser;
@@ -213,25 +215,8 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
         };
         handleData("followup/", this.state.nic, toSave)
         .then(() => {
-            listenStatus.get()
-            .then((islistening) => {
                 this.setState({isSubmitting: false});
-                if (!islistening) {
-                    this.props.navigation.push("Notification", {
-                        heading: "Success!",
-                        message: "Your data has been stored online.",
-                        type: "success",
-                    });
-                } else {
-                    this.props.navigation.push("Notification", {
-                        heading: "Saved",
-                        message: "We could not establish an internet connection." + "\n" +
-                            "Your data has been stored on this device." + "\n" + 
-                            "Data will be transferred online automatically when internet is connected",
-                        type: "warn",
-                    });
-                }
-            })
+                this.props.navigation.pop();
         })
         .catch((error: Error) => Alert.alert(error.message));
     }

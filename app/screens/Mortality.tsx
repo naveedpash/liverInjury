@@ -11,7 +11,6 @@ import {
 import { TextInputMask } from "react-native-masked-text";
 import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
-import { Loading } from "../components/Loading";
 import { handleData, listenStatus } from "../config/dataHandler";
 import { validateNIC } from "../config/validation";
 // styles
@@ -60,7 +59,6 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
     public render() {
     return (
         <View style={styles.container}>
-            <Loading isLoading={this.state.isSubmitting} />
             <Text style={styles.helpText}>
                 Please enter the National ID Card number of the patient suspected to have deceased
                 from drug induced liver injury
@@ -86,9 +84,9 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
                 />
             </View>
             <View style={styles.button}>
-                <Button onPress={this.submit}
-                    color="black"
-                    title="Save" />
+                { this.state.isSubmitting 
+                    ? <ActivityIndicator color="black"/> 
+                    : <Button onPress={this.submit} color="black" title="Save" /> }
             </View>
         </View>
     );
@@ -113,29 +111,8 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
                         enteredBy: user!.uid,
                    })
         .then(() => {
-            listenStatus.get()
-            .then((islistening) => {
-                this.setState({isSubmitting: false});
-                if (!islistening) {
-                    this.props.navigation.push("notification", {
-                        heading: "Success!",
-                        message: "Your data has been stored online.",
-                        type: "success",
-                    });
-                } else {
-                    this.props.navigation.push("notification", {
-                        heading: "Saved",
-                        message: "We could not establish an internet connection." + "\n" +
-                            "Your data has been stored on this device." + "\n" +
-                            "Data will be transferred online automatically when internet is connected",
-                        type: "warn",
-                    });
-                }
-                });
-            console.log("state");
-            console.log(this.state);
-            console.log("Async Storage");
-            AsyncStorage.getItem("mortality/" + this.state.nic).then((value) => console.log(value));
+            this.setState({isSubmitting: false});
+            this.props.navigation.pop();
         })
         .catch((error: Error) => console.log(error.message));
     }

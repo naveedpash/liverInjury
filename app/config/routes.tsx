@@ -21,9 +21,6 @@ const auth = createStackNavigator({
     SignUp: {
         screen: SignUp,
     },
-    Notification: {
-        screen: Notification,
-    },
     main: {
         screen: createStackNavigator({
             main: {

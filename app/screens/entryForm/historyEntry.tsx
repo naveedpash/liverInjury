@@ -3,8 +3,7 @@ import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native"
 import { NavigationScreenProp, NavigationEvents } from "react-navigation";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { history } from "../../config/redux/types";
-import { saveHistory } from "../../config/redux/actions";
+import { history, newpatient } from "../../config/redux/types";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
 // styles
 import styles from "./styles";
@@ -12,6 +11,9 @@ import styles from "./styles";
 export interface IHistoryScreenProps {
     navigation: NavigationScreenProp<any, any>;
     dispatch: Dispatch<patientAction>;
+    jaundice: "yes" | "no";
+    pain: "yes" | "no";
+    pruritis: "yes" | "no";
 }
 
 class HistoryEntry extends React.Component<IHistoryScreenProps, history> {
@@ -28,17 +30,14 @@ class HistoryEntry extends React.Component<IHistoryScreenProps, history> {
     {/* Patient History */ }
     return (
             <View style={styles.container}>
-                <NavigationEvents
-                    onWillBlur={payload => {
-                        this.props.dispatch({type: "SAVE_HISTORY", payload: this.state});
-                    }}
-                />
                 <ScrollView>
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Jaundice</Text>
                         <Picker style={styles.picker}
-                            onValueChange={value => this.setState({jaundice: value})}
-                            selectedValue={this.state.jaundice}
+                            onValueChange={(value) => {
+                                this.props.dispatch({type: "SAVE_JAUNDICE", payload: value});
+                            }}
+                            selectedValue={this.props.jaundice}
                         >
                             <Picker.Item label="No" value={"no"}/>
                             <Picker.Item label="Yes" value={"yes"}/>
@@ -48,8 +47,10 @@ class HistoryEntry extends React.Component<IHistoryScreenProps, history> {
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Abdominal Pain</Text>
                         <Picker style={styles.picker}
-                            onValueChange={value => this.setState({pain: value})}
-                            selectedValue={this.state.pain}
+                            onValueChange={(value) => {
+                                this.props.dispatch({type: "SAVE_PAIN", payload: value});
+                            }}
+                            selectedValue={this.props.pain}
                         >
                             <Picker.Item label="No" value={"no"}/>
                             <Picker.Item label="Yes" value={"yes"}/>
@@ -59,24 +60,26 @@ class HistoryEntry extends React.Component<IHistoryScreenProps, history> {
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Pruritis</Text>
                         <Picker style={styles.picker}
-                            onValueChange={value => this.setState({pruritis: value})}
-                            selectedValue={this.state.pruritis}
+                            onValueChange={(value) => {
+                                this.props.dispatch({type: "SAVE_PRURITIS", payload: value});
+                            }}
+                            selectedValue={this.props.pruritis}
                         >
                             <Picker.Item label="No" value={"no"}/>
                             <Picker.Item label="Yes" value={"yes"}/>
                         </Picker>
                     </View>
                     <Text style={styles.helpText}>Is the patient complain of pruritis on initial presentation?</Text>
-                    <Button color="black" title="Next" onPress={this.next} />
                 </ScrollView>
             </View>
         );
     }
-
-    public next = () => {
-        this.props.dispatch({type: "SAVE_HISTORY", payload: this.state});
-        this.props.navigation.navigate("labs");
-    };
 }
 
-export default connect()(HistoryEntry);
+const mapStateToProps = (state: Array<newpatient>) => ({
+    jaundice: state.slice(-1)[0].jaundice,
+    pain: state.slice(-1)[0].pain,
+    pruritis: state.slice(-1)[0].pruritis,
+})
+
+export default connect(mapStateToProps)(HistoryEntry);

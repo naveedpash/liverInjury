@@ -1,13 +1,12 @@
 import firebase from "firebase";
 import moment from "moment";
 import * as React from "react";
-import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
+import { Picker, ScrollView, Text, TextInput, View } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
-import { NavigationScreenProp, NavigationEvents } from "react-navigation";
+import { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
-import { demographics } from "../../config/redux/types";
-import { saveDemographics } from "../../config/redux/actions";
+import { Dispatch } from "redux";
+import { demographics, newpatient } from "../../config/redux/types";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
 // styles
 import styles from "./styles";
@@ -19,6 +18,11 @@ const today: Date = new Date();
 export interface IEntryScreenProps {
     navigation: NavigationScreenProp<any, any>;
     dispatch: Dispatch<patientAction>;
+    nic: string;
+    name: string;
+    age: string;
+    gender: "male" | "female";
+    consent: "yes" | "no";
 }
 
 class Entry extends React.Component<IEntryScreenProps, demographics> {
@@ -38,11 +42,6 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
         return (
             <View style={styles.container}>
             {/* Patient Demographics */}
-                <NavigationEvents
-                    onWillBlur={() => {
-                        this.props.dispatch({type: "SAVE_DEMOGRAPHICS", payload: this.state});
-                    }}
-                />
                 <ScrollView>
                     <View>
                         <Text style={styles.helpText}>{moment(today).format("DD/MM/YYYY")}</Text>
@@ -54,14 +53,14 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
                     </View>
                     <View>
                     <View style={styles.wrapper}>
-                        <Text style={styles.label}>NIC Number</Text>
+                        <Text style={styles.label}>MR Number</Text>
                         <TextInputMask 
                             keyboardType="numeric"
-                            onChangeText={text => this.setState({nic: text})}
-                            options={{mask: "99999-9999999-9"}}
+                            onChangeText={text => this.props.dispatch({type: "SAVE_NIC", payload: text})}
+                            options={{mask: "999-99-99"}}
                             style={styles.input}
                             type="custom"
-                            value={this.state.nic}
+                            value={this.props.nic}
                         />
                     </View>
                         <Text style={styles.helpText}>Enter the National ID Card number of the patient</Text>
@@ -70,7 +69,8 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Name</Text>
                         <TextInput style={styles.input}
-                            onChangeText={ value => this.setState({name: value}) }
+                            onChangeText={text => this.props.dispatch({type: "SAVE_NAME", payload: text})}
+                            value={this.props.name}
                         />
                     </View>
                         <Text style={styles.helpText}>Name of the Patient</Text>
@@ -80,7 +80,8 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
                         <Text style={styles.label}>Age</Text>
                         <TextInput style={styles.input}
                             keyboardType="numeric"
-                            onChangeText={ value => this.setState({age: parseInt(value)}) }
+                            onChangeText={text => this.props.dispatch({type: "SAVE_AGE", payload: text})}
+                            value={this.props.age}
                         />
                     </View>
                         <Text style={styles.helpText}>Age of the Patient at the time of Registration</Text>
@@ -89,8 +90,11 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Gender</Text>
                         <Picker style={styles.picker}
-                            onValueChange={value => this.setState({gender: value})}
-                            selectedValue={this.state.gender}
+                            onValueChange={(text) => {
+                                this.props.dispatch({type: "SAVE_GENDER", payload: text});
+                                }
+                            }
+                            selectedValue={this.props.gender}
                         >
                             <Picker.Item label="Male" value={"male"} />
                             <Picker.Item label="Female" value={"female"} />
@@ -102,8 +106,11 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
                     <View style={styles.wrapper}>
                         <Text style={styles.label}>Consent</Text>
                         <Picker style={styles.picker}
-                            onValueChange={value => this.setState({consent: value})}
-                            selectedValue={this.state.consent}
+                            onValueChange={(text) => {
+                                this.props.dispatch({type: "SAVE_CONSENT", payload: text});
+                                }
+                            }
+                            selectedValue={this.props.consent}
                         >
                             <Picker.Item label="Yes" value={"yes"} />
                             <Picker.Item label="No" value={"no"} />
@@ -111,16 +118,18 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
                     </View>
                         <Text style={styles.helpText}>Has the patient given consent to be registered?</Text>
                     </View>
-                    <Button color="black" title="Next" onPress={this.next} />
                 </ScrollView>
             </View>
         );
     }
-
-    public next = () => {
-        this.props.dispatch({type: "SAVE_DEMOGRAPHICS", payload: this.state});
-        this.props.navigation.navigate("dili");
-    };
 }
 
-export default connect()(Entry);
+const mapStateToProps = (state: Array<newpatient>) => ({
+    nic: state.slice(-1)[0].nic,
+    name: state.slice(-1)[0].name,
+    age: state.slice(-1)[0].age,
+    gender: state.slice(-1)[0].gender,
+    consent: state.slice(-1)[0].consent,
+})
+
+export default connect(mapStateToProps)(Entry);

@@ -1,7 +1,7 @@
 import moment from "moment";
 
 export const validateNIC = (value: string): boolean => {
-    return /\d{5}-\d{7}-\d{1}/.test(value) && value.length == 15;
+    return /\d{3}-\d{2}-\d{2}/.test(value) && value.length == 9;
 }
 
 export const validateDate = (date: moment.Moment, against: string): boolean => {
