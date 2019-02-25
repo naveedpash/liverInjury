@@ -1,20 +1,24 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as React from "react";
+import { Dispatch } from "redux";
 import firebase from "firebase";
 import { AsyncStorage, NetInfo, Text, TouchableOpacity, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { Logo } from "../components/Logo";
 import { handleConnectivityChange } from "../config/dataHandler";
+import { patientAction, initialPatient } from "../config/redux/reducers";
 // styles
 import styles from "./styles";
 
 export interface IHomeScreenProps {
     navigation: NavigationScreenProp<any, any>;
+    dispatch: Dispatch<patientAction>;
 }
 
 export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
     private constructor(props: IHomeScreenProps) {
         super(props);
+        this.handleNewEntry = this.handleNewEntry.bind(this);
     }
 
     static navigationOptions = {
@@ -58,7 +62,7 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
             <View style={styles.container}>
                 <View style={styles.containerMenu}>
                     <TouchableOpacity style={styles.touchable}
-                        onPress={() => this.props.navigation.navigate("entry")}>
+                        onPress={this.handleNewEntry}>
                         <MaterialCommunityIcons name="plus-circle" size={32} color="white" />
                         <Text style={styles.buttonText}>Register New Patient</Text>
                     </TouchableOpacity>
@@ -84,6 +88,10 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
         );
     }
 
+    private handleNewEntry = () => {
+        this.props.dispatch({type: "RESET_PATIENT", payload: initialPatient});
+        this.props.navigation.navigate("entry");
+    }
     private handleSignOut = () => {
         firebase
             .auth()

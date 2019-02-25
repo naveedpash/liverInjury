@@ -63,12 +63,12 @@ export interface newpatient {
     altDate: string;
     alkphos: string;
     alkphosDate: string;
-    antihavigm: string;
+    antihavigm: "reactive" | "nonreactive" | "";
     antihavigmDate: string;
-    antihevigm: string;
+    antihevigm:  "reactive" | "nonreactive" | "";
     antihevigmDate: string;
-    hbsag: string;
+    hbsag: "reactive" | "nonreactive" | "";
     hbsagDate: string;
-    antihcvigm: string;
+    antihcvigm: "reactive" | "nonreactive" | "";
     antihcvigmDate: string;
 }

@@ -8,6 +8,7 @@ import { ActivityIndicator,
     Button,
     KeyboardAvoidingView,
     NetInfo,
+    Picker,
     ScrollView,
     Text,
     TextInput,
@@ -38,13 +39,13 @@ export interface ILabScreenProps {
     altDate: string;
     alkphos: string;
     alkphosDate: string;
-    antihavigm: string;
+    antihavigm: "reactive" | "nonreactive" | "";
     antihavigmDate: string;
-    antihevigm: string;
+    antihevigm: "reactive" | "nonreactive" | "";
     antihevigmDate: string;
-    hbsag: string;
+    hbsag: "reactive" | "nonreactive" | "";
     hbsagDate: string;
-    antihcvigm: string;
+    antihcvigm: "reactive" | "nonreactive" | "";
     antihcvigmDate: string;
 }
 
@@ -135,12 +136,17 @@ class LabsEntry extends React.Component<ILabScreenProps, ILabsScreenState> {
                 </View>
                 <View style={styles.wrapper}>
                     <Text style={styles.label}>Anti-HAV IgM</Text>
-                    <TextInput style={styles.inputForm}
-                                onChangeText={ (value) => {
-                                    this.props.dispatch({type: "SAVE_ANTIHAVIGM", payload: value});
-                                }}
-                                value={this.props.antihavigm}
-                    />
+                    <Picker style={styles.picker}
+                        onValueChange={(text) => {
+                            this.props.dispatch({type: "SAVE_ANTIHAVIGM", payload: text});
+                            }
+                        }
+                        selectedValue={this.props.antihavigm}
+                    >
+                        <Picker.Item label="" value={""} />
+                        <Picker.Item label="Non-Reactive" value={"nonreactive"} />
+                        <Picker.Item label="Reactive" value={"reactive"} />
+                    </Picker>
                     <DateEntry
                         dateHandler={(date) => {
                             this.props.dispatch({type: "SAVE_ANTIHAVIGMDATE", payload: date.format("YYYY-MM-DD")});
@@ -151,12 +157,17 @@ class LabsEntry extends React.Component<ILabScreenProps, ILabsScreenState> {
                 </View>
                 <View style={styles.wrapper}>
                     <Text style={styles.label}>Anti-HEV IgM</Text>
-                    <TextInput style={styles.inputForm}
-                                onChangeText={ (value) => {
-                                    this.props.dispatch({type: "SAVE_ANTIHEVIGM", payload: value});
-                                }}
-                                value={this.props.antihevigm}
-                    />
+                    <Picker style={styles.picker}
+                        onValueChange={(text) => {
+                            this.props.dispatch({type: "SAVE_ANTIHEVIGM", payload: text});
+                            }
+                        }
+                        selectedValue={this.props.antihevigm}
+                    >
+                        <Picker.Item label="" value={""} />
+                        <Picker.Item label="Non-Reactive" value={"nonreactive"} />
+                        <Picker.Item label="Reactive" value={"reactive"} />
+                    </Picker>
                     <DateEntry
                         dateHandler={(date) => {
                             this.props.dispatch({type: "SAVE_ANTIHEVIGMDATE", payload: date.format("YYYY-MM-DD")});
@@ -167,12 +178,17 @@ class LabsEntry extends React.Component<ILabScreenProps, ILabsScreenState> {
                 </View>
                 <View style={styles.wrapper}>
                     <Text style={styles.label}>HBsAg</Text>
-                    <TextInput style={styles.inputForm}
-                                onChangeText={ (value) => {
-                                    this.props.dispatch({type: "SAVE_HBSAG", payload: value});
-                                }}
-                                value={this.props.hbsag}
-                    />
+                    <Picker style={styles.picker}
+                        onValueChange={(text) => {
+                            this.props.dispatch({type: "SAVE_HBSAG", payload: text});
+                            }
+                        }
+                        selectedValue={this.props.hbsag}
+                    >
+                        <Picker.Item label="" value={""} />
+                        <Picker.Item label="Non-Reactive" value={"nonreactive"} />
+                        <Picker.Item label="Reactive" value={"reactive"} />
+                    </Picker>
                     <DateEntry
                         dateHandler={(date) => {
                             this.props.dispatch({type: "SAVE_HBSAGDATE", payload: date.format("YYYY-MM-DD")});
@@ -183,11 +199,17 @@ class LabsEntry extends React.Component<ILabScreenProps, ILabsScreenState> {
                 </View>
                 <View style={styles.wrapper}>
                     <Text style={styles.label}>Anti-HCV antibody</Text>
-                    <TextInput style={styles.inputForm}
-                                onChangeText={ (value) => {
-                                    this.props.dispatch({type: "SAVE_ANTIHCVIGM", payload: value});
-                                }}
-                    />
+                    <Picker style={styles.picker}
+                        onValueChange={(text) => {
+                            this.props.dispatch({type: "SAVE_ANTIHCVIGM", payload: text});
+                            }
+                        }
+                        selectedValue={this.props.antihcvigm}
+                    >
+                        <Picker.Item label="" value={""} />
+                        <Picker.Item label="Non-Reactive" value={"nonreactive"} />
+                        <Picker.Item label="Reactive" value={"reactive"} />
+                    </Picker>
                     <DateEntry
                         dateHandler={(date) => {
                             this.props.dispatch({type: "SAVE_ANTIHCVIGMDATE", payload: date.format("YYYY-MM-DD")});
