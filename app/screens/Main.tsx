@@ -22,7 +22,7 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
     }
 
     static navigationOptions = {
-        title: 'What would you like to to?',
+        title: 'What would you like to do?',
         headerStyle: {
             backgroundColor: '#910505',
         },
@@ -70,7 +70,7 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
                         onPress={() => this.props.navigation.navigate("followUp")}>
                         <MaterialCommunityIcons name="test-tube" size={32} color="white" />
                         <Text style={styles.buttonText}>Enter FollowUp LFTs</Text>
-                        </TouchableOpacity>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.touchable}
                         onPress={() => this.props.navigation.navigate("mortality")}>
                         <MaterialCommunityIcons name="emoticon-dead" size={32} color="white" />

@@ -5,6 +5,6 @@ import Navigation from "./config/routes";
 
 export default () => (
     <Provider store={store}>
-    <Navigation />
-</Provider>
+        <Navigation />
+    </Provider>
 );

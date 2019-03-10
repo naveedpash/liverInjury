@@ -1,6 +1,5 @@
 import {
     createAppContainer,
-    createMaterialTopTabNavigator,
     createStackNavigator } from "react-navigation";
 import Loading from "../screens/auth/Loading";
 import Login from "../screens/auth/Login";
@@ -9,7 +8,6 @@ import EntryForm from "../screens/entryForm";
 import FollowUp from "../screens/FollowUp";
 import Main from "../screens/Main";
 import Mortality from "../screens/Mortality";
-import Notification from "../screens/Notification";
 
 const auth = createStackNavigator({
     Loading: {
