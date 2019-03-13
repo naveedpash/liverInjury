@@ -1,24 +1,25 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as React from "react";
 import { Dispatch } from "redux";
+import { connect } from "react-redux";
 import firebase from "firebase";
 import { AsyncStorage, NetInfo, Text, TouchableOpacity, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { Logo } from "../components/Logo";
 import { handleConnectivityChange } from "../config/dataHandler";
+import * as actions from "../config/redux/actions";
 import { patientAction, initialPatient } from "../config/redux/reducers";
 // styles
 import styles from "./styles";
 
 export interface IHomeScreenProps {
     navigation: NavigationScreenProp<any, any>;
-    dispatch: Dispatch<patientAction>;
+    resetEntryForm: () => any;
 }
 
-export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
-    private constructor(props: IHomeScreenProps) {
+export class HomeScreen extends React.Component<IHomeScreenProps, any> {
+    public constructor(props: IHomeScreenProps) {
         super(props);
-        this.handleNewEntry = this.handleNewEntry.bind(this);
     }
 
     static navigationOptions = {
@@ -61,8 +62,10 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
         return (
             <View style={styles.container}>
                 <View style={styles.containerMenu}>
-                    <TouchableOpacity style={styles.touchable}
-                        onPress={this.handleNewEntry}>
+                    <TouchableOpacity style={styles.touchable} onPress={() => {
+                        this.props.resetEntryForm();
+                        this.props.navigation.navigate("entry");
+                    }}>
                         <MaterialCommunityIcons name="plus-circle" size={32} color="white" />
                         <Text style={styles.buttonText}>Register New Patient</Text>
                     </TouchableOpacity>
@@ -88,10 +91,6 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
         );
     }
 
-    private handleNewEntry = () => {
-        this.props.dispatch({type: "RESET_PATIENT", payload: initialPatient});
-        this.props.navigation.navigate("entry");
-    }
     private handleSignOut = () => {
         firebase
             .auth()
@@ -100,3 +99,11 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
             .catch((error: Error) => console.log(error.message));
     }
 }
+
+const mapDispatchtoProps = (dispatch: Dispatch<patientAction>) => {
+    return {
+        resetEntryForm: () => dispatch(actions.resetPatient())
+    }
+}
+
+export default connect(mapDispatchtoProps)(HomeScreen);

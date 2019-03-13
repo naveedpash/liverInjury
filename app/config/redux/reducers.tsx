@@ -194,7 +194,7 @@ export const reducer: Reducer<newpatient[], patientAction> = (state: newpatient[
         case getType(actions.saveNewPatient):
             return state
         case getType(actions.resetPatient):
-            return [...state, action.payload]
+            return [...state, initialPatient]
         default:
             return state
     }

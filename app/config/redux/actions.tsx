@@ -123,6 +123,4 @@ export const saveAntiHCVIgMDate = createAction('SAVE_ANTIHCVIGMDATE', resolve =>
 
 export const saveNewPatient = createAction('SAVE_NEWPATIENT')
 
-export const resetPatient = createAction('RESET_PATIENT', resolve => {
-    return (blankPatient: newpatient) => resolve(blankPatient)
-})
+export const resetPatient = createAction('RESET_PATIENT')
