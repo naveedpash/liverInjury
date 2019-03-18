@@ -2,12 +2,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as React from "react";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
+import { FAB, TouchableRipple, Text as Txt } from "react-native-paper";
 import firebase from "firebase";
 import { AsyncStorage, NetInfo, Text, TouchableOpacity, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { Logo } from "../components/Logo";
 import { handleConnectivityChange } from "../config/dataHandler";
 import * as actions from "../config/redux/actions";
+import colors from "../config/colors";
 import { patientAction, initialPatient } from "../config/redux/reducers";
 // styles
 import styles from "./styles";
@@ -22,21 +24,21 @@ export class HomeScreen extends React.Component<IHomeScreenProps, any> {
         super(props);
     }
 
-    static navigationOptions = {
-        title: 'What would you like to do?',
-        headerStyle: {
-            backgroundColor: '#910505',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            alignSelf: "center",
-            color: "#ffffff",
-            flex: 1,
-            fontSize: 18,
-            fontWeight: "300",
-            textAlign: "left",
-        },
-    }
+//    static navigationOptions = {
+//        title: 'What would you like to do?',
+//        headerStyle: {
+//            backgroundColor: colors.darkorange,
+//        },
+//        headerTintColor: '#fff',
+//        headerTitleStyle: {
+//            alignSelf: "center",
+//            color: "#ffffff",
+//            flex: 1,
+//            fontSize: 18,
+//            fontWeight: "300",
+//            textAlign: "left",
+//        },
+//    }
 
     public componentWillMount() {
         AsyncStorage.getItem("islistening")
@@ -62,28 +64,22 @@ export class HomeScreen extends React.Component<IHomeScreenProps, any> {
         return (
             <View style={styles.container}>
                 <View style={styles.containerMenu}>
-                    <TouchableOpacity style={styles.touchable} onPress={() => {
-                        this.props.resetEntryForm();
-                        this.props.navigation.navigate("entry");
-                    }}>
-                        <MaterialCommunityIcons name="plus-circle" size={32} color="white" />
-                        <Text style={styles.buttonText}>Register New Patient</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchable}
-                        onPress={() => this.props.navigation.navigate("followUp")}>
-                        <MaterialCommunityIcons name="test-tube" size={32} color="white" />
-                        <Text style={styles.buttonText}>Enter FollowUp LFTs</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchable}
-                        onPress={() => this.props.navigation.navigate("mortality")}>
-                        <MaterialCommunityIcons name="emoticon-dead" size={32} color="white" />
-                        <Text style={styles.buttonText}>Register Mortality</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchable}
-                        onPress={this.handleSignOut}>
-                        <MaterialCommunityIcons name="logout" size={32} color="white" />
-                        <Text style={styles.buttonText}>Log Out</Text>
-                    </TouchableOpacity>
+                    <TouchableRipple rippleColor="#EC9154">
+                        <FAB icon="assignment" label="Register New Patient"
+                            onPress={() => this.props.navigation.navigate("entry")} />
+                    </TouchableRipple>
+                    <TouchableRipple rippleColor="#EC9154">
+                        <FAB icon="timeline" label="Enter FollowUp LFTs"
+                            onPress={() => this.props.navigation.navigate("followUp")} />
+                    </TouchableRipple>
+                    <TouchableRipple rippleColor="#EC9154">
+                        <FAB icon="timeline" label="Register Mortality"
+                            onPress={() => this.props.navigation.navigate("mortality")} />
+                    </TouchableRipple>
+                    <TouchableRipple rippleColor="#EC9154">
+                        <FAB icon="timeline" label="Log Out"
+                            onPress={() => this.handleSignOut} />
+                    </TouchableRipple>
                 </View>
                 <View style={{backgroundColor: "black", flex: 0.02}} />
                 <Logo portrait={false} />

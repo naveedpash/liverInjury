@@ -34,7 +34,7 @@ const auth = createStackNavigator({
                 screen: Mortality,
             },
         }, {
-            headerMode: "screen",
+            headerMode: "none",
         }),
     },
 }, {

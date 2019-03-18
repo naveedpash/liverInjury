@@ -9,10 +9,9 @@ import { ActivityIndicator,
     KeyboardAvoidingView,
     NetInfo,
     ScrollView,
-    Text,
-    TextInput,
     View } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
+import { Text, TextInput } from "react-native-paper";
 import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
 import { handleData,listenStatus } from "../config/dataHandler";
@@ -113,11 +112,12 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                             </Text>
                         </View>
                         <View style={styles.wrapper}>
-                            <Text style={styles.label}>Bilirubin (U/L)</Text>
                             <TextInput
                                 keyboardType="numeric"
+                                label="Bilirubin (U/L)"
                                 onChangeText={(text) => {this.setState({bilirubin: text})}}
                                 style={styles.inputForm}
+                                value={this.state.bilirubin}
                             />
                             <DateEntry
                                 dateHandler={(date) => this.setState({bilirubinDate: date.format("YYYY-MM-DD")})}
@@ -126,11 +126,12 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                             />
                         </View>
                         <View style={styles.wrapper}>
-                            <Text style={styles.label}>AST (U/L)</Text>
                             <TextInput
                                 keyboardType="numeric"
+                                label="AST (U/L)"
                                 onChangeText={(text) => {this.setState({ast: text})}}
                                 style={styles.inputForm}
+                                value={this.state.ast}
                             />
                             <DateEntry
                                 dateHandler={(date) => this.setState({astDate: date.format("YYYY-MM-DD")})}
@@ -139,11 +140,12 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                             />
                         </View>
                         <View style={styles.wrapper}>
-                            <Text style={styles.label}>ALT (U/L)</Text>
                             <TextInput
                                 keyboardType="numeric"
+                                label="ALT (U/L)"
                                 onChangeText={(text) => {this.setState({alt: text})}}
                                 style={styles.inputForm}
+                                value={this.state.alt}
                             />
                             <DateEntry
                                 dateHandler={(date) => this.setState({altDate: date.format("YYYY-MM-DD")})}
@@ -152,11 +154,12 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                             />
                         </View>
                         <View style={styles.wrapper}>
-                            <Text style={styles.label}>Alkaline Phosphatase{"\n"}(U/L)</Text>
                             <TextInput
                                 keyboardType="numeric"
+                                label="Alkaline Phosphatase (U/L)"
                                 onChangeText={(text) => {this.setState({alkphos: text})}}
                                 style={styles.inputForm}
+                                value={this.state.alkphos}
                             />
                             <DateEntry
                                 dateHandler={(date) => this.setState({alkphosDate: date.format("YYYY-MM-DD")})}
@@ -165,11 +168,12 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                             />
                         </View>
                         <View style={styles.wrapper}>
-                            <Text style={styles.label}>INR</Text>
                             <TextInput
                                 keyboardType="numeric"
+                                label="INR"
                                 onChangeText={(text) => {this.setState({inr: text})}}
                                 style={styles.inputForm}
+                                value={this.state.inr}
                             />
                             <DateEntry
                                 dateHandler={(date) => this.setState({inrDate: date.format("YYYY-MM-DD")})}

@@ -5,10 +5,9 @@ import {
     Alert,
     AsyncStorage,
     Button,
-    Text,
-    TextInput,
     View } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
+import { Text, TextInput } from "react-native-paper";
 import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
 import { handleData, listenStatus } from "../config/dataHandler";

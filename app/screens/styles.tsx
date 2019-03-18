@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
+import colors from "../config/colors";
 
 const INPUT_HEIGHT: number = 48;
 const BORDER_RADIUS: number = 9;
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
         textShadowRadius: 5,
     },
     container: {
-        backgroundColor: "#31aa80",
+        backgroundColor: colors.white,
         flexDirection: "column",
         height: "100%",
     },
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     heading: {
-        color: "#910505",
+        color: colors.darkorange,
         fontSize: 32,
         fontWeight: "600",
         letterSpacing: -0.5,
@@ -64,10 +65,9 @@ const styles = StyleSheet.create({
         textAlign: "right",
     },
     inputForm: {
-        color: "#910505",
-        flex: 0.4,
-        fontSize: 16,
-        height: INPUT_HEIGHT,
+        flex: 1,
+     // fontSize: 16,
+     // height: INPUT_HEIGHT,
     },
     label: {
         color: "#ffffff",
