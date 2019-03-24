@@ -18,12 +18,6 @@ import { validateNIC, validateLabValue } from "../config/validation";
 // styles
 import styles from "./styles";
 
-// TODO: Need to add dates for each lab -- DONE
-// TODO: Need to add popUp confirmed if saved -- DONE
-// TODO: Need to save to local storage if no internet connection and upload upon connecting to web -- DONE
-// TODO: Need to add styling.
-// TODO: Need to add ability to update late if needed
-
 const validateAgainst: string = "2018-12-31";
 const invalidDateMessage: string = "Date of Labs must be after 31st December 2018";
 
@@ -235,7 +229,7 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
         handleData("followup/", this.state.nic, toSave)
         .then(() => {
                 this.setState({isSubmitting: false});
-                this.props.navigation.pop();
+                this.props.navigation.navigate("main");
         })
         .catch((error: Error) => Alert.alert(error.message));
     }

@@ -117,7 +117,7 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
                                         <RadioButton color={colors.darkorange} value="yes" />
                                     </View>
                                     <View>
-                                        <Text>Yes</Text>
+                                        <Text>No</Text>
                                         <RadioButton color={colors.darkorange} value="no" />
                                     </View>
                                 </RadioButton.Group>

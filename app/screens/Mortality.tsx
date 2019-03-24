@@ -102,7 +102,7 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
                    })
         .then(() => {
             this.setState({isSubmitting: false});
-            this.props.navigation.pop();
+            this.props.navigation.navigate("main");
         })
         .catch((error: Error) => console.log(error.message));
     }
