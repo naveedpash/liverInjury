@@ -5,13 +5,12 @@ import * as React from "react";
 import { ActivityIndicator,
     Alert,
     AsyncStorage,
-    Button,
     KeyboardAvoidingView,
     NetInfo,
     ScrollView,
     View } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
-import { Text, TextInput } from "react-native-paper";
+import { Appbar, Button, Paragraph, Surface, Text, TextInput } from "react-native-paper";
 import { NavigationScreenProp } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
 import { handleData,listenStatus } from "../config/dataHandler";
@@ -85,28 +84,34 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
 
     public render() {
         return (
-            <View style={styles.container}>
+            <View>
+                <Appbar.Header>
+                    <Appbar.BackAction onPress={() => this.props.navigation.navigate("main")} />
+                    <Appbar.Content title="Enter FollowUp Labs" />
+                </Appbar.Header>
                 <View>
-                    <Text style={styles.helpText}>
+                    <Paragraph style={{textAlign: "center"}}>
                         Please enter the laboratory values of the registered patient suspected
                         to have drug induced liver injury
-                    </Text>
+                    </Paragraph>
                 </View>
                 {/* TODO: implement fuzzy search */}
                     <ScrollView keyboardShouldPersistTaps="always">
                         <KeyboardAvoidingView behavior="padding">
                         <View>
-                            <View style={styles.wrapper}>
-                                <Text style={styles.label}>MR Number</Text>
-                                <TextInputMask 
-                                    keyboardType="numeric"
-                                    onChangeText={(text) => {this.setState({nic: text})}}
-                                    options={{mask: "999-99-99"}}
-                                    style={styles.input}
-                                    type="custom"
-                                    value={this.state.nic}
-                                />
-                            </View>
+                            <TextInputMask 
+                                customTextInput={TextInput}
+                                customTextInputProps={{
+                                    label: "MR Number",
+                                    mode: "outlined",
+                                }}
+                                keyboardType="numeric"
+                                onChangeText={(text) => {this.setState({nic: text})}}
+                                options={{mask: "999-99-99"}}
+                                style={styles.input}
+                                type="custom"
+                                value={this.state.nic}
+                            />
                             <Text style={styles.helpText}>
                                 Enter the National ID Card Number of the Patient
                             </Text>
@@ -115,6 +120,7 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                             <TextInput
                                 keyboardType="numeric"
                                 label="Bilirubin (U/L)"
+                                mode="outlined"
                                 onChangeText={(text) => {this.setState({bilirubin: text})}}
                                 style={styles.inputForm}
                                 value={this.state.bilirubin}
@@ -130,6 +136,7 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                                 keyboardType="numeric"
                                 label="AST (U/L)"
                                 onChangeText={(text) => {this.setState({ast: text})}}
+                                mode="outlined"
                                 style={styles.inputForm}
                                 value={this.state.ast}
                             />
@@ -143,6 +150,7 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                             <TextInput
                                 keyboardType="numeric"
                                 label="ALT (U/L)"
+                                mode="outlined"
                                 onChangeText={(text) => {this.setState({alt: text})}}
                                 style={styles.inputForm}
                                 value={this.state.alt}
@@ -157,6 +165,7 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                             <TextInput
                                 keyboardType="numeric"
                                 label="Alkaline Phosphatase (U/L)"
+                                mode="outlined"
                                 onChangeText={(text) => {this.setState({alkphos: text})}}
                                 style={styles.inputForm}
                                 value={this.state.alkphos}
@@ -171,6 +180,7 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                             <TextInput
                                 keyboardType="numeric"
                                 label="INR"
+                                mode="outlined"
                                 onChangeText={(text) => {this.setState({inr: text})}}
                                 style={styles.inputForm}
                                 value={this.state.inr}
@@ -181,9 +191,14 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                                 validationMessage={invalidDateMessage}
                             />
                         </View>
-                        { this.state.isSubmitting 
-                            ? <ActivityIndicator color="black"/> 
-                            : <Button title="Submit" onPress={this.submit} color="black" /> }
+                        <Button onPress={this.submit}
+                            disabled={this.state.isSubmitting}
+                            loading={this.state.isSubmitting}
+                            mode="contained"
+                            style={styles.button}
+                        >
+                            <Text>Submit</Text>
+                        </Button>
                 </KeyboardAvoidingView>
             </ScrollView>
             </View>

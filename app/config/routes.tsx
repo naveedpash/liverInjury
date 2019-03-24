@@ -1,6 +1,6 @@
 import {
     createAppContainer,
-    createStackNavigator } from "react-navigation";
+    createSwitchNavigator } from "react-navigation";
 import Loading from "../screens/auth/Loading";
 import Login from "../screens/auth/Login";
 import SignUp from "../screens/auth/SignUp";
@@ -9,7 +9,7 @@ import FollowUp from "../screens/FollowUp";
 import Main from "../screens/Main";
 import Mortality from "../screens/Mortality";
 
-const auth = createStackNavigator({
+const auth = createSwitchNavigator({
     Loading: {
         screen: Loading,
     },
@@ -20,10 +20,10 @@ const auth = createStackNavigator({
         screen: SignUp,
     },
     main: {
-        screen: createStackNavigator({
-            main: {
-                screen: Main,
-            },
+        screen: Main,
+    },
+    entry: {
+        screen: createSwitchNavigator({
             entry: {
                 screen: EntryForm,
             },
@@ -33,12 +33,8 @@ const auth = createStackNavigator({
             mortality: {
                 screen: Mortality,
             },
-        }, {
-            headerMode: "none",
         }),
     },
-}, {
-    headerMode: "none",
 });
 
 export default createAppContainer(auth);

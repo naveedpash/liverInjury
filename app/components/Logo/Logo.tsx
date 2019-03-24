@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Image, ImageBackground, Text, View } from "react-native";
+import { Image, ImageBackground, View } from "react-native";
+import { Card, Subheading, Surface, Text } from "react-native-paper";
 // Images
 import Splash from "./images/background.jpg";
-import Icon from "./images/Logo.png";
+import Icon from "./images/finalLogo.png";
 // Styles
 import styles from "./styles";
 
@@ -12,12 +13,12 @@ export interface ILogoProps {
 
 const Logo: React.SFC<ILogoProps> = (props: ILogoProps = {portrait: true}) => {
     return (
-        <View style={props.portrait ? styles.containerPortrait : styles.container}>
+        <Surface style={props.portrait ? styles.containerPortrait : styles.container}>
             <Image resizeMode="contain" style={props.portrait ? styles.imagePortrait : styles.image} source={Icon} />
-            <Text style={props.portrait ? styles.textPortrait : styles.text}>
-                Karachi Registry for{"\n"}Drug Induced Liver Injury
-            </Text>
-        </View>
+            <Subheading style={props.portrait ? styles.textPortrait : styles.text}>
+                Registry for{"\n"}Drug Induced Liver Injury
+            </Subheading>
+        </Surface>
     );
 };
 

@@ -8,11 +8,11 @@ import Navigation from "./config/routes";
 const theme = {
     ...DefaultTheme,
     colors: {
-        primary: colors.darkorange,
-        accent: colors.yellow,
-        background: colors.yellow,
-        surface: colors.green,
-        text: colors.green,
+        primary: colors.green,
+        accent: colors.lightorange,
+        background: colors.white,
+        surface: colors.yellow,
+        text: "black",
         disabled: colors.grey,
         backdrop: colors.green,
     },

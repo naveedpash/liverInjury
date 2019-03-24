@@ -2,7 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import moment from "moment";
 import * as React from "react";
 import { Alert, TouchableOpacity, View } from "react-native";
-import { Button, Text, TouchableRipple } from "react-native-paper";
+import { Button, FAB, Text, TouchableRipple } from "react-native-paper";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import { validateDate } from "../../config/validation";
 // styles
@@ -32,11 +32,7 @@ class DateEntry extends React.Component<IDateEntryProps, IDateEntryState> {
         return (
             <View style={styles.container}>
                 <TouchableRipple onPress={this.showDateTimePicker}>
-                    <Button mode="outlined"
-                        style={{height: 52}}
-                        icon={() => <FontAwesome name="calendar" color="black" />}>
-                        <Text>{this.state.date}</Text>
-                    </Button>
+                    <FAB icon="date-range" label={this.state.date} />
                 </TouchableRipple>
                 <DateTimePicker
                     isVisible={this.state.isDateTimePickerVisible}

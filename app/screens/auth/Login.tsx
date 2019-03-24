@@ -1,8 +1,8 @@
-import * as Expo from "expo";
 import * as firebase from "firebase";
 import * as React from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
+import { Alert, StyleSheet, View } from "react-native";
+import { Button, Divider, Headline, HelperText, Text, TextInput } from "react-native-paper";
+import { NavigationScreenProp } from "react-navigation";
 import { Loading } from "../../components/Loading";
 import { Logo } from "../../components/Logo";
 import { validateEmail } from "../../config/validation";
@@ -34,40 +34,50 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
     public render() {
         return (
             <View style={styles.container}>
-                <Loading isLoading={this.state.isSubmitting} />
                 <Logo portrait={true} />
-                <View style={{backgroundColor: "black", flex: 0.02}} />
+                <Divider style={{backgroundColor: "black", flex: 0.02}} />
                 <View style={styles.containerForm}>
-                    <Text style={styles.heading}>Login</Text>
+                    <Headline>Login</Headline>
                     <View style={styles.wrapperForm}>
                         <TextInput
-                            style={styles.inputForm}
+                            label="Email"
+                            style={styles.input}
                             autoCapitalize="none"
-                            placeholder="Email"
                             onChangeText={( email ) => this.setState({ email })}
+                            mode="outlined"
                             value={this.state.email}
                         />
                     </View>
                     <View style={styles.wrapperForm}>
                         <TextInput
-                            style={styles.inputForm}
+                            label="Password"
+                            style={styles.input}
                             secureTextEntry
                             autoCapitalize="none"
-                            placeholder="Password"
                             onChangeText={( password ) => this.setState({ password })}
+                            mode="outlined"
                             value={this.state.password}
                         />
                     </View>
                     <View style={styles.button}>
-                        <Button title="Login"
-                            color="black"
-                            onPress={this.handleLogin} />
+                        <Button 
+                            disabled={this.state.isSubmitting}
+                            loading={this.state.isSubmitting}
+                            mode="contained"
+                            onPress={this.handleLogin}>
+                            <Text>Login</Text>
+                        </Button>
                     </View>
+                    <Divider style={{marginVertical: 10}} />
+                    <HelperText>Don't have an account?</HelperText>
                     <View style={styles.button}>
                         <Button
-                            title="Don't have an account? Create one"
-                            color="black"
-                            onPress={() => this.props.navigation.navigate("SignUp")} />
+                            disabled={this.state.isSubmitting}
+                            loading={this.state.isSubmitting}
+                            mode="contained"
+                            onPress={() => this.props.navigation.navigate("SignUp")}>
+                            <Text>Create an account</Text>
+                        </Button>
                     </View>
                 </View>
             </View>

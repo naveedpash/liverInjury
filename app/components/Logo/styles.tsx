@@ -1,13 +1,15 @@
 import { StatusBar, StyleSheet } from "react-native";
+import colors from "../../config/colors";
 
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
-        backgroundColor: "#910505",
+        elevation: 20,
         flex: 1,
         flexDirection: "row",
         justifyContent: "center",
-        paddingHorizontal: 5,
+        margin: 10,
+        padding: 5,
     },
     image: {
         flex: 1,
@@ -17,16 +19,12 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         fontSize: 20,
         letterSpacing: -0.5,
-        color: "#FFFFFF",
+        color: colors.green,
         textAlign: "center",
         textAlignVertical: "center",
-        textShadowColor: "black",
-        textShadowOffset: {width: 3, height: 3},
-        textShadowRadius: 1,
     },
     containerPortrait: {
         alignItems: "center",
-        backgroundColor: "#910505",
         flex: 1.5,
         flexDirection: "column",
         paddingTop: StatusBar.currentHeight! + 10,
@@ -39,12 +37,9 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         fontSize: 20,
         letterSpacing: -0.5,
-        color: "#FFFFFF",
+        color: colors.green,
         textAlign: "center",
         textAlignVertical: "center",
-        textShadowColor: "black",
-        textShadowOffset: {width: 3, height: 3},
-        textShadowRadius: 1,
     },
 });
 

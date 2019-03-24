@@ -4,10 +4,9 @@ import {
     ActivityIndicator,
     Alert,
     AsyncStorage,
-    Button,
     View } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
-import { Text, TextInput } from "react-native-paper";
+import { Appbar, Button, Paragraph, Surface, Text, TextInput } from "react-native-paper";
 import { NavigationActions, NavigationScreenProp, StackActions } from "react-navigation";
 import { DateEntry } from "../components/DateEntry";
 import { handleData, listenStatus } from "../config/dataHandler";
@@ -29,23 +28,6 @@ export interface IMortalityScreenState {
 }
 
 export default class Mortality extends React.Component<IMortalityScreenProp, IMortalityScreenState> {
-    public static navigationOptions = {
-        title: "Register Mortality",
-        headerStyle: {
-            backgroundColor: "#910505",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-            alignSelf: "center",
-            color: "#ffffff",
-            flex: 1,
-            fontSize: 18,
-            fontWeight: "300",
-            paddingBottom: 10,
-            textAlign: "left",
-        },
-    };
-
     private constructor(props: IMortalityScreenProp) {
         super(props);
         this.state = {
@@ -57,15 +39,24 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
 
     public render() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.helpText}>
-                Please enter the National ID Card number of the patient suspected to have deceased
-                from drug induced liver injury
-            </Text>
+        <View>
+            <Appbar.Header>
+                <Appbar.BackAction onPress={() => this.props.navigation.navigate("main")} />
+                <Appbar.Content title="Register Mortality" />
+            </Appbar.Header>
+            <Paragraph style={{textAlign: "center"}}>
+                Please enter the National ID Card number and date of death of the patient
+                suspected to have deceased from drug induced liver injury
+            </Paragraph>
             {/* TODO: implement fuzzy search */}
             <View style={styles.wrapperForm}>
-                <Text style={styles.label}>MR Number</Text>
                 <TextInputMask 
+                    customTextInput={TextInput}
+                    customTextInputProps={{
+                        label: "MR Number",
+                        mode: "outlined",
+                        style: styles.inputForm,
+                    }}
                     keyboardType="numeric"
                     onChangeText={(text) => {this.setState({nic: text})}}
                     options={{mask: "999-99-99"}}
@@ -73,20 +64,20 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
                     type="custom"
                     value={this.state.nic}
                 />
-            </View>
-            <View style={styles.wrapperForm}>
-                <Text style={styles.label}>Date of Death</Text>
                 <DateEntry
                     dateHandler={(date) => this.setState({mortalityDate: date.format("YYYY-MM-DD")})}
                     validateAgainst={validateAgainst}
                     validationMessage={invalidDateMessage}
                 />
             </View>
-            <View style={styles.button}>
-                { this.state.isSubmitting 
-                    ? <ActivityIndicator color="black"/> 
-                    : <Button onPress={this.submit} color="black" title="Save" /> }
-            </View>
+            <Button onPress={this.submit}
+                disabled={this.state.isSubmitting}
+                loading={this.state.isSubmitting}
+                mode="contained"
+                style={styles.button}
+            >
+                <Text>Submit</Text>
+            </Button>
         </View>
     );
     }

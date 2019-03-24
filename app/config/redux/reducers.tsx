@@ -29,13 +29,13 @@ export const initialPatient: newpatient = {
     , altDate: ""
     , alkphos: ""
     , alkphosDate: ""
-    , antihavigm: ""
+    , antihavigm: "unavailable"
     , antihavigmDate: ""
-    , antihevigm: ""
+    , antihevigm: "unavailable"
     , antihevigmDate: ""
-    , hbsag: ""
+    , hbsag: "unavailable"
     , hbsagDate: ""
-    , antihcvigm: ""
+    , antihcvigm: "unavailable"
     , antihcvigmDate: ""
 }
 

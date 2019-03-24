@@ -13,24 +13,9 @@ const styles = StyleSheet.create({
     //  Subtle border between fields in same section
     //  Accordion border between sections
     button: {
-        marginTop: 20,
-    },
-    buttonText: {
-        color: "#ffffff",
-        fontSize: 15,
-        fontWeight: "500",
-        height: INPUT_HEIGHT,
-        justifyContent: "center",
-        letterSpacing: -0.5,
-        textAlign: "center",
-        textShadowColor: "black",
-        textShadowOffset: {width: 5, height: 5},
-        textShadowRadius: 5,
+        margin: 20,
     },
     container: {
-        alignItems: "stretch",
-        backgroundColor: "#31aa80",
-        height: "100%",
         padding: 15,
     },
     heading: {
@@ -42,26 +27,15 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     helpText: {
-        color: "black",
-        fontSize: 14,
-        fontWeight: "400",
-        justifyContent: "center",
-        letterSpacing: -0.5,
         textAlign: "center",
-        marginBottom: 20,
     },
     input: {
-        color: "#910505",
         flex: 1,
-        fontSize: 16,
-        height: INPUT_HEIGHT,
         textAlign: "right",
     },
     inputText: {
-        color: "#910505",
         flex: 1,
-        fontSize: 16,
-        height: INPUT_HEIGHT,
+        height: INPUT_HEIGHT * 2,
     },
     inputForm: {
         alignSelf: "baseline",
@@ -98,13 +72,13 @@ const styles = StyleSheet.create({
         elevation: 15,
     },
     wrapper: {
-        alignContent: "space-around",
-        alignItems: "stretch",
+        alignItems: "center",
         justifyContent: "space-evenly",
         flexDirection: "row",
     },
     wrapperForm: {
-        alignContent: "stretch",
+        alignItems: "center",
+        justifyContent: "space-between",
         flexDirection: "row",
     },
 });

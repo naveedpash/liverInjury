@@ -5,7 +5,7 @@ export const validateNIC = (value: string): boolean => {
 }
 
 export const validateDate = (date: moment.Moment, against: string): boolean => {
-    return date.isBefore(against);
+    return date.isAfter(new Date());
 }
 
 export const validateEmail = (value: string) => {

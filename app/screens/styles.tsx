@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StatusBar, StyleSheet } from "react-native";
 import colors from "../config/colors";
 
 const INPUT_HEIGHT: number = 48;
@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
     //  Subtle border between fields in same section
     //  Accordion border between sections
     button: {
-        marginTop: 20,
+        margin: 20,
+        padding: 5,
     },
     buttonText: {
         color: "#ffffff",
@@ -33,13 +34,17 @@ const styles = StyleSheet.create({
         textShadowRadius: 5,
     },
     container: {
-        backgroundColor: colors.white,
         flexDirection: "column",
         height: "100%",
+        marginTop: StatusBar.currentHeight,
+        paddingTop: 5,
     },
     containerMenu: {
         flex: 3,
-        padding: 15,
+        paddingHorizontal: 15,
+        paddingVertical: TOUCHABLE_HEIGHT * 2,
+        alignSelf: "center",
+        justifyContent: "space-around",
     },
     heading: {
         color: colors.darkorange,
@@ -58,10 +63,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     input: {
-        color: "#910505",
-        flex: 0.5,
-        fontSize: 16,
-        height: INPUT_HEIGHT,
+        marginHorizontal: 10,
         textAlign: "right",
     },
     inputForm: {

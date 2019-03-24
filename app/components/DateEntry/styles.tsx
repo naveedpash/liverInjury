@@ -8,6 +8,7 @@ export default StyleSheet.create({
 //      flex: 0.5,
         alignContent: "space-between",
         justifyContent: "center",
+        paddingLeft: 5,
     },
     text: {
         marginRight: 1,

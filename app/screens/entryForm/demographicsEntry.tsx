@@ -1,22 +1,21 @@
 import firebase from "firebase";
 import moment from "moment";
 import * as React from "react";
-import { Picker, ScrollView, Text, TextInput, View } from "react-native";
+import { Picker, ScrollView, View } from "react-native";
+import { Card, HelperText, RadioButton, Text, TextInput, Title } from "react-native-paper";
 import { TextInputMask } from "react-native-masked-text";
-import { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { demographics, newpatient } from "../../config/redux/types";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
 // styles
 import styles from "./styles";
+// colors
+import colors from "../../config/colors";
 
 const today: Date = new Date();
 
-// TODO: Add border between each entry element
-
 export interface IEntryScreenProps {
-    navigation: NavigationScreenProp<any, any>;
     dispatch: Dispatch<patientAction>;
     nic: string;
     name: string;
@@ -28,13 +27,6 @@ export interface IEntryScreenProps {
 class Entry extends React.Component<IEntryScreenProps, demographics> {
     constructor(props: IEntryScreenProps) {
         super(props);
-        this.state = {
-            nic: initialPatient.nic,
-            name: initialPatient.name,
-            age: initialPatient.age,
-            gender: initialPatient.gender,
-            consent: initialPatient.consent
-        };
     }
 
     public render() {
@@ -43,81 +35,97 @@ class Entry extends React.Component<IEntryScreenProps, demographics> {
             <View style={styles.container}>
             {/* Patient Demographics */}
                 <ScrollView>
-                    <View>
-                        <Text style={styles.helpText}>{moment(today).format("DD/MM/YYYY")}</Text>
-                    </View>
-                    <View style={styles.wrapper}>
-                        {/* TODO: Automatically pull entrant name from stored ID */}
-                        <Text style={styles.label}>Entrant</Text>
-                        <Text style={styles.input}>{user!.email}</Text>
-                    </View>
-                    <View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>MR Number</Text>
-                        <TextInputMask 
-                            keyboardType="numeric"
-                            onChangeText={text => this.props.dispatch({type: "SAVE_NIC", payload: text})}
-                            options={{mask: "999-99-99"}}
-                            style={styles.input}
-                            type="custom"
-                            value={this.props.nic}
-                        />
-                    </View>
-                        <Text style={styles.helpText}>Enter the National ID Card number of the patient</Text>
-                    </View>
-                    <View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>Name</Text>
-                        <TextInput style={styles.input}
-                            onChangeText={text => this.props.dispatch({type: "SAVE_NAME", payload: text})}
-                            value={this.props.name}
-                        />
-                    </View>
-                        <Text style={styles.helpText}>Name of the Patient</Text>
-                    </View>
-                    <View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>Age</Text>
-                        <TextInput style={styles.input}
-                            keyboardType="numeric"
-                            onChangeText={text => this.props.dispatch({type: "SAVE_AGE", payload: text})}
-                            value={this.props.age}
-                        />
-                    </View>
-                        <Text style={styles.helpText}>Age of the Patient at the time of Registration</Text>
-                    </View>
-                    <View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>Gender</Text>
-                        <Picker style={styles.picker}
-                            onValueChange={(text) => {
-                                this.props.dispatch({type: "SAVE_GENDER", payload: text});
-                                }
-                            }
-                            selectedValue={this.props.gender}
-                        >
-                            <Picker.Item label="Male" value={"male"} />
-                            <Picker.Item label="Female" value={"female"} />
-                        </Picker>
-                    </View>
-                        <Text style={styles.helpText}>Gender of Patient</Text>
-                    </View>
-                    <View>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>Consent</Text>
-                        <Picker style={styles.picker}
-                            onValueChange={(text) => {
-                                this.props.dispatch({type: "SAVE_CONSENT", payload: text});
-                                }
-                            }
-                            selectedValue={this.props.consent}
-                        >
-                            <Picker.Item label="Yes" value={"yes"} />
-                            <Picker.Item label="No" value={"no"} />
-                        </Picker>
-                    </View>
-                        <Text style={styles.helpText}>Has the patient given consent to be registered?</Text>
-                    </View>
+                    <Card elevation={3}>
+                        <Card.Title title="Demographics" />
+                        <Card.Content>
+                        <View>
+                            <HelperText style={styles.helpText}>{moment(today).format("DD/MM/YYYY")}</HelperText>
+                        </View>
+                        <View style={styles.wrapper}>
+                                {/* TODO: Automatically pull entrant name from stored ID */}
+                                <Text>Entrant</Text>
+                                <Text>{user!.email}</Text>
+                        </View>
+                        <View>
+                            <TextInputMask 
+                                customTextInput={TextInput}
+                                customTextInputProps={{
+                                    label: "MR Number",
+                                    mode: "outlined",
+                                    style: styles.input,
+                                }}
+                                keyboardType="numeric"
+                                onChangeText={text => this.props.dispatch({type: "SAVE_NIC", payload: text})}
+                                options={{mask: "999-99-99"}}
+                                style={styles.inputText}
+                                type="custom"
+                                value={this.props.nic}
+                            />
+                            <HelperText style={styles.helpText}>Enter the National ID Card number of the patient</HelperText>
+                        </View>
+                        <View>
+                            <TextInput style={styles.input}
+                                label="Name"
+                                mode="outlined"
+                                onChangeText={text => this.props.dispatch({type: "SAVE_NAME", payload: text})}
+                                value={this.props.name}
+                            />
+                            <HelperText style={styles.helpText}>Name of the Patient</HelperText>
+                        </View>
+                        <View>
+                            <TextInput style={styles.input}
+                                label="Age"
+                                mode="outlined"
+                                keyboardType="numeric"
+                                onChangeText={text => this.props.dispatch({type: "SAVE_AGE", payload: text})}
+                                value={this.props.age}
+                            />
+                            <HelperText style={styles.helpText}>Age of the Patient at the time of Registration</HelperText>
+                        </View>
+                        <View>
+                            <View style={styles.wrapper}>
+                                <Text>Gender</Text>
+                                <RadioButton.Group 
+                                    onValueChange={(text) => {
+                                        this.props.dispatch({type: "SAVE_GENDER", payload: text});
+                                    }}
+                                    value={this.props.gender}
+                                >
+                                    <View>
+                                        <Text>Male</Text>
+                                        <RadioButton color={colors.darkorange} value={"male"} />
+                                    </View>
+                                    <View>
+                                        <Text>Female</Text>
+                                        <RadioButton color={colors.darkorange} value={"female"} />
+                                    </View>
+                                </RadioButton.Group>
+                            </View>
+                            <HelperText style={styles.helpText}>Gender of the Patient</HelperText>
+                        </View>
+                        <View>
+                            <View style={styles.wrapper}>
+                                <Text>Consent</Text>
+                                <RadioButton.Group
+                                    onValueChange={(text) => {
+                                        this.props.dispatch({type: "SAVE_CONSENT", payload: text});
+                                    }}
+                                    value={this.props.consent}
+                                >
+                                    <View>
+                                        <Text>Yes</Text>
+                                        <RadioButton color={colors.darkorange} value="yes" />
+                                    </View>
+                                    <View>
+                                        <Text>Yes</Text>
+                                        <RadioButton color={colors.darkorange} value="no" />
+                                    </View>
+                                </RadioButton.Group>
+                            </View>
+                            <HelperText style={styles.helpText}>Has the patient given consent to be registered?</HelperText>
+                        </View>
+                        </Card.Content>
+                    </Card>
                 </ScrollView>
             </View>
         );

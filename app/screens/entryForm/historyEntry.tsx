@@ -1,15 +1,16 @@
 import * as React from "react";
-import { Button, Picker, ScrollView, Text, TextInput, View } from "react-native";
-import { NavigationScreenProp, NavigationEvents } from "react-navigation";
+import { Button, Picker, ScrollView, View } from "react-native";
+import { Card, HelperText, RadioButton, Text, TextInput } from "react-native-paper";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { history, newpatient } from "../../config/redux/types";
 import { patientAction, initialPatient } from "../../config/redux/reducers";
 // styles
 import styles from "./styles";
+// colors
+import colors from "../../config/colors";
 
 export interface IHistoryScreenProps {
-    navigation: NavigationScreenProp<any, any>;
     dispatch: Dispatch<patientAction>;
     jaundice: "yes" | "no";
     pain: "yes" | "no";
@@ -19,58 +20,76 @@ export interface IHistoryScreenProps {
 class HistoryEntry extends React.Component<IHistoryScreenProps, history> {
     constructor(props: IHistoryScreenProps) {
         super(props);
-        this.state = {
-            jaundice: initialPatient.jaundice,
-            pain: initialPatient.pain,
-            pruritis: initialPatient.pruritis,
-        };
     }
 
     public render() {
     {/* Patient History */ }
     return (
             <View style={styles.container}>
-                <ScrollView>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>Jaundice</Text>
-                        <Picker style={styles.picker}
-                            onValueChange={(value) => {
-                                this.props.dispatch({type: "SAVE_JAUNDICE", payload: value});
-                            }}
-                            selectedValue={this.props.jaundice}
-                        >
-                            <Picker.Item label="No" value={"no"}/>
-                            <Picker.Item label="Yes" value={"yes"}/>
-                        </Picker>
-                    </View>
-                    <Text style={styles.helpText}>Is the patient complaining of jaundice on initial presentation?</Text>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>Abdominal Pain</Text>
-                        <Picker style={styles.picker}
-                            onValueChange={(value) => {
-                                this.props.dispatch({type: "SAVE_PAIN", payload: value});
-                            }}
-                            selectedValue={this.props.pain}
-                        >
-                            <Picker.Item label="No" value={"no"}/>
-                            <Picker.Item label="Yes" value={"yes"}/>
-                        </Picker>
-                    </View>
-                    <Text style={styles.helpText}>Is the patient complain of abdominal pain on initial presentation?</Text>
-                    <View style={styles.wrapper}>
-                        <Text style={styles.label}>Pruritis</Text>
-                        <Picker style={styles.picker}
-                            onValueChange={(value) => {
-                                this.props.dispatch({type: "SAVE_PRURITIS", payload: value});
-                            }}
-                            selectedValue={this.props.pruritis}
-                        >
-                            <Picker.Item label="No" value={"no"}/>
-                            <Picker.Item label="Yes" value={"yes"}/>
-                        </Picker>
-                    </View>
-                    <Text style={styles.helpText}>Is the patient complain of pruritis on initial presentation?</Text>
-                </ScrollView>
+                <Card elevation={3}>
+                    <Card.Title title="Patient History" />
+                    <Card.Content>
+                        <ScrollView>
+                            <Text style={{alignSelf: "center"}}>Jaundice</Text>
+                            <View style={styles.wrapper}>
+                                <RadioButton.Group
+                                    onValueChange={(value) => {
+                                        this.props.dispatch({type: "SAVE_JAUNDICE", payload: value});
+                                    }}
+                                    value={this.props.jaundice}
+                                >
+                                    <View>
+                                        <Text>No</Text>
+                                        <RadioButton color={colors.darkorange} value={"no"}/>
+                                    </View>
+                                    <View>
+                                        <Text>Yes</Text>
+                                        <RadioButton color={colors.darkorange} value={"yes"}/>
+                                    </View>
+                                </RadioButton.Group>
+                            </View>
+                            <HelperText style={styles.helpText}>Is the patient complaining of jaundice on initial presentation?</HelperText>
+                            <Text style={{alignSelf: "center"}}>Abdominal Pain</Text>
+                            <View style={styles.wrapper}>
+                                <RadioButton.Group
+                                    onValueChange={(value) => {
+                                        this.props.dispatch({type: "SAVE_PAIN", payload: value});
+                                    }}
+                                    value={this.props.pain}
+                                >
+                                    <View>
+                                        <Text>No</Text>
+                                        <RadioButton color={colors.darkorange} value={"no"}/>
+                                    </View>
+                                    <View>
+                                        <Text>Yes</Text>
+                                        <RadioButton color={colors.darkorange} value={"yes"}/>
+                                    </View>
+                                </RadioButton.Group>
+                            </View>
+                            <HelperText style={styles.helpText}>Is the patient complain of abdominal pain on initial presentation?</HelperText>
+                            <Text style={{alignSelf: "center"}}>Pruritis</Text>
+                            <View style={styles.wrapper}>
+                                <RadioButton.Group
+                                    onValueChange={(value) => {
+                                        this.props.dispatch({type: "SAVE_PRURITIS", payload: value});
+                                    }}
+                                    value={this.props.pruritis}
+                                >
+                                    <View>
+                                        <Text>No</Text>
+                                        <RadioButton color={colors.darkorange} value={"no"}/>
+                                    </View>
+                                    <View>
+                                        <Text>Yes</Text>
+                                        <RadioButton color={colors.darkorange} value={"yes"}/>
+                                    </View>
+                                </RadioButton.Group>
+                            </View>
+                            <HelperText style={styles.helpText}>Is the patient complain of pruritis on initial presentation?</HelperText>
+                        </ScrollView>
+                    </Card.Content>
+                </Card>
             </View>
         );
     }
