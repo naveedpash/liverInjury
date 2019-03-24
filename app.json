@@ -23,7 +23,6 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
       "bundleIdentifier": "org.dilipk.akuh"
     },
     "android": {
