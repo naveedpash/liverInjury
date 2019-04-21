@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import * as React from "react";
+import * as Animatable from "react-native-animatable";
 import { Divider, FAB, Headline, Surface, TouchableRipple, Text as Txt } from "react-native-paper";
 import { AsyncStorage, NetInfo, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
@@ -42,7 +43,7 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
 
     public render() {
         return (
-            <View style={styles.container}>
+            <Animatable.View animation="fadeIn" easing="linear" duration={250} useNativeDriver={true} style={styles.container}>
                 <Logo portrait={false} />
                 <View style={styles.containerMenu}>
                     <Headline style={{alignSelf: "center"}}>What would you like to do?</Headline>
@@ -63,7 +64,7 @@ export default class HomeScreen extends React.Component<IHomeScreenProps, any> {
                             onPress={this.handleSignOut} />
                     </TouchableRipple>
                 </View>
-            </View>
+            </Animatable.View>
         );
     }
 

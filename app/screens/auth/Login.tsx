@@ -1,5 +1,6 @@
 import * as firebase from "firebase";
 import * as React from "react";
+import * as Animatable from "react-native-animatable";
 import { Alert, StyleSheet, View } from "react-native";
 import { Button, Divider, Headline, HelperText, Text, TextInput } from "react-native-paper";
 import { NavigationScreenProp } from "react-navigation";
@@ -31,9 +32,18 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
         };
     }
 
+    private AnimationRef: any;
+
     public render() {
         return (
-            <View style={styles.container}>
+            <Animatable.View
+                animation="fadeInRight"
+                duration={250}
+                easing="linear"
+                ref={ref => {this.AnimationRef = ref}}
+                style={styles.container}
+                useNativeDriver={true}
+            >
                 <Logo portrait={true} />
                 <Divider style={{backgroundColor: "black", flex: 0.02}} />
                 <View style={styles.containerForm}>
@@ -75,12 +85,15 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
                             disabled={this.state.isSubmitting}
                             loading={this.state.isSubmitting}
                             mode="contained"
-                            onPress={() => this.props.navigation.navigate("SignUp")}>
+                            onPress={() => {
+                                this.AnimationRef.fadeOutRight();
+                                this.props.navigation.navigate("SignUp");
+                            }}>
                             <Text>Create an account</Text>
                         </Button>
                     </View>
                 </View>
-            </View>
+            </Animatable.View>
         );
     }
 
@@ -98,6 +111,7 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
             )
             .then(() => {
                 this.setState({isSubmitting: false});
+                this.AnimationRef.fadeOutRight();
                 this.props.navigation.navigate("main");
             })
             .catch((error: Error) => {

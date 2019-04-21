@@ -3,6 +3,7 @@ import { ActivityIndicator,
     KeyboardAvoidingView,
     ScrollView,
     View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Card, Divider, HelperText, RadioButton, Text, TextInput } from "react-native-paper";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -53,31 +54,31 @@ class LabsEntry extends React.Component<ILabScreenProps, ILabsScreenState> {
     public render() {
     {/* Laboratory Tests */}
     return (
-        <ScrollView>
-            <View style={styles.container}>
-            <Card elevation={3}>
+        <View>
+            <Card elevation={3} style={styles.container}>
                 <Card.Title title="Lab Tests" />
                 <Card.Content>
-                        <HelperText style={styles.helpText}>Please enter the results of the following laboratory tests done on initial presentation</HelperText>
+                    <HelperText style={styles.helpText}>Please enter the results of the following laboratory tests done on initial presentation</HelperText>
+                    <KeyboardAwareScrollView style={{maxHeight: "70%"}}>
                         <View>
                             <View style={styles.wrapperForm}>
                                 <TextInput style={styles.input}
-                                    keyboardType="numeric"
-                                    label="Bilirubin (U/L)"
-                                    mode="outlined"
-                                    onChangeText={ (value) => {
-                                        this.props.dispatch({type: "SAVE_BILIRUBIN", payload: value});
-                                    }}
-                                    value={this.props.bilirubin}
-                                />
-                                <DateEntry
-                                    dateHandler={(date) => {
-                                        this.props.dispatch({type: "SAVE_BILIRUBINDATE", payload: date.format("YYYY-MM-DD")});
-                                    }}
-                                    validateAgainst={validateAgainst}
-                                    validationMessage={invalidDateMessage}
-                                />
-                            </View>
+                                keyboardType="numeric"
+                                label="Bilirubin (U/L)"
+                                mode="outlined"
+                                onChangeText={ (value) => {
+                                    this.props.dispatch({type: "SAVE_BILIRUBIN", payload: value});
+                                }}
+                                value={this.props.bilirubin}
+                            />
+                            <DateEntry
+                                dateHandler={(date) => {
+                                    this.props.dispatch({type: "SAVE_BILIRUBINDATE", payload: date.format("YYYY-MM-DD")});
+                                }}
+                                validateAgainst={validateAgainst}
+                                validationMessage={invalidDateMessage}
+                            />
+                        </View>
                         </View>
                         <View style={styles.wrapperForm}>
                             <TextInput style={styles.input}
@@ -116,84 +117,84 @@ class LabsEntry extends React.Component<ILabScreenProps, ILabsScreenState> {
                             />
                         </View>
                         <View style={styles.wrapperForm}>
-                            <TextInput style={styles.input}
-                                keyboardType="numeric"
-                                label="Alkaline Phosphatase (mg/dL)"
-                                mode="outlined"
-                                onChangeText={ (value) => {
-                                    this.props.dispatch({type: "SAVE_ALKPHOS", payload: value});
-                                }}
-                                value={this.props.alkphos}
-                            />
-                            <DateEntry
-                                dateHandler={(date) => {
-                                    this.props.dispatch({type: "SAVE_ALKPHOSDATE", payload: date.format("YYYY-MM-DD")});
-                                }}
-                                validateAgainst={validateAgainst}
-                                validationMessage={invalidDateMessage}
-                            />
-                        </View>
-                        <Divider style={{marginVertical: 10}} />
-                        <View style={styles.wrapperForm}>
-                            <Text>Anti-HAV IgM</Text>
-                            <DateEntry
-                                dateHandler={(date) => {
-                                    this.props.dispatch({type: "SAVE_ANTIHAVIGMDATE", payload: date.format("YYYY-MM-DD")});
-                                }}
-                                validateAgainst={validateAgainst}
-                                validationMessage={invalidDateMessage}
-                            />
-                        </View>
-                        <View style={styles.wrapper}>
-                            <RadioButton.Group style={styles.picker}
-                                onValueChange={(text) => {
-                                    this.props.dispatch({type: "SAVE_ANTIHAVIGM", payload: text});
-                                }}
-                                value={this.props.antihavigm}
-                            >
-                                <View>
-                                    <Text>Unavailable</Text>
-                                    <RadioButton color={colors.darkorange} value={"unavailable"} />
-                                </View>
-                                <View>
-                                    <Text>Non-Reactive</Text>
-                                    <RadioButton color={colors.darkorange} value={"nonreactive"} />
-                                </View>
-                                <View>
-                                    <Text>Reactive</Text>
-                                    <RadioButton color={colors.darkorange} value={"reactive"} />
-                                </View>
-                            </RadioButton.Group>
-                        </View>
-                        <Divider style={{marginVertical: 10}} />
-                        <View style={styles.wrapperForm}>
-                            <Text>Anti-HEV IgM</Text>
-                            <DateEntry
-                                dateHandler={(date) => {
-                                    this.props.dispatch({type: "SAVE_ANTIHEVIGMDATE", payload: date.format("YYYY-MM-DD")});
-                                }}
-                                validateAgainst={validateAgainst}
-                                validationMessage={invalidDateMessage}
-                            />
-                        </View>
-                        <View style={styles.wrapper}>
-                            <RadioButton.Group
-                                onValueChange={(text) => {
-                                    this.props.dispatch({type: "SAVE_ANTIHEVIGM", payload: text});
-                                }}
-                                value={this.props.antihevigm}
-                            >
-                                <View>
-                                    <Text>Unavailable</Text>
-                                    <RadioButton color={colors.darkorange} value={"unavailable"} />
-                                </View>
-                                <View>
-                                    <Text>Non-Reactive</Text>
-                                    <RadioButton color={colors.darkorange} value={"nonreactive"} />
-                                </View>
-                                <View>
-                                    <Text>Reactive</Text>
-                                    <RadioButton color={colors.darkorange} value={"reactive"} />
+                        <TextInput style={styles.input}
+                            keyboardType="numeric"
+                            label="Alkaline Phosphatase (mg/dL)"
+                            mode="outlined"
+                            onChangeText={ (value) => {
+                                this.props.dispatch({type: "SAVE_ALKPHOS", payload: value});
+                            }}
+                            value={this.props.alkphos}
+                        />
+                        <DateEntry
+                            dateHandler={(date) => {
+                                this.props.dispatch({type: "SAVE_ALKPHOSDATE", payload: date.format("YYYY-MM-DD")});
+                            }}
+                            validateAgainst={validateAgainst}
+                            validationMessage={invalidDateMessage}
+                        />
+                    </View>
+                    <Divider style={{marginVertical: 10}} />
+                    <View style={styles.wrapperForm}>
+                        <Text>Anti-HAV IgM</Text>
+                        <DateEntry
+                            dateHandler={(date) => {
+                                this.props.dispatch({type: "SAVE_ANTIHAVIGMDATE", payload: date.format("YYYY-MM-DD")});
+                            }}
+                            validateAgainst={validateAgainst}
+                            validationMessage={invalidDateMessage}
+                        />
+                    </View>
+                    <View style={styles.wrapper}>
+                        <RadioButton.Group style={styles.picker}
+                            onValueChange={(text) => {
+                                this.props.dispatch({type: "SAVE_ANTIHAVIGM", payload: text});
+                            }}
+                            value={this.props.antihavigm}
+                        >
+                            <View>
+                                <Text>Unavailable</Text>
+                                <RadioButton color={colors.darkorange} value={"unavailable"} />
+                            </View>
+                            <View>
+                                <Text>Non-Reactive</Text>
+                                <RadioButton color={colors.darkorange} value={"nonreactive"} />
+                            </View>
+                            <View>
+                                <Text>Reactive</Text>
+                                <RadioButton color={colors.darkorange} value={"reactive"} />
+                            </View>
+                        </RadioButton.Group>
+                    </View>
+                    <Divider style={{marginVertical: 10}} />
+                    <View style={styles.wrapperForm}>
+                        <Text>Anti-HEV IgM</Text>
+                        <DateEntry
+                            dateHandler={(date) => {
+                                this.props.dispatch({type: "SAVE_ANTIHEVIGMDATE", payload: date.format("YYYY-MM-DD")});
+                            }}
+                            validateAgainst={validateAgainst}
+                            validationMessage={invalidDateMessage}
+                        />
+                    </View>
+                    <View style={styles.wrapper}>
+                        <RadioButton.Group
+                            onValueChange={(text) => {
+                                this.props.dispatch({type: "SAVE_ANTIHEVIGM", payload: text});
+                            }}
+                            value={this.props.antihevigm}
+                        >
+                            <View>
+                                <Text>Unavailable</Text>
+                                <RadioButton color={colors.darkorange} value={"unavailable"} />
+                            </View>
+                            <View>
+                                <Text>Non-Reactive</Text>
+                                <RadioButton color={colors.darkorange} value={"nonreactive"} />
+                            </View>
+                            <View>
+                                <Text>Reactive</Text>
+                                <RadioButton color={colors.darkorange} value={"reactive"} />
                                 </View>
                             </RadioButton.Group>
                         </View>
@@ -209,62 +210,62 @@ class LabsEntry extends React.Component<ILabScreenProps, ILabsScreenState> {
                             />
                         </View>
                         <View style={styles.wrapper}>
-                            <RadioButton.Group
-                                onValueChange={(text) => {
-                                    this.props.dispatch({type: "SAVE_HBSAG", payload: text});
-                                }}
-                                value={this.props.hbsag}
-                            >
-                                <View>
-                                    <Text>Unavailable</Text>
-                                    <RadioButton color={colors.darkorange} value={"unavailable"} />
-                                </View>
-                                <View>
-                                    <Text>Non-Reactive</Text>
-                                    <RadioButton color={colors.darkorange} value={"nonreactive"} />
-                                </View>
-                                <View>
-                                    <Text>Reactive</Text>
-                                    <RadioButton color={colors.darkorange} value={"reactive"} />
-                                </View>
+                        <RadioButton.Group
+                            onValueChange={(text) => {
+                                this.props.dispatch({type: "SAVE_HBSAG", payload: text});
+                            }}
+                            value={this.props.hbsag}
+                        >
+                        <View>
+                            <Text>Unavailable</Text>
+                            <RadioButton color={colors.darkorange} value={"unavailable"} />
+                            </View>
+                            <View>
+                                <Text>Non-Reactive</Text>
+                                <RadioButton color={colors.darkorange} value={"nonreactive"} />
+                            </View>
+                            <View>
+                                <Text>Reactive</Text>
+                                <RadioButton color={colors.darkorange} value={"reactive"} />
+                            </View>
                             </RadioButton.Group>
                         </View>
                         <Divider style={{marginVertical: 10}} />
                         <View style={styles.wrapperForm}>
                             <Text>Anti-HCV antibody</Text>
                             <DateEntry
-                                dateHandler={(date) => {
-                                    this.props.dispatch({type: "SAVE_ANTIHCVIGMDATE", payload: date.format("YYYY-MM-DD")});
-                                }}
-                                validateAgainst={validateAgainst}
-                                validationMessage={invalidDateMessage}
-                            />
-                        </View>
-                        <View style={styles.wrapper}>
-                            <RadioButton.Group
-                                onValueChange={(text) => {
-                                    this.props.dispatch({type: "SAVE_ANTIHCVIGM", payload: text});
-                                }}
-                                value={this.props.antihcvigm}
-                            >
-                                <View>
-                                    <Text>Unavailable</Text>
-                                    <RadioButton color={colors.darkorange} value={"unavailable"} />
-                                </View>
-                                <View>
-                                    <Text>Non-Reactive</Text>
-                                    <RadioButton color={colors.darkorange} value={"nonreactive"} />
+                            dateHandler={(date) => {
+                                this.props.dispatch({type: "SAVE_ANTIHCVIGMDATE", payload: date.format("YYYY-MM-DD")});
+                            }}
+                            validateAgainst={validateAgainst}
+                            validationMessage={invalidDateMessage}
+                        />
+                    </View>
+                    <View style={styles.wrapper}>
+                        <RadioButton.Group
+                            onValueChange={(text) => {
+                                this.props.dispatch({type: "SAVE_ANTIHCVIGM", payload: text});
+                            }}
+                            value={this.props.antihcvigm}
+                        >
+                            <View>
+                                <Text>Unavailable</Text>
+                                <RadioButton color={colors.darkorange} value={"unavailable"} />
+                            </View>
+                            <View>
+                                <Text>Non-Reactive</Text>
+                                <RadioButton color={colors.darkorange} value={"nonreactive"} />
                                 </View>
                                 <View>
                                     <Text>Reactive</Text>
                                     <RadioButton color={colors.darkorange} value={"reactive"} />
                                 </View>
                             </RadioButton.Group>
-                        </View>
-                </Card.Content>
-            </Card>
-        </View>
-    </ScrollView>
+                            </View>
+                        </KeyboardAwareScrollView>
+                    </Card.Content>
+                    </Card>
+                    </View>
     );
     }
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as Animatable from "react-native-animatable";
 import { View } from "react-native";
 import { ActivityIndicator, Divider, HelperText } from "react-native-paper";
 import { NavigationScreenProp } from "react-navigation";
@@ -28,7 +29,7 @@ export default class Loading extends React.Component<IAuthProps, any> {
 
     public render() {
         return (
-            <View style={styles.container}>
+            <Animatable.View animation="fadeIn" easing="linear" duration={250} useNativeDriver={true} style={styles.container}>
                 <Logo portrait={true} />
                 <Divider style={{backgroundColor: "black", flex: 0.02}} />
                 <View style={styles.containerForm}>
@@ -37,7 +38,7 @@ export default class Loading extends React.Component<IAuthProps, any> {
                         <ActivityIndicator color="grey" size="large" />
                     </View>
                 </View>
-            </View>
+            </Animatable.View>
         );
     }
 

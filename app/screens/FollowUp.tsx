@@ -2,13 +2,15 @@
 import firebase from "firebase";
 import moment from "moment";
 import * as React from "react";
+import * as Animatable from "react-native-animatable";
 import { ActivityIndicator,
     Alert,
     AsyncStorage,
-    KeyboardAvoidingView,
+    BackHandler,
     NetInfo,
     ScrollView,
     View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInputMask } from "react-native-masked-text";
 import { Appbar, Button, Paragraph, Surface, Text, TextInput } from "react-native-paper";
 import { NavigationScreenProp } from "react-navigation";
@@ -42,21 +44,6 @@ export interface IFollowUpState {
 }
 
 export default class FollowUp extends React.Component<IFollowUpProps, any> {
-    public static navigationOptions = {
-        title: 'Enter FollowUp LFTs',
-        headerStyle: {
-            backgroundColor: '#910505',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            color: "#ffffff",
-            flex: 1,
-            fontSize: 18,
-            fontWeight: "300",
-            textAlign: "left",
-        },
-    }
-
     private constructor(props: IFollowUpProps) {
         super(props);
         this.state = {
@@ -74,11 +61,24 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
             user: firebase.auth().currentUser,
             isSubmitting: false,
         };
+        this.handleBackPress = this.handleBackPress.bind(this);
+    }
+
+    public componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+    }
+    public componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress)
+    }
+
+    private handleBackPress() {
+        this.props.navigation.navigate("main");
+        return true;
     }
 
     public render() {
         return (
-            <View>
+            <Animatable.View animation="fadeIn" easing="linear" duration={250} useNativeDriver={true}>
                 <Appbar.Header>
                     <Appbar.BackAction onPress={() => this.props.navigation.navigate("main")} />
                     <Appbar.Content title="Enter FollowUp Labs" />
@@ -90,26 +90,27 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                     </Paragraph>
                 </View>
                 {/* TODO: implement fuzzy search */}
-                    <ScrollView keyboardShouldPersistTaps="always">
-                        <KeyboardAvoidingView behavior="padding">
-                        <View>
-                            <TextInputMask 
-                                customTextInput={TextInput}
-                                customTextInputProps={{
-                                    label: "MR Number",
-                                    mode: "outlined",
-                                }}
-                                keyboardType="numeric"
-                                onChangeText={(text) => {this.setState({nic: text})}}
-                                options={{mask: "999-99-99"}}
-                                style={styles.input}
-                                type="custom"
-                                value={this.state.nic}
-                            />
-                            <Text style={styles.helpText}>
-                                Enter the National ID Card Number of the Patient
-                            </Text>
-                        </View>
+                <KeyboardAwareScrollView
+                            extraHeight={90}
+                            extraScrollHeight={200}
+                            enableOnAndroid={true}
+                >
+                        <TextInputMask 
+                            customTextInput={TextInput}
+                            customTextInputProps={{
+                                label: "MR Number",
+                                mode: "outlined",
+                            }}
+                            keyboardType="numeric"
+                            onChangeText={(text) => {this.setState({nic: text})}}
+                            options={{mask: "999-99-99"}}
+                            style={styles.input}
+                            type="custom"
+                            value={this.state.nic}
+                        />
+                        <Text style={styles.helpText}>
+                            Enter the National ID Card Number of the Patient
+                        </Text>
                         <View style={styles.wrapper}>
                             <TextInput
                                 keyboardType="numeric"
@@ -185,17 +186,16 @@ export default class FollowUp extends React.Component<IFollowUpProps, any> {
                                 validationMessage={invalidDateMessage}
                             />
                         </View>
-                        <Button onPress={this.submit}
-                            disabled={this.state.isSubmitting}
-                            loading={this.state.isSubmitting}
-                            mode="contained"
-                            style={styles.button}
-                        >
-                            <Text>Submit</Text>
-                        </Button>
-                </KeyboardAvoidingView>
-            </ScrollView>
-            </View>
+                    <Button onPress={this.submit}
+                        disabled={this.state.isSubmitting}
+                        loading={this.state.isSubmitting}
+                        mode="contained"
+                        style={styles.button}
+                    >
+                        <Text>Submit</Text>
+                    </Button>
+                </KeyboardAwareScrollView>
+            </Animatable.View>
         );
     }
 

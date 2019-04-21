@@ -2,9 +2,10 @@
 import { omit } from "lodash";
 import firebase from "firebase";
 import * as React from "react";
+import * as Animatable from "react-native-animatable";
 import { Dispatch } from "redux";
 // for presentation
-import { ScrollView, View } from "react-native";
+import { BackHandler, ListView, ScrollView, View } from "react-native";
 import { Appbar, Button, Divider, HelperText, List, Text } from "react-native-paper";
 import { NavigationScreenProp } from "react-navigation";
 import DemographicsEntry from "./demographicsEntry";
@@ -32,40 +33,39 @@ export default class EntryForm extends React.Component<IEntryFormProps, IEntryFo
         super(props)
         this.state = { isSubmitting: false }
         this.save = this.save.bind(this);
+        this.handleBackPress = this.handleBackPress.bind(this);
+    }
+
+    public componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+    }
+    public componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress)
+    }
+
+    private handleBackPress() {
+        this.props.navigation.navigate("main");
+        return true;
     }
 
     public render() {
         return (
-            <View>
+            <Animatable.View animation="fadeIn" easing="linear" duration={250} useNativeDriver={true}>
                 <Appbar.Header>
                     <Appbar.BackAction onPress={() => this.props.navigation.navigate("main")} />
                     <Appbar.Content title="Register New Patient" />
                     <Appbar.Action accessibilityLabel="Save" disabled={this.state.isSubmitting} icon="save" onPress={this.save} />
                 </Appbar.Header>
-                <ScrollView>
-                    <List.Section>
-                        <List.Accordion title="Demographics">
-                            <DemographicsEntry />
-                        </List.Accordion>
-                        <Divider style={{marginVertical: 10}} />
-                        <List.Accordion title="DILI Episode">
-                            <DiliEntry />
-                        </List.Accordion>
-                        <Divider style={{marginVertical: 10}} />
-                        <List.Accordion title="Patient History">
-                            <HistoryEntry />
-                        </List.Accordion>
-                        <Divider style={{marginVertical: 10}} />
-                        <List.Accordion title="Patient Labs">
-                            <LabEntry />
-                        </List.Accordion>
-                        <Divider style={{marginVertical: 10}} />
-                    </List.Section>
-                    <HelperText style={{textAlign: "center"}}>
-                        Please complete all sections, then press Save in the top right corner.
-                    </HelperText>
+                <HelperText style={{textAlign: "center"}}>
+                    Please complete all four sections, then press Save in the top right corner.
+                </HelperText>
+                <ScrollView horizontal={true}>
+                    <DemographicsEntry />
+                    <DiliEntry />
+                    <HistoryEntry />
+                    <LabEntry />
                 </ScrollView>
-            </View>
+            </Animatable.View>
         );
     }
 

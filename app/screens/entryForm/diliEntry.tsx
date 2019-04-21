@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Button, Picker, ScrollView, View } from "react-native";
 import { Card, HelperText, RadioButton, Text, TextInput } from "react-native-paper";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { dili, newpatient } from "../../config/redux/types";
@@ -28,13 +29,19 @@ class DiliEntry extends React.Component<IDiliScreenProps, dili> {
 
     public render() {
         return (
-            <View style={styles.container}>
-                <Card elevation={3}>
+            <View>
+                <Card elevation={3} style={styles.container}>
                     <Card.Title title="DILI Episode" />
                     <Card.Content>
-                {/* DILI Episode */}
-                {/* TODO: implement RxNorm coding system */}
-                        <ScrollView>
+                        {/* DILI Episode */}
+                        {/* TODO: implement RxNorm coding system */}
+                        <KeyboardAwareScrollView
+                            extraHeight={90}
+                            extraScrollHeight={200}
+                            enableOnAndroid={true}
+                            resetScrollToCoords={{x: 0, y: 0}}
+                            style={{maxHeight: "85%"}}
+                        >
                             <View>
                                 <View style={styles.wrapper}>
                                     <TextInput style={styles.input}
@@ -110,23 +117,23 @@ class DiliEntry extends React.Component<IDiliScreenProps, dili> {
                                             <RadioButton color={colors.darkorange} value={"yes"} />
                                         </View>
                                     </RadioButton.Group>
-                                </View>
-                                <HelperText style={styles.helpText}>
-                                    Was the patient re-challenged with the drug suspected to have caused liver injury
-                                </HelperText>
                             </View>
-                            <View>
-                                <TextInput style={styles.input}
-                                    label="Rechallenge Result"
-                                    multiline={true}
-                                    onChangeText={ (value) => {
-                                        this.props.dispatch({type: "SAVE_CHALLENGERESULT", payload: value});
-                                    }}
-                                    value={this.props.challengeResult}
-                                />
-                                <HelperText style={styles.helpText}>What was the result of the Re-challenge?</HelperText>
+                            <HelperText style={styles.helpText}>
+                                Was the patient re-challenged with the drug suspected to have caused liver injury
+                            </HelperText>
+                        </View>
+                        <View>
+                            <TextInput style={styles.input}
+                                label="Rechallenge Result"
+                                multiline={true}
+                                onChangeText={ (value) => {
+                                    this.props.dispatch({type: "SAVE_CHALLENGERESULT", payload: value});
+                                }}
+                                value={this.props.challengeResult}
+                            />
+                            <HelperText style={styles.helpText}>What was the result of the Re-challenge?</HelperText>
                             </View>
-                        </ScrollView>
+                        </KeyboardAwareScrollView>
                     </Card.Content>
                 </Card>
             </View>

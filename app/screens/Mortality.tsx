@@ -1,8 +1,10 @@
 import firebase from "firebase";
 import * as React from "react";
+import * as Animatable from "react-native-animatable";
 import {
     ActivityIndicator,
     Alert,
+    BackHandler,
     AsyncStorage,
     View } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
@@ -35,11 +37,24 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
             nic: "",
             mortalityDate: "",
         };
+        this.handleBackPress = this.handleBackPress.bind(this);
+    }
+
+    public componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+    }
+    public componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress)
+    }
+
+    private handleBackPress() {
+        this.props.navigation.navigate("main");
+        return true;
     }
 
     public render() {
     return (
-        <View>
+        <Animatable.View animation="fadeIn" easing="linear" duration={250} useNativeDriver={true}>
             <Appbar.Header>
                 <Appbar.BackAction onPress={() => this.props.navigation.navigate("main")} />
                 <Appbar.Content title="Register Mortality" />
@@ -78,7 +93,7 @@ export default class Mortality extends React.Component<IMortalityScreenProp, IMo
             >
                 <Text>Submit</Text>
             </Button>
-        </View>
+        </Animatable.View>
     );
     }
 
