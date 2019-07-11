@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
         height: "100%",
     },
     containerForm: {
-        alignItems: "stretch",
-        flex: 3,
-        justifyContent: "center",
-        paddingHorizontal: 15,
+//      alignItems: "stretch",
+//      flex: 3,
+//      justifyContent: "center",
+        padding: 15,
     },
     helpText: {
         textAlign: "center",
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
         padding: 11,
     },
     wrapperForm: {
-        alignContent: "stretch",
-        flexDirection: "row",
+//      alignContent: "stretch",
+//      flexDirection: "row",
         padding: 11,
     },
 });

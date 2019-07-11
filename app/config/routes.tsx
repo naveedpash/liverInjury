@@ -16,9 +16,9 @@ const auth = createSwitchNavigator({
     Login: {
         screen: Login,
     },
-    SignUp: {
-        screen: SignUp,
-    },
+//  SignUp: {
+//      screen: SignUp,
+//  },
     main: {
         screen: Main,
     },

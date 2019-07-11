@@ -1,8 +1,9 @@
 import * as firebase from "firebase";
 import * as React from "react";
 import * as Animatable from "react-native-animatable";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, Linking, StyleSheet, View } from "react-native";
 import { Button, Divider, Headline, HelperText, Text, TextInput } from "react-native-paper";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { NavigationScreenProp } from "react-navigation";
 import { Loading } from "../../components/Loading";
 import { Logo } from "../../components/Logo";
@@ -48,27 +49,31 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
                 <Divider style={{backgroundColor: "black", flex: 0.02}} />
                 <View style={styles.containerForm}>
                     <Headline>Login</Headline>
-                    <View style={styles.wrapperForm}>
-                        <TextInput
-                            label="Email"
-                            style={styles.input}
-                            autoCapitalize="none"
-                            onChangeText={( email ) => this.setState({ email })}
-                            mode="outlined"
-                            value={this.state.email}
-                        />
-                    </View>
-                    <View style={styles.wrapperForm}>
-                        <TextInput
-                            label="Password"
-                            style={styles.input}
-                            secureTextEntry
-                            autoCapitalize="none"
-                            onChangeText={( password ) => this.setState({ password })}
-                            mode="outlined"
-                            value={this.state.password}
-                        />
-                    </View>
+                    <KeyboardAwareScrollView enableOnAndroid={true}
+                        extraHeight={5}
+                    extraScrollHeight={5}>
+                        <View style={styles.wrapperForm}>
+                                <TextInput
+                                    label="Email"
+                                    style={styles.input}
+                                    autoCapitalize="none"
+                                    onChangeText={( email ) => this.setState({ email })}
+                                    mode="outlined"
+                                    value={this.state.email}
+                                />
+                        </View>
+                        <View style={styles.wrapperForm}>
+                                <TextInput
+                                    label="Password"
+                                    style={styles.input}
+                                    secureTextEntry
+                                    autoCapitalize="none"
+                                    onChangeText={( password ) => this.setState({ password })}
+                                    mode="outlined"
+                                    value={this.state.password}
+                                />
+                        </View>
+                    </KeyboardAwareScrollView>
                     <View style={styles.button}>
                         <Button 
                             disabled={this.state.isSubmitting}
@@ -78,20 +83,19 @@ export default class Login extends React.Component<IAuthProps, IAuthState> {
                             <Text>Login</Text>
                         </Button>
                     </View>
-                    <Divider style={{marginVertical: 10}} />
-                    <HelperText>Don't have an account?</HelperText>
-                    <View style={styles.button}>
-                        <Button
-                            disabled={this.state.isSubmitting}
-                            loading={this.state.isSubmitting}
-                            mode="contained"
-                            onPress={() => {
-                                this.AnimationRef.fadeOutRight();
-                                this.props.navigation.navigate("SignUp");
-                            }}>
-                            <Text>Create an account</Text>
-                        </Button>
-                    </View>
+                </View>
+                <Divider style={{marginVertical: 10}} />
+                <HelperText style={styles.helpText}>Don't have an account?</HelperText>
+                <View style={styles.button}>
+                    <Button
+                        disabled={this.state.isSubmitting}
+                        loading={this.state.isSubmitting}
+                        mode="contained"
+                        onPress={() => {
+                            Linking.openURL("mailto:admin@dili.pk");
+                        }}>
+                        <Text>Email Us</Text>
+                    </Button>
                 </View>
             </Animatable.View>
         );

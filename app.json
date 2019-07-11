@@ -28,7 +28,7 @@
     "android": {
         "package": "org.dilipk.akuh",
         "permissions": [],
-        "versionCode": 2
+        "versionCode": 3
     }
   }
 }

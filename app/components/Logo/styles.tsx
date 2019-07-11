@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
     },
     containerPortrait: {
         alignItems: "center",
-        flex: 1.5,
+        flex: 1,
         flexDirection: "column",
+//      height: "40%",
         paddingTop: StatusBar.currentHeight! + 10,
     },
     imagePortrait: {
